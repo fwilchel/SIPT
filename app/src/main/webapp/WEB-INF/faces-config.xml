@@ -13,13 +13,17 @@
       <default-locale>en</default-locale>
     </locale-config>
   </application>
-  <render-kit>
-    <renderer>
-      <component-family>org.primefaces.component</component-family>
-      <renderer-type>org.primefaces.component.FileUploadRenderer</renderer-type>
-      <renderer-class>com.ssl.sipt.web.renderer.FileUploadRenderer</renderer-class>
-    </renderer>
-  </render-kit>  
-  <lifecycle>
-  </lifecycle>
+  <navigation-rule>
+    <from-view-id>*</from-view-id>
+    <!-- index -->
+    <navigation-case>
+      <from-outcome>index</from-outcome>
+      <to-view-id>/pages/index.xhtml</to-view-id>
+    </navigation-case>
+    <!-- listas parametricas -->
+    <navigation-case>
+      <from-outcome>lp</from-outcome>
+      <to-view-id>/pages/lp/lp.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
 </faces-config>

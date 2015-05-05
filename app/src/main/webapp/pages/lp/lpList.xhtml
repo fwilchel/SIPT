@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition 
+  xmlns="http://www.w3.org/1999/xhtml" 
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:ui="http://java.sun.com/jsf/facelets" 
+  xmlns:p="http://primefaces.org/ui" >
+  <h:form
+    id="frmImageList"
+    prependId="false"
+    rendered="#{listasParametricasController.showList}">
+    <p:toolbar>
+      <f:facet 
+        name="left">
+        <h:outputText 
+          value="Imagenes"
+          styleClass="toolbar-title"/>
+      </f:facet>
+      <f:facet 
+        name="right">
+        <p:commandButton 
+          title="Actualizar"
+          icon="ui-icon-refresh"
+          actionListener="#{listasParametricasController.loadList()}"
+          disabled="#{listasParametricasController.editable}"
+          update="dtImage"/>
+        <p:commandButton 
+          id="btnCreate" 
+          title="Nueva Imagen"
+          icon="ui-icon-document"
+          actionListener="#{listasParametricasController.onCreate()}"
+          update=":main"/>
+        <p:commandButton 
+          type="button" 
+          title="Print" 
+          icon="ui-icon-print" />
+      </f:facet>
+    </p:toolbar>
+    <p:dataTable 
+      id="dtImage"
+      value="#{listasParametricasController.list}"
+      var="image"
+      paginator="false" 
+      selectionMode="single" 
+      selection="#{listasParametricasController.selected}" 
+      rowKey="#{image.id}">
+      <p:ajax 
+        event="rowSelect" 
+        listener="#{listasParametricasController.onRowSelect}" 
+        update=":main" />
+    </p:dataTable>
+  </h:form>
+</ui:composition>

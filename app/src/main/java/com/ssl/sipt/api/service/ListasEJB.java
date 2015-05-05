@@ -14,7 +14,7 @@ public interface ListasEJB {
 
   Item findById(Long id) throws ServiceException;
 
-  void create(Item record) throws ServiceException;
+  Item create(Item record) throws ServiceException;
 
   void update(Item record) throws ServiceException;
 

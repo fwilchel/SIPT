@@ -11,25 +11,25 @@
     prependId="false">
     <p:menubar>
       <p:submenu 
-        label="Administracion" >
+        label="#{bundle['menu.option.admon']}" >
         <p:menuitem 
-          value="Usuarios" 
-          outcome="index.xhtml" />
+          value="#{bundle['menu.option.admon.users']}" 
+          outcome="index" />
         <p:menuitem 
-          value="Roles" 
-          outcome="index.xhtml" />
+          value="#{bundle['menu.option.admon.profiles']}" 
+          outcome="index" />
       </p:submenu>      
       <p:menuitem 
-        value="Listas parametricas" 
-        outcome="index.xhtml" />
+        value="#{bundle['menu.option.lp']}" 
+        outcome="lp" />
       <p:menuitem 
-        value="Nómina" 
-        outcome="index.xhtml" />
+        value="#{bundle['menu.option.th']}" 
+        outcome="index" />
       <f:facet 
         name="options">
         <p:commandButton 
           type="button" 
-          value="Logout" 
+          value="#{bundle['commons.btn.logout']}" 
           icon="ui-icon-extlink" />
       </f:facet>
     </p:menubar>
