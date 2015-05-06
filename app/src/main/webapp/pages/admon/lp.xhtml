@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition 
+  xmlns="http://www.w3.org/1999/xhtml" 
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:ui="http://java.sun.com/jsf/facelets" 
+  xmlns:p="http://primefaces.org/ui"
+  template="/resources/templates/default/template.left-panel.xhtml">
+  <ui:define 
+    name="left">
+    <h:form
+      id="frm"
+      prependId="false"
+      rendered="#{lpController.showList}">
+      <p:toolbar>
+        <f:facet 
+          name="left">
+          <h:outputText 
+            value="#{bundle['lp.title']}"
+            styleClass="toolbar-title"/>
+        </f:facet>
+        <f:facet 
+          name="right">
+          <p:commandButton 
+            value="#{bundle['commons.btn.refresh']}"
+            icon="ui-icon-refresh"
+            actionListener="#{lpController.initialize()}"
+            disabled="#{lpController.editable}"
+            update="@form"/>
+        </f:facet>
+      </p:toolbar>
+    </h:form>
+  </ui:define>
+  <ui:define 
+    name="content">
+    <h:panelGroup 
+      id="main"
+      layout="block">
+    </h:panelGroup>
+  </ui:define>
+</ui:composition>
+

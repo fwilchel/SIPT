@@ -1,3 +1,7 @@
+/*
+ * Softstudio LTDA
+ * Copyrigth .2015.
+ */
 package com.ssl.sipt.api.sdo;
 
 import com.ssl.sipt.api.sdo.exception.PersistenceException;
@@ -10,13 +14,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * DemiurgeSoft
- *
- * Clase que implementa los metodos necesarios para manejar la informacion con el motor de persistencia
- *
- * @author d5a9p6s7
+ * @author: Diego Poveda.
  * @param <T>
  * @param <K>
+ * @name:
+ * @descripcion:
+ * @version: 1.0
+ * @since: JDK_1.7
  */
 public class DefaultSDO<T, K> implements SDO<T, K> {
 

@@ -1,3 +1,7 @@
+/*
+ * Softstudio LTDA
+ * Copyrigth .2015.
+ */
 package com.ssl.sipt.web.converter;
 
 import com.google.gson.Gson;
@@ -10,12 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * DemiurgeSoft
- *
- * @author: Alejandro Poveda.
- * @param <T>
- * @name: AbstractJSONConverter
- * @Descripcion:
+ * @author: Diego Poveda.
+ * @name:
+ * @descripcion:
  * @version: 1.0
  * @since: JDK_1.7
  */

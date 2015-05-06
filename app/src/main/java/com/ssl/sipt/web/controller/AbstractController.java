@@ -1,6 +1,6 @@
 /*
- * Demiurgesoft
- * Copyrigth .2014.
+ * Softstudio LTDA
+ * Copyrigth .2015.
  */
 package com.ssl.sipt.web.controller;
 
@@ -19,11 +19,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * DemiurgeSoft
- *
- * @author: Alejandro Poveda.
- * @name: AbstractController
- * @Descripcion:
+ * @author: Diego Poveda.
+ * @name:
+ * @descripcion:
  * @version: 1.0
  * @since: JDK_1.7
  */

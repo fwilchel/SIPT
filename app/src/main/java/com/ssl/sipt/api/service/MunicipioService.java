@@ -4,8 +4,7 @@
  */
 package com.ssl.sipt.api.service;
 
-import com.ssl.sipt.api.model.Item;
-import com.ssl.sipt.api.model.Lista;
+import com.ssl.sipt.api.model.Municipio;
 import com.ssl.sipt.api.sdo.SDO;
 import com.ssl.sipt.api.sdo.exception.PersistenceException;
 import com.ssl.sipt.api.service.exception.ServiceException;
@@ -20,16 +19,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author: Alejandro Poveda.
+ * @author: Diego Poveda.
  * @name:
- * @Descripcion:
+ * @descripcion:
  * @version: 1.0
  * @since: JDK_1.7
  */
 @Stateless
-public class ListasService implements ListasEJB {
+public class MunicipioService implements MunicipioServiceInterface  {
 
-  private static final Logger LOG = LoggerFactory.getLogger(ListasService.class);
+  private static final Logger LOG = LoggerFactory.getLogger(MunicipioService.class);
   @PersistenceContext(unitName = "sipt-pu")
   private EntityManager em;
   @Inject
@@ -48,11 +47,11 @@ public class ListasService implements ListasEJB {
   }
 
   @Override
-  public List<Lista> findAll() throws ServiceException {
+  public List<Municipio> findAll() throws ServiceException {
     LOG.trace("method: findAll()");
-    List<Lista> list;
+    List<Municipio> list;
     try {
-      list = sdo.getResultList(em, Lista.class);
+      list = sdo.getResultList(em, Municipio.class);
       em.clear();
     } catch (PersistenceException ex) {
       LOG.error("Error en <<findAll>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
@@ -62,24 +61,10 @@ public class ListasService implements ListasEJB {
   }
 
   @Override
-  public List<Item> findByParent(Long parent) throws ServiceException {
-    LOG.trace("method: findByParent()");
-    List<Item> list;
-    try {
-      list = sdo.getResultList(em, Item.class);
-      em.clear();
-    } catch (PersistenceException ex) {
-      LOG.error("Error en <<findByParent>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
-      throw new ServiceException(ex);
-    }
-    return list;
-  }
-
-  @Override
-  public Item findById(Long id) throws ServiceException {
+  public Municipio findById(Long id) throws ServiceException {
     LOG.debug("method: findById(id)");
     try {
-      Item i = (Item) sdo.find(em, id, Item.class);
+      Municipio i = (Municipio) sdo.find(em, id, Municipio.class);
       em.clear();
       return i;
     } catch (PersistenceException ex) {
@@ -89,7 +74,7 @@ public class ListasService implements ListasEJB {
   }
 
   @Override
-  public Item create(Item record) throws ServiceException {
+  public Municipio create(Municipio record) throws ServiceException {
     LOG.debug("method: create(entity)");
     try {
       sdo.persist(em, record);
@@ -101,7 +86,7 @@ public class ListasService implements ListasEJB {
   }
 
   @Override
-  public void update(Item record) throws ServiceException {
+  public void update(Municipio record) throws ServiceException {
     LOG.debug("method: edit(record)");
     try {
       sdo.merge(em, record);
@@ -112,7 +97,7 @@ public class ListasService implements ListasEJB {
   }
 
   @Override
-  public void delete(Item record) throws ServiceException {
+  public void delete(Municipio record) throws ServiceException {
     LOG.debug("method: delete(record)");
     try {
       sdo.remove(em, record);
@@ -126,7 +111,7 @@ public class ListasService implements ListasEJB {
   public void delete(Long id) throws ServiceException {
     LOG.debug("method: delete(id)");
     try {
-      sdo.remove(em, id, Item.class);
+      sdo.remove(em, id, Municipio.class);
     } catch (PersistenceException ex) {
       LOG.error("Error en <<delete>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
       throw new ServiceException(ex);

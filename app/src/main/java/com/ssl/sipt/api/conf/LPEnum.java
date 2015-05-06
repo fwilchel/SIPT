@@ -5,13 +5,13 @@
 package com.ssl.sipt.api.conf;
 
 /**
- *
  * @author: Diego Poveda.
+ * @name:
  * @descripcion:
  * @version: 1.0
  * @since: JDK_1.7
  */
-public enum ListasEnum {
+public enum LPEnum {
 
   ARL(1L, "ARL's", ""),
   BANCO(1L, "Bancos", ""),
@@ -42,7 +42,7 @@ public enum ListasEnum {
   private String nombre;
   private String descripcion;
 
-  private ListasEnum(Long id, String nombre, String descripcion) {
+  private LPEnum(Long id, String nombre, String descripcion) {
     this.id = id;
     this.nombre = nombre;
     this.descripcion = descripcion;

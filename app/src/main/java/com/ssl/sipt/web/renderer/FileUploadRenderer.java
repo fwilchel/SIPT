@@ -1,3 +1,7 @@
+/*
+ * Softstudio LTDA
+ * Copyrigth .2015.
+ */
 package com.ssl.sipt.web.renderer;
 
 import java.io.IOException;
@@ -18,6 +22,15 @@ import org.primefaces.renderkit.CoreRenderer;
 import org.primefaces.util.HTML;
 import org.primefaces.util.WidgetBuilder;
 
+/**
+ * Aplica para la version 5.1 de primefaces
+ *
+ * @author: Diego Poveda.
+ * @name:
+ * @descripcion:
+ * @version: 1.0
+ * @since: JDK_1.7
+ */
 public class FileUploadRenderer extends CoreRenderer {
 
   @Override
@@ -84,7 +97,6 @@ public class FileUploadRenderer extends CoreRenderer {
 //        .callback("onstart", "function()", fileUpload.getOnstart())
 //        .callback("onerror", "function()", fileUpload.getOnerror())
 //        .callback("oncomplete", "function()", fileUpload.getOncomplete());
-
     if (fileUpload.getAllowTypes() != null) {
       wb.append(",allowTypes:").append(fileUpload.getAllowTypes());
     }

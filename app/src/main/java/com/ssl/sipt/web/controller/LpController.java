@@ -6,7 +6,7 @@ package com.ssl.sipt.web.controller;
 
 import com.ssl.sipt.api.model.Item;
 import com.ssl.sipt.api.model.Lista;
-import com.ssl.sipt.api.service.ListasEJB;
+import com.ssl.sipt.api.service.LPServiceInterface;
 import com.ssl.sipt.api.service.exception.ServiceException;
 import com.ssl.sipt.web.util.NavEnum;
 import java.util.List;
@@ -19,9 +19,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
  * @author: Diego Poveda.
- * @name: lpController
+ * @name:
  * @descripcion:
  * @version: 1.0
  * @since: JDK_1.7
@@ -33,7 +32,7 @@ public class LpController extends AbstractController {
   private static final Logger LOG = LoggerFactory.getLogger(LpController.class);
 
   @EJB
-  private ListasEJB listasService;
+  private LPServiceInterface listasService;
   private List<Lista> listLP;
   private Lista selectedLP;
   private Item selectedItem;

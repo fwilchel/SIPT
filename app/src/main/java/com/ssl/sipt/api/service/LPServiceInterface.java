@@ -10,10 +10,13 @@ import com.ssl.sipt.api.service.exception.ServiceException;
 import java.util.List;
 
 /**
- *
- * @author d5a9p6s7
+ * @author: Diego Poveda.
+ * @name:
+ * @descripcion:
+ * @version: 1.0
+ * @since: JDK_1.7
  */
-public interface ListasEJB {
+public interface LPServiceInterface {
 
   List<Lista> findAll() throws ServiceException;
 

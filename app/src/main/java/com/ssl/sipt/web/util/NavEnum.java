@@ -1,8 +1,15 @@
+/*
+ * Softstudio LTDA
+ * Copyrigth .2015.
+ */
 package com.ssl.sipt.web.util;
 
 /**
- *
- * @author d5a9p6s7
+ * @author: Diego Poveda.
+ * @name:
+ * @descripcion:
+ * @version: 1.0
+ * @since: JDK_1.7
  */
 public enum NavEnum {
 

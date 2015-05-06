@@ -1,3 +1,7 @@
+/*
+ * Softstudio LTDA
+ * Copyrigth .2015.
+ */
 package com.ssl.sipt.web.listener;
 
 import java.util.Date;
@@ -8,11 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * OMNES S.A.S.
- *
- * @author: Alejandro Poveda.
+ * @author: Diego Poveda.
  * @name:
- * @Descripcion:
+ * @descripcion:
  * @version: 1.0
  * @since: JDK_1.7
  */

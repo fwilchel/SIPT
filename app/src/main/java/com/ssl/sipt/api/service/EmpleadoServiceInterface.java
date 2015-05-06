@@ -1,3 +1,7 @@
+/*
+ * Softstudio LTDA
+ * Copyrigth .2015.
+ */
 package com.ssl.sipt.api.service;
 
 import com.ssl.sipt.api.model.Empleado;
@@ -5,10 +9,13 @@ import com.ssl.sipt.api.service.exception.ServiceException;
 import java.util.List;
 
 /**
- *
- * @author d5a9p6s7
+ * @author: Diego Poveda.
+ * @name:
+ * @descripcion:
+ * @version: 1.0
+ * @since: JDK_1.7
  */
-public interface EmpleadoEJB {
+public interface EmpleadoServiceInterface {
 
   List<Empleado> findAll() throws ServiceException;
 
