@@ -18,12 +18,27 @@
     <!-- index -->
     <navigation-case>
       <from-outcome>index</from-outcome>
-      <to-view-id>/pages/index.xhtml</to-view-id>
+      <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+    <!-- usuarios -->
+    <navigation-case>
+      <from-outcome>usuarios</from-outcome>
+      <to-view-id>/pages/admon/u/usuarios.xhtml</to-view-id>
+    </navigation-case>
+    <!-- perfiles -->
+    <navigation-case>
+      <from-outcome>perfiles</from-outcome>
+      <to-view-id>/pages/admon/p/perfiles.xhtml</to-view-id>
     </navigation-case>
     <!-- listas parametricas -->
     <navigation-case>
       <from-outcome>lp</from-outcome>
-      <to-view-id>/pages/lp/lp.xhtml</to-view-id>
+      <to-view-id>/pages/admon/lp/lp.xhtml</to-view-id>
+    </navigation-case>
+    <!-- talento humano -->
+    <navigation-case>
+      <from-outcome>th</from-outcome>
+      <to-view-id>/pages/th/th.xhtml</to-view-id>
     </navigation-case>
   </navigation-rule>
 </faces-config>

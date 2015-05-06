@@ -1,10 +1,16 @@
+/*
+ * Softstudio LTDA
+ * Copyrigth .2015.
+ */
 package com.ssl.sipt.api.service;
 
 import com.ssl.sipt.api.model.Item;
+import com.ssl.sipt.api.model.Lista;
 import com.ssl.sipt.api.sdo.SDO;
 import com.ssl.sipt.api.sdo.exception.PersistenceException;
 import com.ssl.sipt.api.service.exception.ServiceException;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -20,6 +26,7 @@ import org.slf4j.LoggerFactory;
  * @version: 1.0
  * @since: JDK_1.7
  */
+@Stateless
 public class ListasService implements ListasEJB {
 
   private static final Logger LOG = LoggerFactory.getLogger(ListasService.class);
@@ -41,6 +48,20 @@ public class ListasService implements ListasEJB {
   }
 
   @Override
+  public List<Lista> findAll() throws ServiceException {
+    LOG.trace("method: findAll()");
+    List<Lista> list;
+    try {
+      list = sdo.getResultList(em, Lista.class);
+      em.clear();
+    } catch (PersistenceException ex) {
+      LOG.error("Error en <<findAll>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
+      throw new ServiceException(ex);
+    }
+    return list;
+  }
+
+  @Override
   public List<Item> findByParent(Long parent) throws ServiceException {
     LOG.trace("method: findByParent()");
     List<Item> list;
@@ -58,7 +79,7 @@ public class ListasService implements ListasEJB {
   public Item findById(Long id) throws ServiceException {
     LOG.debug("method: findById(id)");
     try {
-      Item i = (Item) sdo.find(em, id,Item.class);
+      Item i = (Item) sdo.find(em, id, Item.class);
       em.clear();
       return i;
     } catch (PersistenceException ex) {
@@ -111,5 +132,4 @@ public class ListasService implements ListasEJB {
       throw new ServiceException(ex);
     }
   }
-
 }

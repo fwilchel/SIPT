@@ -5,6 +5,7 @@
 package com.ssl.sipt.web.controller;
 
 import com.ssl.sipt.api.model.Item;
+import com.ssl.sipt.api.model.Lista;
 import com.ssl.sipt.api.service.ListasEJB;
 import com.ssl.sipt.api.service.exception.ServiceException;
 import com.ssl.sipt.web.util.NavEnum;
@@ -20,110 +21,96 @@ import org.slf4j.LoggerFactory;
 /**
  *
  * @author: Diego Poveda.
- * @name: ListasParametricasController
- * @Descripcion:
+ * @name: lpController
+ * @descripcion:
  * @version: 1.0
  * @since: JDK_1.7
  */
 @Named
 @ViewScoped
-public class ListasParametricasController extends AbstractController {
+public class LpController extends AbstractController {
 
-  private static final Logger LOG = LoggerFactory.getLogger(ListasParametricasController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(LpController.class);
 
   @EJB
   private ListasEJB listasService;
-  private Item selected;
-  private List<Item> list;
+  private List<Lista> listLP;
+  private Lista selectedLP;
+  private Item selectedItem;
+  private List<Item> listItems;
   private boolean editable;
   private NavEnum optionNavEnum;
-
-  public ListasParametricasController() {
-    LOG.trace("method: constructor()");
-  }
 
   @PostConstruct
   public void initialize() {
     LOG.trace("method: initialize()");
     optionNavEnum = NavEnum.LIST;
-    setSelected(null);
+    setSelectedItem(null);
     setEditable(false);
-    setSelected(null);
-    loadList();
+    setSelectedItem(null);
+    setSelectedLP(null);
+    loadListLP();
   }
 
-  /**
-   *
-   */
-  public void loadList() {
+  public void loadListLP() {
+    LOG.trace("method: loadListLP()");
+    try {
+      setListLP(listasService.findAll());
+    } catch (ServiceException ex) {
+      LOG.error("Error in method: loadListLP()", ex);
+    }
+  }
+
+  public void loadListItems() {
     LOG.trace("method: loadList()");
-//    try {
-//      setList(imageService.findByParent(Long.MIN_VALUE));
-//    } catch (ServiceException ex) {
-//      LOG.error("Error in method: loadList()", ex);
-//    }
+    try {
+      setListItems(listasService.findByParent(getSelectedLP().getId()));
+    } catch (ServiceException ex) {
+      LOG.error("Error in method: loadList()", ex);
+    }
   }
 
-  /**
-   *
-   */
   private void initializeEdit() {
     LOG.trace("method: initializeEdit()");
     setEditable(true);
   }
 
-  /**
-   *
-   */
   public void onCreate() {
     LOG.trace("method: onCreate()");
     optionNavEnum = NavEnum.DETAILS;
-    setSelected(new Item());
+    setSelectedItem(new Item());
     initializeEdit();
   }
 
-  /**
-   *
-   * @param event
-   */
   public void onRowSelect(SelectEvent event) {
     LOG.trace("method: onRowSelect()");
-    setSelected((Item) event.getObject());
+    setSelectedItem((Item) event.getObject());
     setEditable(false);
     optionNavEnum = NavEnum.DETAILS;
   }
 
-  /**
-   *
-   */
   public void onEdit() {
     LOG.trace("method: onEdit()");
     initializeEdit();
   }
 
-  /**
-   *
-   */
   public void onDelete() {
     LOG.trace("method: onDelete()");
     try {
-      listasService.delete(getSelected());
+      listasService.delete(getSelectedItem());
       initialize();
     } catch (ServiceException ex) {
       LOG.error("Error in method: onDelete()", ex);
     }
   }
 
-  /**
-   *
-   */
   public void onSave() {
     LOG.trace("method: onSave()");
     try {
-      if (getSelected().getId() == null) {
-        listasService.create(getSelected());
+      if (getSelectedItem().getId() == null) {
+        listasService.create(getSelectedItem());
       } else {
-        listasService.update(getSelected());
+        listasService.update(getSelectedItem());
       }
       setEditable(false);
     } catch (ServiceException ex) {
@@ -131,79 +118,89 @@ public class ListasParametricasController extends AbstractController {
     }
   }
 
-  /**
-   *
-   */
   public void onCancel() {
     LOG.trace("method: onCancel()");
-    if (getSelected() != null && getSelected().getId() != null) {
+    if (getSelectedItem() != null && getSelectedItem().getId() != null) {
       setEditable(false);
     } else {
       optionNavEnum = NavEnum.LIST;
     }
   }
 
-  /**
-   *
-   */
   public void onBack() {
     LOG.trace("method: onBack()");
     initialize();
   }
 
-  /**
-   *
-   * @return
-   */
   public boolean isShowList() {
     boolean showList = (optionNavEnum == NavEnum.LIST);
     return showList;
   }
 
-  /**
-   *
-   * @return
-   */
   public boolean isShowDetails() {
     boolean showDetails = (optionNavEnum == NavEnum.DETAILS);
     return showDetails;
   }
 
-  /**
-   *
-   * @return
-   */
   public boolean isNewRecord() {
-    boolean newRecord = (getSelected() != null && getSelected().getId() == null);
+    boolean newRecord = (getSelectedItem() != null && getSelectedItem().getId() == null);
     return newRecord;
   }
 
   /**
-   * @return the selected
+   * @return the listLP
    */
-  public Item getSelected() {
-    return selected;
+  public List<Lista> getListLP() {
+    return listLP;
   }
 
   /**
-   * @param selected the selected to set
+   * @param listLP the listLP to set
    */
-  public void setSelected(Item selected) {
-    this.selected = selected;
+  public void setListLP(List<Lista> listLP) {
+    this.listLP = listLP;
   }
 
   /**
-   * @return the list
+   * @return the selectedLP
    */
-  public List<Item> getList() {
-    return list;
+  public Lista getSelectedLP() {
+    return selectedLP;
   }
 
   /**
-   * @param list the list to set
+   * @param selectedLP the selectedLP to set
    */
-  public void setList(List<Item> list) {
-    this.list = list;
+  public void setSelectedLP(Lista selectedLP) {
+    this.selectedLP = selectedLP;
+  }
+
+  /**
+   * @return the selectedItem
+   */
+  public Item getSelectedItem() {
+    return selectedItem;
+  }
+
+  /**
+   * @param selectedItem the selectedItem to set
+   */
+  public void setSelectedItem(Item selectedItem) {
+    this.selectedItem = selectedItem;
+  }
+
+  /**
+   * @return the listItems
+   */
+  public List<Item> getListItems() {
+    return listItems;
+  }
+
+  /**
+   * @param listItems the listItems to set
+   */
+  public void setListItems(List<Item> listItems) {
+    this.listItems = listItems;
   }
 
   /**
@@ -219,4 +216,5 @@ public class ListasParametricasController extends AbstractController {
   public void setEditable(boolean editable) {
     this.editable = editable;
   }
+
 }

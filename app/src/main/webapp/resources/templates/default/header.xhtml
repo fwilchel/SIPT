@@ -10,21 +10,24 @@
     id="frmNav" 
     prependId="false">
     <p:menubar>
+      <p:menuitem 
+        value="index" 
+        outcome="index" />
       <p:submenu 
         label="#{bundle['menu.option.admon']}" >
         <p:menuitem 
           value="#{bundle['menu.option.admon.users']}" 
-          outcome="index" />
+          outcome="usuarios" />
         <p:menuitem 
           value="#{bundle['menu.option.admon.profiles']}" 
-          outcome="index" />
+          outcome="perfiles" />
+        <p:menuitem 
+          value="#{bundle['menu.option.lp']}" 
+          outcome="lp" />
       </p:submenu>      
       <p:menuitem 
-        value="#{bundle['menu.option.lp']}" 
-        outcome="lp" />
-      <p:menuitem 
         value="#{bundle['menu.option.th']}" 
-        outcome="index" />
+        outcome="th" />
       <f:facet 
         name="options">
         <p:commandButton 

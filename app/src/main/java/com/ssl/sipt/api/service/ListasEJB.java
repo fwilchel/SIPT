@@ -1,6 +1,11 @@
+/*
+ * Softstudio LTDA
+ * Copyrigth .2015.
+ */
 package com.ssl.sipt.api.service;
 
 import com.ssl.sipt.api.model.Item;
+import com.ssl.sipt.api.model.Lista;
 import com.ssl.sipt.api.service.exception.ServiceException;
 import java.util.List;
 
@@ -9,6 +14,8 @@ import java.util.List;
  * @author d5a9p6s7
  */
 public interface ListasEJB {
+
+  List<Lista> findAll() throws ServiceException;
 
   List<Item> findByParent(Long parent) throws ServiceException;
 
