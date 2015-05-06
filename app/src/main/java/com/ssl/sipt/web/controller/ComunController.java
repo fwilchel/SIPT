@@ -29,12 +29,12 @@ public class ComunController {
   @EJB
   private DepartamentoServiceInterface departamentoService;
 
-  public List<Departamento> getListDepartamentos() {
-    LOG.trace("method: getListDepartamentos()");
+  public List<Departamento> obtenerDepartamentos() {
+    LOG.trace("method: obtenerDepartamentos()");
     try {
       return departamentoService.findAll();
     } catch (ServiceException ex) {
-      LOG.error("Error in method: getListDepartamentos()", ex);
+      LOG.error("Error in method: obtenerDepartamentos()", ex);
       return null;
     }
   }

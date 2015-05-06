@@ -4,6 +4,7 @@
  */
 package com.ssl.sipt.web.controller;
 
+import com.ssl.sipt.api.model.Departamento;
 import com.ssl.sipt.api.model.Municipio;
 import com.ssl.sipt.api.service.MunicipioServiceInterface;
 import com.ssl.sipt.api.service.exception.ServiceException;
@@ -81,6 +82,7 @@ public class MunicipioController extends AbstractController {
     LOG.trace("method: onCreate()");
     optionNavEnum = OptionNavEnum.DETAILS;
     setSelected(new Municipio());
+//    getSelected().setDepartamento(new Departamento());
     initializeEdit();
   }
 

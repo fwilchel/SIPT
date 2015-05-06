@@ -144,6 +144,25 @@
                   id="descripcion"
                   value="#{municipioController.selected.descripcion}"
                   rendered="#{municipioController.editable}"/>
+                <p:outputLabel 
+                  for="depto" 
+                  value="#{bundle['municipio.departamento']}"  />
+                <h:outputText
+                  value="#{municipioController.selected.departamento.nombre}"
+                  rendered="#{!municipioController.editable}"/>
+                <p:selectOneMenu 
+                  id="depto" 
+                  value="#{municipioController.selected.departamento}" 
+                  converter="deptoConverter"
+                  rendered="#{municipioController.editable}">
+                  <f:selectItem 
+                    noSelectionOption="true"/>
+                  <f:selectItems 
+                    value="#{comunController.obtenerDepartamentos()}" 
+                    var="record" 
+                    itemLabel="#{record.nombre}" 
+                    itemValue="#{record}" />
+                </p:selectOneMenu>              
               </p:panelGrid>
               <f:facet name="footer">
                 <p:commandButton 
