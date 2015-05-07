@@ -1,4 +1,35 @@
 
+CREATE SEQUENCE public.centro_trabajo_id_seq;
+
+CREATE TABLE public.centro_trabajo (
+                id BIGINT NOT NULL DEFAULT nextval('public.centro_trabajo_id_seq'),
+                nombre VARCHAR(100) NOT NULL,
+                descripcion VARCHAR(500),
+                direccion VARCHAR(100) NOT NULL,
+                estado BOOLEAN DEFAULT true NOT NULL,
+                CONSTRAINT centro_trabajo_pk PRIMARY KEY (id)
+);
+
+
+ALTER SEQUENCE public.centro_trabajo_id_seq OWNED BY public.centro_trabajo.id;
+
+CREATE SEQUENCE public.centro_medico_id_seq;
+
+CREATE TABLE public.centro_medico (
+                id BIGINT NOT NULL DEFAULT nextval('public.centro_medico_id_seq'),
+                nit VARCHAR(50) NOT NULL,
+                nombre VARCHAR(100) NOT NULL,
+                direccion VARCHAR(100) NOT NULL,
+                municipio BIGINT NOT NULL,
+                telefono VARCHAR(50) NOT NULL,
+                contacto VARCHAR(100) NOT NULL,
+                estado BOOLEAN DEFAULT true NOT NULL,
+                CONSTRAINT centro_medico_pk PRIMARY KEY (id)
+);
+
+
+ALTER SEQUENCE public.centro_medico_id_seq OWNED BY public.centro_medico.id;
+
 CREATE SEQUENCE public.departamento_id_seq;
 
 CREATE TABLE public.departamento (
@@ -43,7 +74,7 @@ CREATE TABLE public.item (
                 lista BIGINT NOT NULL,
                 nombre VARCHAR(100) NOT NULL,
                 descripcion VARCHAR(500),
-                estado BOOLEAN NOT NULL,
+                estado BOOLEAN DEFAULT true NOT NULL,
                 CONSTRAINT item_pk PRIMARY KEY (id)
 );
 
@@ -76,7 +107,7 @@ CREATE TABLE public.empleado (
                 lugar_expedicion_identificacion BIGINT,
                 nombres VARCHAR(50) NOT NULL,
                 apellidos VARCHAR(50) NOT NULL,
-                estado BOOLEAN NOT NULL,
+                estado BOOLEAN DEFAULT true NOT NULL,
                 email VARCHAR(100),
                 estado_civil BIGINT NOT NULL,
                 rh BIGINT NOT NULL,
@@ -87,8 +118,9 @@ CREATE TABLE public.empleado (
                 tipo_contrato BIGINT NOT NULL,
                 cargo BIGINT NOT NULL,
                 centro_trabajo BIGINT NOT NULL,
-                macro_proyecto VARCHAR NOT NULL,
+                macro_proyecto BIGINT NOT NULL,
                 curriculum BIGINT NOT NULL,
+                centro_medico BIGINT NOT NULL,
                 CONSTRAINT empleado_pk PRIMARY KEY (id)
 );
 
@@ -222,6 +254,20 @@ CREATE TABLE public.beneficiario (
 
 ALTER SEQUENCE public.beneficiario_id_seq OWNED BY public.beneficiario.id;
 
+ALTER TABLE public.empleado ADD CONSTRAINT centro_trabajo_empleado_fk
+FOREIGN KEY (centro_trabajo)
+REFERENCES public.centro_trabajo (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.empleado ADD CONSTRAINT centro_medico_empleado_fk
+FOREIGN KEY (centro_medico)
+REFERENCES public.centro_medico (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
 ALTER TABLE public.municipio ADD CONSTRAINT departamento_municipio_fk
 FOREIGN KEY (departamento)
 REFERENCES public.departamento (id)
@@ -336,6 +382,13 @@ NOT DEFERRABLE;
 
 ALTER TABLE public.beneficiario ADD CONSTRAINT parentesco_beneficiario_fk
 FOREIGN KEY (parentesco)
+REFERENCES public.item (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.empleado ADD CONSTRAINT macro_proyecto_empleado_fk
+FOREIGN KEY (macro_proyecto)
 REFERENCES public.item (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
