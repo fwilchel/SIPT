@@ -1,17 +1,18 @@
 package com.ssl.sipt.api.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -23,14 +24,10 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(catalog = "sipt", schema = "public")
 @NamedQueries({
-  @NamedQuery(name = Municipio.FIND_ALL, query = "SELECT m FROM Municipio m"),
-  @NamedQuery(name = Municipio.FIND_BY_DEPARTAMENTO, query = "SELECT m FROM Municipio m WHERE m.departamento.id = :depeartamento")
-})
-public class Municipio implements Serializable {
+  @NamedQuery(name = "Lista.findAll", query = "SELECT l FROM Lista l")})
+public class CentroMedico implements Serializable {
 
   private static final long serialVersionUID = 1L;
-  public static final String FIND_ALL = "Municipio.findAll";
-  public static final String FIND_BY_DEPARTAMENTO = "Municipio.findByDepartamento";
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Basic(optional = false)
@@ -44,18 +41,17 @@ public class Municipio implements Serializable {
   @Size(max = 500)
   @Column(length = 500)
   private String descripcion;
-  @JoinColumn(name = "departamento", referencedColumnName = "id", nullable = false)
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
-  private Departamento departamento;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "lista", fetch = FetchType.LAZY)
+  private List<Item> itemList;
 
-  public Municipio() {
+  public CentroMedico() {
   }
 
-  public Municipio(Long id) {
+  public CentroMedico(Long id) {
     this.id = id;
   }
 
-  public Municipio(Long id, String nombre) {
+  public CentroMedico(Long id, String nombre) {
     this.id = id;
     this.nombre = nombre;
   }
@@ -84,12 +80,12 @@ public class Municipio implements Serializable {
     this.descripcion = descripcion;
   }
 
-  public Departamento getDepartamento() {
-    return departamento;
+  public List<Item> getItemList() {
+    return itemList;
   }
 
-  public void setDepartamento(Departamento departamento) {
-    this.departamento = departamento;
+  public void setItemList(List<Item> itemList) {
+    this.itemList = itemList;
   }
 
   @Override
@@ -102,10 +98,10 @@ public class Municipio implements Serializable {
   @Override
   public boolean equals(Object object) {
     // TODO: Warning - this method won't work in the case the id fields are not set
-    if (!(object instanceof Municipio)) {
+    if (!(object instanceof CentroMedico)) {
       return false;
     }
-    Municipio other = (Municipio) object;
+    CentroMedico other = (CentroMedico) object;
     if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
       return false;
     }
@@ -114,7 +110,7 @@ public class Municipio implements Serializable {
 
   @Override
   public String toString() {
-    return "com.ssl.sipt.api.model.Municipio[ id=" + id + " ]";
+    return "com.ssl.sipt.api.model.Lista[ id=" + id + " ]";
   }
 
 }

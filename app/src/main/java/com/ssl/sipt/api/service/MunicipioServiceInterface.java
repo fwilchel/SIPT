@@ -19,6 +19,8 @@ public interface MunicipioServiceInterface {
 
   List<Municipio> findAll() throws ServiceException;
 
+  List<Municipio> findByDepartamento(Long idDepartamento) throws ServiceException;
+
   Municipio findById(Long id) throws ServiceException;
 
   Municipio create(Municipio record) throws ServiceException;

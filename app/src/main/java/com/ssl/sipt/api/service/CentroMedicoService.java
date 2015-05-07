@@ -4,13 +4,11 @@
  */
 package com.ssl.sipt.api.service;
 
-import com.ssl.sipt.api.model.Municipio;
+import com.ssl.sipt.api.model.CentroMedico;
 import com.ssl.sipt.api.sdo.SDO;
 import com.ssl.sipt.api.sdo.exception.PersistenceException;
 import com.ssl.sipt.api.service.exception.ServiceException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.naming.InitialContext;
@@ -28,9 +26,9 @@ import org.slf4j.LoggerFactory;
  * @since: JDK_1.7
  */
 @Stateless
-public class MunicipioService implements MunicipioServiceInterface {
+public class CentroMedicoService implements CentroMedicoServiceInterface  {
 
-  private static final Logger LOG = LoggerFactory.getLogger(MunicipioService.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CentroMedicoService.class);
   @PersistenceContext(unitName = "sipt-pu")
   private EntityManager em;
   @Inject
@@ -49,11 +47,11 @@ public class MunicipioService implements MunicipioServiceInterface {
   }
 
   @Override
-  public List<Municipio> findAll() throws ServiceException {
+  public List<CentroMedico> findAll() throws ServiceException {
     LOG.trace("method: findAll()");
-    List<Municipio> list;
+    List<CentroMedico> list;
     try {
-      list = sdo.getResultList(em, Municipio.class);
+      list = sdo.getResultList(em, CentroMedico.class);
       em.clear();
     } catch (PersistenceException ex) {
       LOG.error("Error en <<findAll>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
@@ -63,29 +61,10 @@ public class MunicipioService implements MunicipioServiceInterface {
   }
 
   @Override
-  public List<Municipio> findByDepartamento(Long idDepartamento) throws ServiceException {
-    LOG.trace("method: findAll()");
-    if (idDepartamento == null){
-      throw new IllegalArgumentException("El id del departamento es obligatorio");
-    }
-    List<Municipio> list;
-    try {
-      Map<String, Object> params = new HashMap<>();
-      params.put("departamento", idDepartamento);
-      list = sdo.getResultListByNamedQuery(em, Municipio.FIND_BY_DEPARTAMENTO, params);
-      em.clear();
-    } catch (PersistenceException ex) {
-      LOG.error("Error en <<findAll>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
-      throw new ServiceException(ex);
-    }
-    return list;
-  }
-
-  @Override
-  public Municipio findById(Long id) throws ServiceException {
+  public CentroMedico findById(Long id) throws ServiceException {
     LOG.debug("method: findById(id)");
     try {
-      Municipio i = (Municipio) sdo.find(em, id, Municipio.class);
+      CentroMedico i = (CentroMedico) sdo.find(em, id, CentroMedico.class);
       em.clear();
       return i;
     } catch (PersistenceException ex) {
@@ -95,7 +74,7 @@ public class MunicipioService implements MunicipioServiceInterface {
   }
 
   @Override
-  public Municipio create(Municipio record) throws ServiceException {
+  public CentroMedico create(CentroMedico record) throws ServiceException {
     LOG.debug("method: create(entity)");
     try {
       sdo.persist(em, record);
@@ -107,7 +86,7 @@ public class MunicipioService implements MunicipioServiceInterface {
   }
 
   @Override
-  public void update(Municipio record) throws ServiceException {
+  public void update(CentroMedico record) throws ServiceException {
     LOG.debug("method: edit(record)");
     try {
       sdo.merge(em, record);
@@ -118,7 +97,7 @@ public class MunicipioService implements MunicipioServiceInterface {
   }
 
   @Override
-  public void delete(Municipio record) throws ServiceException {
+  public void delete(CentroMedico record) throws ServiceException {
     LOG.debug("method: delete(record)");
     try {
       sdo.remove(em, record);
@@ -132,7 +111,7 @@ public class MunicipioService implements MunicipioServiceInterface {
   public void delete(Long id) throws ServiceException {
     LOG.debug("method: delete(id)");
     try {
-      sdo.remove(em, id, Municipio.class);
+      sdo.remove(em, id, CentroMedico.class);
     } catch (PersistenceException ex) {
       LOG.error("Error en <<delete>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
       throw new ServiceException(ex);
