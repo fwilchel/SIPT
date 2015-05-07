@@ -1,6 +1,5 @@
 # sipt
-Version 0.1
-SIPT es un proyecto empresarial enfocado a administrar la informacion de la empresa.
+Version 0.1 - SIPT es un proyecto empresarial enfocado a administrar la informacion de la empresa.
 
 ## Requerimientos
 * JDK 7
@@ -27,10 +26,7 @@ SIPT es un proyecto empresarial enfocado a administrar la informacion de la empr
 - Desplegar aplicativo en el servidor Glassfish.
 
 ## Roadmap
-[ Disponible en google drive ]
-https://docs.google.com/document/d/1rGqSOLp2SGu21I-RwBKa6hi09QXoeYq7CX1pE7IAjng/edit
-
+[ Disponible en google drive ] - https://docs.google.com/document/d/1rGqSOLp2SGu21I-RwBKa6hi09QXoeYq7CX1pE7IAjng/edit
 
 **Con quien debo hablar?**
-Fredy Wilches, fredy.wilches@softstudio.co
-Diego Poveda, diego.poveda@softstudio.co
+Fredy Wilches, fredy.wilches@softstudio.co - Diego Poveda, diego.poveda@softstudio.co
