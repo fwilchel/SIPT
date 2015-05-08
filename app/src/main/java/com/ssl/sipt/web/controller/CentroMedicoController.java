@@ -5,6 +5,8 @@
 package com.ssl.sipt.web.controller;
 
 import com.ssl.sipt.api.model.CentroMedico;
+import com.ssl.sipt.api.model.Departamento;
+import com.ssl.sipt.api.model.Municipio;
 import com.ssl.sipt.api.service.CentroMedicoServiceInterface;
 import com.ssl.sipt.api.service.exception.ServiceException;
 import java.util.List;
@@ -81,6 +83,8 @@ public class CentroMedicoController extends AbstractController {
         LOG.trace("method: onCreate()");
         optionNavEnum = OptionNavEnum.DETAILS;
         setSelected(new CentroMedico());
+        getSelected().setMunicipio(new Municipio());
+        getSelected().getMunicipio().setDepartamento(new Departamento());
         initializeEdit();
     }
 

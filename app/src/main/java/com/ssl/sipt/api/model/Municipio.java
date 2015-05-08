@@ -6,9 +6,7 @@
 package com.ssl.sipt.api.model;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,7 +29,7 @@ import javax.validation.constraints.Size;
 @Table(catalog = "sipt", schema = "public")
 @NamedQueries({
     @NamedQuery(name = Municipio.FIND_ALL, query = "SELECT m FROM Municipio m"),
-    @NamedQuery(name = Municipio.FIND_BY_DEPARTAMENTO, query = "SELECT m FROM Municipio m WHERE m.departamento.id = :depeartamento")
+    @NamedQuery(name = Municipio.FIND_BY_DEPARTAMENTO, query = "SELECT m FROM Municipio m WHERE m.departamento.id = :departamento")
 })
 public class Municipio implements Serializable {
 
@@ -52,10 +49,8 @@ public class Municipio implements Serializable {
     @Size(max = 500)
     @Column(length = 500)
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "municipio", fetch = FetchType.LAZY)
-    private List<Empleado> empleadoList;
     @JoinColumn(name = "departamento", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Departamento departamento;
 
     public Municipio() {
@@ -63,11 +58,6 @@ public class Municipio implements Serializable {
 
     public Municipio(Long id) {
         this.id = id;
-    }
-
-    public Municipio(Long id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
     }
 
     public Long getId() {
@@ -92,14 +82,6 @@ public class Municipio implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public List<Empleado> getEmpleadoList() {
-        return empleadoList;
-    }
-
-    public void setEmpleadoList(List<Empleado> empleadoList) {
-        this.empleadoList = empleadoList;
     }
 
     public Departamento getDepartamento() {

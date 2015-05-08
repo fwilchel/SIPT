@@ -14,7 +14,7 @@ import javax.faces.convert.FacesConverter;
  * @version: 1.0
  * @since: JDK_1.7
  */
-@FacesConverter("deptoConverter")
+@FacesConverter("municipioConverter")
 public class MunicipioConverter extends AbstractGSONConverter {
 
     @Override

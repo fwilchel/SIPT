@@ -178,25 +178,43 @@
                                 <!-- departamento -->
                                 <p:outputLabel
                                     for="departamento"
-                                    value="#{bundle['centromedico.departamento']}"/>
-                                <h:outputText
-                                    value="#{centroMedicoController.selected.municipio}"
-                                    rendered="#{!centroMedicoController.editable}"/>
-                                <p:inputText
-                                    id="departamento"
-                                    value="#{centroMedicoController.selected.municipio}"
+                                    value="#{bundle['centromedico.departamento']}"
                                     rendered="#{centroMedicoController.editable}"/>
+                                <p:selectOneMenu 
+                                    id="departamento" 
+                                    value="#{centroMedicoController.selected.municipio.departamento}" 
+                                    converter="deptoConverter"
+                                    rendered="#{centroMedicoController.editable}">
+                                    <p:ajax 
+                                        update="municipio" />
+                                    <f:selectItem 
+                                        noSelectionOption="true"/>
+                                    <f:selectItems 
+                                        value="#{comunController.obtenerDepartamentos()}" 
+                                        var="record" 
+                                        itemLabel="#{record.nombre}" 
+                                        itemValue="#{record}" />
+                                </p:selectOneMenu>              
                                 <!-- municipio -->
                                 <p:outputLabel
                                     for="municipio"
                                     value="#{bundle['centromedico.municipio']}"/>
                                 <h:outputText
-                                    value="#{centroMedicoController.selected.municipio}"
+                                    value="#{centroMedicoController.selected.municipio.nombre}"
                                     rendered="#{!centroMedicoController.editable}"/>
-                                <p:inputText
-                                    id="municipio"
-                                    value="#{centroMedicoController.selected.municipio}"
-                                    rendered="#{centroMedicoController.editable}"/>
+                                <p:selectOneMenu 
+                                    id="municipio" 
+                                    value="#{centroMedicoController.selected.municipio}" 
+                                    converter="municipioConverter"
+                                    rendered="#{centroMedicoController.editable}">
+                                    <f:selectItem 
+                                        noSelectionOption="true"/>
+                                    <f:selectItems 
+                                        value="#{comunController.obtenerMunicipios(centroMedicoController.selected.municipio.departamento.id)}" 
+                                        var="record" 
+                                        itemLabel="#{record.nombre}" 
+                                        itemValue="#{record}" />
+                                </p:selectOneMenu>              
                                 <!-- telefono -->
                                 <p:outputLabel
                                     for="telefono"
@@ -223,13 +241,13 @@
                                 <p:outputLabel
                                     for="estado"
                                     value="#{bundle['centromedico.estado']}"/>
-                                <h:outputText
-                                    value="#{centroMedicoController.selected.estado}"
-                                    rendered="#{!centroMedicoController.editable}"/>
-                                <p:inputText
-                                    id="estado"
-                                    value="#{centroMedicoController.selected.estado}"
-                                    rendered="#{centroMedicoController.editable}"/>
+                                <p:selectBooleanButton 
+                                    id="estado" 
+                                    value="#{centroMedicoController.selected.estado}" 
+                                    onLabel="#{bundle['commons.lbl.active']}" 
+                                    offLabel="#{bundle['commons.lbl.inactive']}" 
+                                    style="width:80px" 
+                                    disabled="#{!centroMedicoController.editable}"/>
                             </p:panelGrid>
                             <f:facet name="footer">
                                 <p:commandButton 

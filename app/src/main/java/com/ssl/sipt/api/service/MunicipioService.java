@@ -99,6 +99,7 @@ public class MunicipioService implements MunicipioServiceInterface {
         LOG.debug("method: create(entity)");
         try {
             sdo.persist(em, record);
+            em.flush();
             return record;
         } catch (PersistenceException ex) {
             LOG.error("Error en <<create>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
@@ -111,6 +112,7 @@ public class MunicipioService implements MunicipioServiceInterface {
         LOG.debug("method: edit(record)");
         try {
             sdo.merge(em, record);
+            em.flush();
         } catch (PersistenceException ex) {
             LOG.error("Error en <<record>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
             throw new ServiceException(ex);
@@ -122,6 +124,7 @@ public class MunicipioService implements MunicipioServiceInterface {
         LOG.debug("method: delete(record)");
         try {
             sdo.remove(em, record);
+            em.flush();
         } catch (PersistenceException ex) {
             LOG.error("Error en <<delete>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
             throw new ServiceException(ex);
@@ -133,6 +136,7 @@ public class MunicipioService implements MunicipioServiceInterface {
         LOG.debug("method: delete(id)");
         try {
             sdo.remove(em, id, Municipio.class);
+            em.flush();
         } catch (PersistenceException ex) {
             LOG.error("Error en <<delete>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
             throw new ServiceException(ex);

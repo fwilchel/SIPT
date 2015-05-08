@@ -15,6 +15,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -53,10 +55,9 @@ public class CentroMedico implements Serializable {
     @Size(min = 1, max = 100)
     @Column(nullable = false, length = 100)
     private String direccion;
-    @Basic(optional = false)
-    @NotNull
-    @Column(nullable = false)
-    private long municipio;
+    @JoinColumn(name = "municipio", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Municipio municipio;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -71,25 +72,12 @@ public class CentroMedico implements Serializable {
     @NotNull
     @Column(nullable = false)
     private boolean estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "centroMedico", fetch = FetchType.LAZY)
-    private List<Empleado> empleadoList;
 
     public CentroMedico() {
     }
 
     public CentroMedico(Long id) {
         this.id = id;
-    }
-
-    public CentroMedico(Long id, String nit, String nombre, String direccion, long municipio, String telefono, String contacto, boolean estado) {
-        this.id = id;
-        this.nit = nit;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.municipio = municipio;
-        this.telefono = telefono;
-        this.contacto = contacto;
-        this.estado = estado;
     }
 
     public Long getId() {
@@ -124,11 +112,11 @@ public class CentroMedico implements Serializable {
         this.direccion = direccion;
     }
 
-    public long getMunicipio() {
+    public Municipio getMunicipio() {
         return municipio;
     }
 
-    public void setMunicipio(long municipio) {
+    public void setMunicipio(Municipio municipio) {
         this.municipio = municipio;
     }
 
@@ -154,14 +142,6 @@ public class CentroMedico implements Serializable {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
-    }
-
-    public List<Empleado> getEmpleadoList() {
-        return empleadoList;
-    }
-
-    public void setEmpleadoList(List<Empleado> empleadoList) {
-        this.empleadoList = empleadoList;
     }
 
     @Override

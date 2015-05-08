@@ -45,6 +45,9 @@ public class ComunController {
 
     public List<Municipio> obtenerMunicipios(Long idDepartamento) {
         LOG.trace("method: obtenerDepartamentos()");
+        if (idDepartamento == null) {
+            return null;
+        }
         try {
             return municipioService.findByDepartamento(idDepartamento);
         } catch (ServiceException ex) {
