@@ -17,8 +17,8 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter("deptoConverter")
 public class MunicipioConverter extends AbstractGSONConverter {
 
-  @Override
-  public Class getClazz() {
-    return Municipio.class;
-  }
+    @Override
+    public Class getClazz() {
+        return Municipio.class;
+    }
 }

@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.ssl.sipt.api.model;
 
 import java.io.Serializable;
@@ -22,95 +27,166 @@ import javax.validation.constraints.Size;
  * @author d5a9p6s7
  */
 @Entity
-@Table(catalog = "sipt", schema = "public")
+@Table(name = "centro_medico", catalog = "sipt", schema = "public")
 @NamedQueries({
-  @NamedQuery(name = "Lista.findAll", query = "SELECT l FROM Lista l")})
+    @NamedQuery(name = "CentroMedico.findAll", query = "SELECT c FROM CentroMedico c")})
 public class CentroMedico implements Serializable {
 
-  private static final long serialVersionUID = 1L;
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Basic(optional = false)
-  @Column(nullable = false)
-  private Long id;
-  @Basic(optional = false)
-  @NotNull
-  @Size(min = 1, max = 100)
-  @Column(nullable = false, length = 100)
-  private String nombre;
-  @Size(max = 500)
-  @Column(length = 500)
-  private String descripcion;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "lista", fetch = FetchType.LAZY)
-  private List<Item> itemList;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private Long id;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(nullable = false, length = 50)
+    private String nit;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(nullable = false, length = 100)
+    private String nombre;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(nullable = false, length = 100)
+    private String direccion;
+    @Basic(optional = false)
+    @NotNull
+    @Column(nullable = false)
+    private long municipio;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(nullable = false, length = 50)
+    private String telefono;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(nullable = false, length = 100)
+    private String contacto;
+    @Basic(optional = false)
+    @NotNull
+    @Column(nullable = false)
+    private boolean estado;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "centroMedico", fetch = FetchType.LAZY)
+    private List<Empleado> empleadoList;
 
-  public CentroMedico() {
-  }
-
-  public CentroMedico(Long id) {
-    this.id = id;
-  }
-
-  public CentroMedico(Long id, String nombre) {
-    this.id = id;
-    this.nombre = nombre;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getNombre() {
-    return nombre;
-  }
-
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
-  }
-
-  public String getDescripcion() {
-    return descripcion;
-  }
-
-  public void setDescripcion(String descripcion) {
-    this.descripcion = descripcion;
-  }
-
-  public List<Item> getItemList() {
-    return itemList;
-  }
-
-  public void setItemList(List<Item> itemList) {
-    this.itemList = itemList;
-  }
-
-  @Override
-  public int hashCode() {
-    int hash = 0;
-    hash += (id != null ? id.hashCode() : 0);
-    return hash;
-  }
-
-  @Override
-  public boolean equals(Object object) {
-    // TODO: Warning - this method won't work in the case the id fields are not set
-    if (!(object instanceof CentroMedico)) {
-      return false;
+    public CentroMedico() {
     }
-    CentroMedico other = (CentroMedico) object;
-    if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-      return false;
-    }
-    return true;
-  }
 
-  @Override
-  public String toString() {
-    return "com.ssl.sipt.api.model.Lista[ id=" + id + " ]";
-  }
+    public CentroMedico(Long id) {
+        this.id = id;
+    }
+
+    public CentroMedico(Long id, String nit, String nombre, String direccion, long municipio, String telefono, String contacto, boolean estado) {
+        this.id = id;
+        this.nit = nit;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.municipio = municipio;
+        this.telefono = telefono;
+        this.contacto = contacto;
+        this.estado = estado;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNit() {
+        return nit;
+    }
+
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public long getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(long municipio) {
+        this.municipio = municipio;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getContacto() {
+        return contacto;
+    }
+
+    public void setContacto(String contacto) {
+        this.contacto = contacto;
+    }
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public List<Empleado> getEmpleadoList() {
+        return empleadoList;
+    }
+
+    public void setEmpleadoList(List<Empleado> empleadoList) {
+        this.empleadoList = empleadoList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof CentroMedico)) {
+            return false;
+        }
+        CentroMedico other = (CentroMedico) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.ssl.sipt.api.model.CentroMedico[ id=" + id + " ]";
+    }
 
 }

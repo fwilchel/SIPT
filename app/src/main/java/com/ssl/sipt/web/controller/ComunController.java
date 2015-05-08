@@ -27,29 +27,29 @@ import org.slf4j.LoggerFactory;
 @RequestScoped
 public class ComunController {
 
-  private static final Logger LOG = LoggerFactory.getLogger(ComunController.class);
-  @EJB
-  private DepartamentoServiceInterface departamentoService;
-  @EJB
-  private MunicipioServiceInterface municipioService;
+    private static final Logger LOG = LoggerFactory.getLogger(ComunController.class);
+    @EJB
+    private DepartamentoServiceInterface departamentoService;
+    @EJB
+    private MunicipioServiceInterface municipioService;
 
-  public List<Departamento> obtenerDepartamentos() {
-    LOG.trace("method: obtenerDepartamentos()");
-    try {
-      return departamentoService.findAll();
-    } catch (ServiceException ex) {
-      LOG.error("Error in method: obtenerDepartamentos()", ex);
-      return null;
+    public List<Departamento> obtenerDepartamentos() {
+        LOG.trace("method: obtenerDepartamentos()");
+        try {
+            return departamentoService.findAll();
+        } catch (ServiceException ex) {
+            LOG.error("Error in method: obtenerDepartamentos()", ex);
+            return null;
+        }
     }
-  }
 
-  public List<Municipio> obtenerMunicipios(Long idDepartamento) {
-    LOG.trace("method: obtenerDepartamentos()");
-    try {
-      return municipioService.findByDepartamento(idDepartamento);
-    } catch (ServiceException ex) {
-      LOG.error("Error in method: obtenerDepartamentos()", ex);
-      return null;
+    public List<Municipio> obtenerMunicipios(Long idDepartamento) {
+        LOG.trace("method: obtenerDepartamentos()");
+        try {
+            return municipioService.findByDepartamento(idDepartamento);
+        } catch (ServiceException ex) {
+            LOG.error("Error in method: obtenerDepartamentos()", ex);
+            return null;
+        }
     }
-  }
 }

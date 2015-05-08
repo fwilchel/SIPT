@@ -17,18 +17,18 @@ import java.util.List;
  */
 public interface MunicipioServiceInterface {
 
-  List<Municipio> findAll() throws ServiceException;
+    List<Municipio> findAll() throws ServiceException;
 
-  List<Municipio> findByDepartamento(Long idDepartamento) throws ServiceException;
+    List<Municipio> findByDepartamento(Long idDepartamento) throws ServiceException;
 
-  Municipio findById(Long id) throws ServiceException;
+    Municipio findById(Long id) throws ServiceException;
 
-  Municipio create(Municipio record) throws ServiceException;
+    Municipio create(Municipio record) throws ServiceException;
 
-  void update(Municipio record) throws ServiceException;
+    void update(Municipio record) throws ServiceException;
 
-  void delete(Municipio record) throws ServiceException;
+    void delete(Municipio record) throws ServiceException;
 
-  void delete(Long id) throws ServiceException;
+    void delete(Long id) throws ServiceException;
 
 }

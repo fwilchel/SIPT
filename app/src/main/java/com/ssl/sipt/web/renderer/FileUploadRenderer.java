@@ -33,54 +33,54 @@ import org.primefaces.util.WidgetBuilder;
  */
 public class FileUploadRenderer extends CoreRenderer {
 
-  @Override
-  public void decode(FacesContext context, UIComponent component) {
-    FileUpload fileUpload = (FileUpload) component;
+    @Override
+    public void decode(FacesContext context, UIComponent component) {
+        FileUpload fileUpload = (FileUpload) component;
 
-    if (!fileUpload.isDisabled()) {
-      ConfigContainer cc = RequestContext.getCurrentInstance().getApplicationContext().getConfig();
-      String uploader = cc.getUploader();
-      boolean isAtLeastJSF22 = cc.isAtLeastJSF22();
-      switch (uploader) {
-        case "auto":
-          if (isAtLeastJSF22) {
-            if (isMultiPartRequest(context)) {
-              NativeFileUploadDecoder.decode(context, fileUpload);
+        if (!fileUpload.isDisabled()) {
+            ConfigContainer cc = RequestContext.getCurrentInstance().getApplicationContext().getConfig();
+            String uploader = cc.getUploader();
+            boolean isAtLeastJSF22 = cc.isAtLeastJSF22();
+            switch (uploader) {
+                case "auto":
+                    if (isAtLeastJSF22) {
+                        if (isMultiPartRequest(context)) {
+                            NativeFileUploadDecoder.decode(context, fileUpload);
+                        }
+                    } else {
+                        CommonsFileUploadDecoder.decode(context, fileUpload);
+                    }
+                    break;
+                case "native":
+                    if (!isAtLeastJSF22) {
+                        throw new FacesException("native uploader requires at least a JSF 2.2 runtime");
+                    }
+                    NativeFileUploadDecoder.decode(context, fileUpload);
+                    break;
+                case "commons":
+                    CommonsFileUploadDecoder.decode(context, fileUpload);
+                    break;
             }
-          } else {
-            CommonsFileUploadDecoder.decode(context, fileUpload);
-          }
-          break;
-        case "native":
-          if (!isAtLeastJSF22) {
-            throw new FacesException("native uploader requires at least a JSF 2.2 runtime");
-          }
-          NativeFileUploadDecoder.decode(context, fileUpload);
-          break;
-        case "commons":
-          CommonsFileUploadDecoder.decode(context, fileUpload);
-          break;
-      }
+        }
     }
-  }
 
-  @Override
-  public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
-    FileUpload fileUpload = (FileUpload) component;
+    @Override
+    public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
+        FileUpload fileUpload = (FileUpload) component;
 
-    encodeMarkup(context, fileUpload);
+        encodeMarkup(context, fileUpload);
 
-    if (fileUpload.getMode().equals("advanced")) {
-      encodeScript(context, fileUpload);
+        if (fileUpload.getMode().equals("advanced")) {
+            encodeScript(context, fileUpload);
+        }
     }
-  }
 
-  protected void encodeScript(FacesContext context, FileUpload fileUpload) throws IOException {
-    String clientId = fileUpload.getClientId(context);
-    String update = fileUpload.getUpdate();
-    String process = fileUpload.getProcess();
-    WidgetBuilder wb = getWidgetBuilder(context);
-    wb.initWithDomReady("FileUpload", fileUpload.resolveWidgetVar(), clientId, "fileupload");
+    protected void encodeScript(FacesContext context, FileUpload fileUpload) throws IOException {
+        String clientId = fileUpload.getClientId(context);
+        String update = fileUpload.getUpdate();
+        String process = fileUpload.getProcess();
+        WidgetBuilder wb = getWidgetBuilder(context);
+        wb.initWithDomReady("FileUpload", fileUpload.resolveWidgetVar(), clientId, "fileupload");
 
 //    wb.attr("auto", fileUpload.isAuto(), false)
 //        .attr("dnd", fileUpload.isDragDropSupport(), true)
@@ -97,150 +97,150 @@ public class FileUploadRenderer extends CoreRenderer {
 //        .callback("onstart", "function()", fileUpload.getOnstart())
 //        .callback("onerror", "function()", fileUpload.getOnerror())
 //        .callback("oncomplete", "function()", fileUpload.getOncomplete());
-    if (fileUpload.getAllowTypes() != null) {
-      wb.append(",allowTypes:").append(fileUpload.getAllowTypes());
+        if (fileUpload.getAllowTypes() != null) {
+            wb.append(",allowTypes:").append(fileUpload.getAllowTypes());
+        }
+
+        wb.finish();
     }
 
-    wb.finish();
-  }
-
-  protected void encodeMarkup(FacesContext context, FileUpload fileUpload) throws IOException {
-    if (fileUpload.getMode().equals("simple")) {
-      encodeSimpleMarkup(context, fileUpload);
-    } else {
-      encodeAdvancedMarkup(context, fileUpload);
-    }
-  }
-
-  protected void encodeAdvancedMarkup(FacesContext context, FileUpload fileUpload) throws IOException {
-    ResponseWriter writer = context.getResponseWriter();
-    String clientId = fileUpload.getClientId(context);
-    String style = fileUpload.getStyle();
-    String styleClass = fileUpload.getStyleClass();
-    styleClass = styleClass == null ? FileUpload.CONTAINER_CLASS : FileUpload.CONTAINER_CLASS + " " + styleClass;
-    boolean disabled = fileUpload.isDisabled();
-
-    writer.startElement("div", fileUpload);
-    writer.writeAttribute("id", clientId, "id");
-    writer.writeAttribute("class", styleClass, styleClass);
-    if (style != null) {
-      writer.writeAttribute("style", style, "style");
+    protected void encodeMarkup(FacesContext context, FileUpload fileUpload) throws IOException {
+        if (fileUpload.getMode().equals("simple")) {
+            encodeSimpleMarkup(context, fileUpload);
+        } else {
+            encodeAdvancedMarkup(context, fileUpload);
+        }
     }
 
-    //buttonbar
-    writer.startElement("div", fileUpload);
-    writer.writeAttribute("class", FileUpload.BUTTON_BAR_CLASS, null);
+    protected void encodeAdvancedMarkup(FacesContext context, FileUpload fileUpload) throws IOException {
+        ResponseWriter writer = context.getResponseWriter();
+        String clientId = fileUpload.getClientId(context);
+        String style = fileUpload.getStyle();
+        String styleClass = fileUpload.getStyleClass();
+        styleClass = styleClass == null ? FileUpload.CONTAINER_CLASS : FileUpload.CONTAINER_CLASS + " " + styleClass;
+        boolean disabled = fileUpload.isDisabled();
 
-    //choose button
-    encodeChooseButton(context, fileUpload, disabled);
+        writer.startElement("div", fileUpload);
+        writer.writeAttribute("id", clientId, "id");
+        writer.writeAttribute("class", styleClass, styleClass);
+        if (style != null) {
+            writer.writeAttribute("style", style, "style");
+        }
 
-    if (!fileUpload.isAuto()) {
-      encodeButton(context, fileUpload.getUploadLabel(), FileUpload.UPLOAD_BUTTON_CLASS, "ui-icon-arrowreturnthick-1-n");
-      encodeButton(context, fileUpload.getCancelLabel(), FileUpload.CANCEL_BUTTON_CLASS, "ui-icon-cancel");
+        //buttonbar
+        writer.startElement("div", fileUpload);
+        writer.writeAttribute("class", FileUpload.BUTTON_BAR_CLASS, null);
+
+        //choose button
+        encodeChooseButton(context, fileUpload, disabled);
+
+        if (!fileUpload.isAuto()) {
+            encodeButton(context, fileUpload.getUploadLabel(), FileUpload.UPLOAD_BUTTON_CLASS, "ui-icon-arrowreturnthick-1-n");
+            encodeButton(context, fileUpload.getCancelLabel(), FileUpload.CANCEL_BUTTON_CLASS, "ui-icon-cancel");
+        }
+
+        writer.endElement("div");
+
+        //content
+        writer.startElement("div", null);
+        writer.writeAttribute("class", FileUpload.CONTENT_CLASS, null);
+
+        writer.startElement("table", null);
+        writer.writeAttribute("class", FileUpload.FILES_CLASS, null);
+        writer.startElement("tbody", null);
+        writer.endElement("tbody");
+        writer.endElement("table");
+
+        writer.endElement("div");
+
+        writer.endElement("div");
     }
 
-    writer.endElement("div");
-
-    //content
-    writer.startElement("div", null);
-    writer.writeAttribute("class", FileUpload.CONTENT_CLASS, null);
-
-    writer.startElement("table", null);
-    writer.writeAttribute("class", FileUpload.FILES_CLASS, null);
-    writer.startElement("tbody", null);
-    writer.endElement("tbody");
-    writer.endElement("table");
-
-    writer.endElement("div");
-
-    writer.endElement("div");
-  }
-
-  protected void encodeSimpleMarkup(FacesContext context, FileUpload fileUpload) throws IOException {
-    encodeInputField(context, fileUpload, fileUpload.getClientId(context));
-  }
-
-  protected void encodeChooseButton(FacesContext context, FileUpload fileUpload, boolean disabled) throws IOException {
-    ResponseWriter writer = context.getResponseWriter();
-    String clientId = fileUpload.getClientId(context);
-    String cssClass = HTML.BUTTON_TEXT_ICON_LEFT_BUTTON_CLASS + " " + FileUpload.CHOOSE_BUTTON_CLASS;
-    if (disabled) {
-      cssClass += " ui-state-disabled";
+    protected void encodeSimpleMarkup(FacesContext context, FileUpload fileUpload) throws IOException {
+        encodeInputField(context, fileUpload, fileUpload.getClientId(context));
     }
 
-    writer.startElement("span", null);
-    writer.writeAttribute("class", cssClass, null);
+    protected void encodeChooseButton(FacesContext context, FileUpload fileUpload, boolean disabled) throws IOException {
+        ResponseWriter writer = context.getResponseWriter();
+        String clientId = fileUpload.getClientId(context);
+        String cssClass = HTML.BUTTON_TEXT_ICON_LEFT_BUTTON_CLASS + " " + FileUpload.CHOOSE_BUTTON_CLASS;
+        if (disabled) {
+            cssClass += " ui-state-disabled";
+        }
 
-    //button icon 
-    writer.startElement("span", null);
-    writer.writeAttribute("class", HTML.BUTTON_LEFT_ICON_CLASS + " ui-icon-plusthick", null);
-    writer.endElement("span");
+        writer.startElement("span", null);
+        writer.writeAttribute("class", cssClass, null);
 
-    //text
-    writer.startElement("span", null);
-    writer.writeAttribute("class", HTML.BUTTON_TEXT_CLASS, null);
-    writer.writeText(fileUpload.getLabel(), "value");
-    writer.endElement("span");
+        //button icon 
+        writer.startElement("span", null);
+        writer.writeAttribute("class", HTML.BUTTON_LEFT_ICON_CLASS + " ui-icon-plusthick", null);
+        writer.endElement("span");
 
-    if (!disabled) {
-      encodeInputField(context, fileUpload, clientId + "_input");
+        //text
+        writer.startElement("span", null);
+        writer.writeAttribute("class", HTML.BUTTON_TEXT_CLASS, null);
+        writer.writeText(fileUpload.getLabel(), "value");
+        writer.endElement("span");
+
+        if (!disabled) {
+            encodeInputField(context, fileUpload, clientId + "_input");
+        }
+
+        writer.endElement("span");
     }
 
-    writer.endElement("span");
-  }
+    protected void encodeInputField(FacesContext context, FileUpload fileUpload, String clientId) throws IOException {
+        ResponseWriter writer = context.getResponseWriter();
 
-  protected void encodeInputField(FacesContext context, FileUpload fileUpload, String clientId) throws IOException {
-    ResponseWriter writer = context.getResponseWriter();
+        writer.startElement("input", null);
+        writer.writeAttribute("type", "file", null);
+        writer.writeAttribute("id", clientId, null);
+        writer.writeAttribute("name", clientId, null);
 
-    writer.startElement("input", null);
-    writer.writeAttribute("type", "file", null);
-    writer.writeAttribute("id", clientId, null);
-    writer.writeAttribute("name", clientId, null);
+        if (fileUpload.isMultiple()) {
+            writer.writeAttribute("multiple", "multiple", null);
+        }
+        if (fileUpload.getStyle() != null) {
+            writer.writeAttribute("style", fileUpload.getStyle(), "style");
+        }
+        if (fileUpload.getStyleClass() != null) {
+            writer.writeAttribute("class", fileUpload.getStyleClass(), "styleClass");
+        }
+        if (fileUpload.isDisabled()) {
+            writer.writeAttribute("disabled", "disabled", "disabled");
+        }
 
-    if (fileUpload.isMultiple()) {
-      writer.writeAttribute("multiple", "multiple", null);
-    }
-    if (fileUpload.getStyle() != null) {
-      writer.writeAttribute("style", fileUpload.getStyle(), "style");
-    }
-    if (fileUpload.getStyleClass() != null) {
-      writer.writeAttribute("class", fileUpload.getStyleClass(), "styleClass");
-    }
-    if (fileUpload.isDisabled()) {
-      writer.writeAttribute("disabled", "disabled", "disabled");
-    }
-
-    writer.endElement("input");
-  }
-
-  protected void encodeButton(FacesContext context, String label, String styleClass, String icon) throws IOException {
-    ResponseWriter writer = context.getResponseWriter();
-    String cssClass = HTML.BUTTON_TEXT_ICON_LEFT_BUTTON_CLASS + " ui-state-disabled " + styleClass;
-
-    writer.startElement("button", null);
-    writer.writeAttribute("type", "button", null);
-    writer.writeAttribute("class", cssClass, null);
-    writer.writeAttribute("disabled", "disabled", null);
-
-    //button icon
-    String iconClass = HTML.BUTTON_LEFT_ICON_CLASS;
-    writer.startElement("span", null);
-    writer.writeAttribute("class", iconClass + " " + icon, null);
-    writer.endElement("span");
-
-    //text
-    writer.startElement("span", null);
-    writer.writeAttribute("class", HTML.BUTTON_TEXT_CLASS, null);
-    writer.writeText(label, "value");
-    writer.endElement("span");
-    writer.endElement("button");
-  }
-
-  private boolean isMultiPartRequest(FacesContext context) {
-    if (context == null) {
-      return false;
+        writer.endElement("input");
     }
 
-    return ((HttpServletRequest) context.getExternalContext().getRequest()).getContentType().startsWith("multipart");
-  }
+    protected void encodeButton(FacesContext context, String label, String styleClass, String icon) throws IOException {
+        ResponseWriter writer = context.getResponseWriter();
+        String cssClass = HTML.BUTTON_TEXT_ICON_LEFT_BUTTON_CLASS + " ui-state-disabled " + styleClass;
+
+        writer.startElement("button", null);
+        writer.writeAttribute("type", "button", null);
+        writer.writeAttribute("class", cssClass, null);
+        writer.writeAttribute("disabled", "disabled", null);
+
+        //button icon
+        String iconClass = HTML.BUTTON_LEFT_ICON_CLASS;
+        writer.startElement("span", null);
+        writer.writeAttribute("class", iconClass + " " + icon, null);
+        writer.endElement("span");
+
+        //text
+        writer.startElement("span", null);
+        writer.writeAttribute("class", HTML.BUTTON_TEXT_CLASS, null);
+        writer.writeText(label, "value");
+        writer.endElement("span");
+        writer.endElement("button");
+    }
+
+    private boolean isMultiPartRequest(FacesContext context) {
+        if (context == null) {
+            return false;
+        }
+
+        return ((HttpServletRequest) context.getExternalContext().getRequest()).getContentType().startsWith("multipart");
+    }
 }

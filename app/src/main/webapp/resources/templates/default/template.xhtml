@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html 
-  xmlns="http://www.w3.org/1999/xhtml" 
-  xmlns:f="http://xmlns.jcp.org/jsf/core"
-  xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:ui="http://java.sun.com/jsf/facelets"
-  xmlns:p="http://primefaces.org/ui" >
-  <f:view>
-    <h:head>
-      <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-      <title>#{bundle['app.title']}</title>
-      <h:outputStylesheet name="/resources/css/default.css"/>
-      <h:outputStylesheet name="/resources/css/cssLayout.css"/>
-    </h:head>
-    <h:body>
-      <!--metadata -->
-      <ui:insert 
-        name="metadata"/>
-      <!--header -->
-      <header id="header">
-        <ui:include 
-          src="header.xhtml" />
-      </header>
-      <!--content-->
-      <div id="content" >
-        <ui:insert 
-          name="content"/>
-        <!-- form dgl global -->
-        <h:form
-          id="frmGlobalDialog"
-          prependId="false">
-          <p:confirmDialog 
-            global="true" 
-            showEffect="fade" 
-            hideEffect="explode">
-            <p:commandButton 
-              value="Yes" 
-              type="button" 
-              styleClass="ui-confirmdialog-yes" 
-              icon="ui-icon-check" />
-            <p:commandButton 
-              value="No" 
-              type="button" 
-              styleClass="ui-confirmdialog-no" 
-              icon="ui-icon-close" />
-          </p:confirmDialog>
-        </h:form>
-      </div>
-      <!--footer-->
-      <footer id="footer" >
-        <ui:include 
-          src="footer.xhtml" />
-      </footer>
-    </h:body>
-  </f:view>
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui" >
+    <f:view>
+        <h:head>
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+            <title>#{bundle['app.title']}</title>
+            <h:outputStylesheet name="/resources/css/default.css"/>
+            <h:outputStylesheet name="/resources/css/cssLayout.css"/>
+        </h:head>
+        <h:body>
+            <!--metadata -->
+            <ui:insert 
+                name="metadata"/>
+            <!--header -->
+            <header id="header">
+                <ui:include 
+                    src="header.xhtml" />
+            </header>
+            <!--content-->
+            <div id="content" >
+                <ui:insert 
+                    name="content"/>
+                <!-- form dgl global -->
+                <h:form
+                    id="frmGlobalDialog"
+                    prependId="false">
+                    <p:confirmDialog 
+                        global="true" 
+                        showEffect="fade" 
+                        hideEffect="explode">
+                        <p:commandButton 
+                            value="Yes" 
+                            type="button" 
+                            styleClass="ui-confirmdialog-yes" 
+                            icon="ui-icon-check" />
+                        <p:commandButton 
+                            value="No" 
+                            type="button" 
+                            styleClass="ui-confirmdialog-no" 
+                            icon="ui-icon-close" />
+                    </p:confirmDialog>
+                </h:form>
+            </div>
+            <!--footer-->
+            <footer id="footer" >
+                <ui:include 
+                    src="footer.xhtml" />
+            </footer>
+        </h:body>
+    </f:view>
 </html>

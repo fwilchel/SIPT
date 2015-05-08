@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence 
-  version="2.1" 
-  xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit 
-    name="sipt-pu" 
-    transaction-type="JTA">
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="sipt-pu" transaction-type="JTA">
     <jta-data-source>jdbc/SIPT</jta-data-source>
-    <class>com.ssl.sipt.api.model.Contacto</class>
-    <class>com.ssl.sipt.api.model.Municipio</class>
     <class>com.ssl.sipt.api.model.Archivo</class>
     <class>com.ssl.sipt.api.model.ArchivoXExperiencia</class>
-    <class>com.ssl.sipt.api.model.Item</class>
-    <class>com.ssl.sipt.api.model.Cesantias</class>
-    <class>com.ssl.sipt.api.model.Departamento</class>
-    <class>com.ssl.sipt.api.model.Experiencia</class>
-    <class>com.ssl.sipt.api.model.Contrato</class>
     <class>com.ssl.sipt.api.model.Beneficiario</class>
-    <class>com.ssl.sipt.api.model.Formacion</class>
-    <class>com.ssl.sipt.api.model.Empleado</class>
+    <class>com.ssl.sipt.api.model.CentroMedico</class>
+    <class>com.ssl.sipt.api.model.CentroTrabajo</class>
+    <class>com.ssl.sipt.api.model.Cesantia</class>
+    <class>com.ssl.sipt.api.model.Contacto</class>
+    <class>com.ssl.sipt.api.model.Contrato</class>
+    <class>com.ssl.sipt.api.model.Departamento</class>
     <class>com.ssl.sipt.api.model.Dotacion</class>
+    <class>com.ssl.sipt.api.model.Empleado</class>
+    <class>com.ssl.sipt.api.model.Experiencia</class>
+    <class>com.ssl.sipt.api.model.Formacion</class>
+    <class>com.ssl.sipt.api.model.Item</class>
     <class>com.ssl.sipt.api.model.Lista</class>
+    <class>com.ssl.sipt.api.model.Municipio</class>
+    <class>com.ssl.sipt.api.model.Cesantias</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
   </persistence-unit>
 </persistence>

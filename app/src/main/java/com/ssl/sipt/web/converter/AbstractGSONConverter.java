@@ -22,84 +22,84 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class AbstractGSONConverter<T> implements Converter {
 
-  /**
-   *
-   */
-  private static final Logger LOG = LoggerFactory.getLogger(AbstractGSONConverter.class);
+    /**
+     *
+     */
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractGSONConverter.class);
 
-  /**
-   *
-   * @param context
-   * @param component
-   * @param value
-   * @return
-   * @throws ConverterException
-   */
-  @Override
-  public Object getAsObject(FacesContext context, UIComponent component, String value) throws ConverterException {
-    LOG.info("Entro a: <<getAsObject>> parametros / context ->> {} / component ->> {} / value ->> {}", context, component, value);
-    if (value == null || value.isEmpty() || !value.startsWith("{")) {
-      return null;
-    }
-    return (T) unmarshal(value);
-  }
-
-  /**
-   *
-   * @param context
-   * @param component
-   * @param value
-   * @return
-   * @throws ConverterException
-   */
-  @Override
-  public String getAsString(FacesContext context, UIComponent component, Object value) throws ConverterException {
-    LOG.info("Entro a: <<getAsString>> parametros / context ->> {} / component ->> {} / value ->> {}", context, component, value);
-    if (value == null) {
-      return null;
-    }
-    return marshal(value);
-  }
-
-  /**
-   *
-   * @param json
-   * @param clazz
-   * @return
-   */
-  private Object unmarshal(String json) {
-    LOG.info("Entro a: <<unmarshal>> parametros / json ->> {} / class ->> {}", json, getClazz());
-    Gson gson = new GsonBuilder().create();
-    if (json == null || json.isEmpty()) {
-      return null;
-    } else {
-      Object o = gson.fromJson(json, getClazz());
-      LOG.debug(o.toString());
-      return o;
-    }
-  }
-
-  /**
-   *
-   * @param instancia
-   * @return
-   */
-  private String marshal(Object instancia) {
-    LOG.info("Entro a: <<marshal>> parametros / instancia  ->> {}", instancia);
-    Gson gson = new GsonBuilder().create();
-    if (instancia == null) {
-      return null;
-    } else {
-      String json = gson.toJson(instancia);
-      LOG.debug(json);
-      return json;
+    /**
+     *
+     * @param context
+     * @param component
+     * @param value
+     * @return
+     * @throws ConverterException
+     */
+    @Override
+    public Object getAsObject(FacesContext context, UIComponent component, String value) throws ConverterException {
+        LOG.info("Entro a: <<getAsObject>> parametros / context ->> {} / component ->> {} / value ->> {}", context, component, value);
+        if (value == null || value.isEmpty() || !value.startsWith("{")) {
+            return null;
+        }
+        return (T) unmarshal(value);
     }
 
-  }
+    /**
+     *
+     * @param context
+     * @param component
+     * @param value
+     * @return
+     * @throws ConverterException
+     */
+    @Override
+    public String getAsString(FacesContext context, UIComponent component, Object value) throws ConverterException {
+        LOG.info("Entro a: <<getAsString>> parametros / context ->> {} / component ->> {} / value ->> {}", context, component, value);
+        if (value == null) {
+            return null;
+        }
+        return marshal(value);
+    }
 
-  /**
-   *
-   * @return
-   */
-  public abstract Class<T> getClazz();
+    /**
+     *
+     * @param json
+     * @param clazz
+     * @return
+     */
+    private Object unmarshal(String json) {
+        LOG.info("Entro a: <<unmarshal>> parametros / json ->> {} / class ->> {}", json, getClazz());
+        Gson gson = new GsonBuilder().create();
+        if (json == null || json.isEmpty()) {
+            return null;
+        } else {
+            Object o = gson.fromJson(json, getClazz());
+            LOG.debug(o.toString());
+            return o;
+        }
+    }
+
+    /**
+     *
+     * @param instancia
+     * @return
+     */
+    private String marshal(Object instancia) {
+        LOG.info("Entro a: <<marshal>> parametros / instancia  ->> {}", instancia);
+        Gson gson = new GsonBuilder().create();
+        if (instancia == null) {
+            return null;
+        } else {
+            String json = gson.toJson(instancia);
+            LOG.debug(json);
+            return json;
+        }
+
+    }
+
+    /**
+     *
+     * @return
+     */
+    public abstract Class<T> getClazz();
 }
