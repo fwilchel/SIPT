@@ -530,7 +530,7 @@
   <table id="TAB143" populated="true" UUID="12b1b310-e4ac-4922-9f14-a0d776f2aeac" name="centro_medico" objectType="TABLE" physicalName="centro_medico" >
    <remarks></remarks>
    <folder id="FOLTAB1431" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL144" populated="true" UUID="2db98510-be3e-4ef3-a91e-2407ad2dc377" autoIncrement="true" autoIncrementSequenceName="centro_medico_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
+    <column id="COL144" populated="true" UUID="2db98510-be3e-4ef3-a91e-2407ad2dc377" autoIncrement="true" autoIncrementSequenceName="centro_medico_id_seq" defaultValue="" name="id" nullable="0" physicalName="id" precision="0" primaryKeySeq="0" referenceCount="2" scale="0" sourceDataTypeName="UserDefinedSQLType" type="-5" userDefinedTypeUUID="433cc8af-284d-4abb-8ef7-08ebcb34dbf1" >
      <remarks></remarks>
     </column>
     <column id="COL145" populated="true" UUID="92520640-3f5c-4715-a757-532fde3f1595" autoIncrement="false" autoIncrementSequenceName="centro_medico_nit_seq" defaultValue="" name="nit" nullable="0" physicalName="nit" precision="50" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
@@ -682,11 +682,14 @@
    <relationship id="REL218" populated="true" UUID="aa9fbe95-3c79-4449-9318-815ef2307e82" deferrability="7" deleteRule="3" fk-table-ref="TAB3" fkCardinality="7" identifying="true" name="municipio_empleado_fk" physicalName="municipio_empleado_fk" pk-table-ref="TAB130" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP219" populated="true" UUID="92122fc4-e8f5-4b49-b775-2132806a222a" fk-column-ref="COL15" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL131" />
    </relationship>
-   <relationship id="REL220" populated="true" UUID="99c6615a-df4a-44eb-9552-ee847d62281f" deferrability="7" deleteRule="3" fk-table-ref="TAB3" fkCardinality="7" identifying="true" name="centro_medico_empleado_fk" physicalName="centro_medico_empleado_fk" pk-table-ref="TAB143" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP221" populated="true" UUID="0e060661-0815-408e-972b-6bb9d881fbcd" fk-column-ref="COL23" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL144" />
+   <relationship id="REL220" populated="true" UUID="d921bab8-3b2a-4efa-b659-7ce59a4afe70" deferrability="7" deleteRule="3" fk-table-ref="TAB143" fkCardinality="7" identifying="true" name="municipio_centro_medico_fk" physicalName="municipio_centro_medico_fk" pk-table-ref="TAB130" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP221" populated="true" UUID="8d696ed7-d8bf-4e33-9332-34033dcb1dbe" fk-column-ref="COL148" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL131" />
    </relationship>
-   <relationship id="REL222" populated="true" UUID="02b24ad2-5c06-4ffd-bb80-ec56fcd65e58" deferrability="7" deleteRule="3" fk-table-ref="TAB3" fkCardinality="7" identifying="true" name="centro_trabajo_empleado_fk" physicalName="centro_trabajo_empleado_fk" pk-table-ref="TAB154" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP223" populated="true" UUID="6be0dddb-16da-465b-8f92-9a2137df642b" fk-column-ref="COL20" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL155" />
+   <relationship id="REL222" populated="true" UUID="99c6615a-df4a-44eb-9552-ee847d62281f" deferrability="7" deleteRule="3" fk-table-ref="TAB3" fkCardinality="7" identifying="true" name="centro_medico_empleado_fk" physicalName="centro_medico_empleado_fk" pk-table-ref="TAB143" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP223" populated="true" UUID="0e060661-0815-408e-972b-6bb9d881fbcd" fk-column-ref="COL23" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL144" />
+   </relationship>
+   <relationship id="REL224" populated="true" UUID="02b24ad2-5c06-4ffd-bb80-ec56fcd65e58" deferrability="7" deleteRule="3" fk-table-ref="TAB3" fkCardinality="7" identifying="true" name="centro_trabajo_empleado_fk" physicalName="centro_trabajo_empleado_fk" pk-table-ref="TAB154" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP225" populated="true" UUID="6be0dddb-16da-465b-8f92-9a2137df642b" fk-column-ref="COL20" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL155" />
    </relationship>
   </relationships>
  </target-database>
@@ -738,9 +741,10 @@
   <table-link relationship-ref="REL208" pkConnection="0.3333333333333333" fkConnection="0.5618279569892473" rLineColor="0x4c4c4c" pkLabelText="" fkLabelText="" orientation="18"/>
   <table-link relationship-ref="REL210" pkConnection="0.1623931623931624" fkConnection="0.782258064516129" rLineColor="0x4c4c4c" pkLabelText="" fkLabelText="" orientation="18"/>
   <table-link relationship-ref="REL212" pkConnection="0.3684210526315789" fkConnection="0.6711711711711712" rLineColor="0x4c4c4c" pkLabelText="" fkLabelText="" orientation="132"/>
-  <table-link relationship-ref="REL222" pkConnection="0.28205128205128205" fkConnection="0.8333333333333334" rLineColor="0x4c4c4c" pkLabelText="" fkLabelText="" orientation="18"/>
-  <table-link relationship-ref="REL220" pkConnection="0.3333333333333333" fkConnection="0.9650537634408602" rLineColor="0x4c4c4c" pkLabelText="" fkLabelText="" orientation="18"/>
+  <table-link relationship-ref="REL224" pkConnection="0.28205128205128205" fkConnection="0.8333333333333334" rLineColor="0x4c4c4c" pkLabelText="" fkLabelText="" orientation="18"/>
+  <table-link relationship-ref="REL222" pkConnection="0.3333333333333333" fkConnection="0.9650537634408602" rLineColor="0x4c4c4c" pkLabelText="" fkLabelText="" orientation="18"/>
   <table-link relationship-ref="REL214" pkConnection="0.27350427350427353" fkConnection="0.8790322580645161" rLineColor="0x4c4c4c" pkLabelText="" fkLabelText="" orientation="18"/>
+  <table-link relationship-ref="REL220" pkConnection="0.7437185929648241" fkConnection="0.6428571428571429" rLineColor="0x4c4c4c" pkLabelText="" fkLabelText="" orientation="36"/>
  </play-pen>
  <critic-manager>
   <critic-grouping platformType="Generic" enabled="true">

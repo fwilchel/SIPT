@@ -13,23 +13,6 @@ CREATE TABLE public.centro_trabajo (
 
 ALTER SEQUENCE public.centro_trabajo_id_seq OWNED BY public.centro_trabajo.id;
 
-CREATE SEQUENCE public.centro_medico_id_seq;
-
-CREATE TABLE public.centro_medico (
-                id BIGINT NOT NULL DEFAULT nextval('public.centro_medico_id_seq'),
-                nit VARCHAR(50) NOT NULL,
-                nombre VARCHAR(100) NOT NULL,
-                direccion VARCHAR(100) NOT NULL,
-                municipio BIGINT NOT NULL,
-                telefono VARCHAR(50) NOT NULL,
-                contacto VARCHAR(100) NOT NULL,
-                estado BOOLEAN DEFAULT true NOT NULL,
-                CONSTRAINT centro_medico_pk PRIMARY KEY (id)
-);
-
-
-ALTER SEQUENCE public.centro_medico_id_seq OWNED BY public.centro_medico.id;
-
 CREATE SEQUENCE public.departamento_id_seq;
 
 CREATE TABLE public.departamento (
@@ -54,6 +37,23 @@ CREATE TABLE public.municipio (
 
 
 ALTER SEQUENCE public.municipio_id_seq OWNED BY public.municipio.id;
+
+CREATE SEQUENCE public.centro_medico_id_seq;
+
+CREATE TABLE public.centro_medico (
+                id BIGINT NOT NULL DEFAULT nextval('public.centro_medico_id_seq'),
+                nit VARCHAR(50) NOT NULL,
+                nombre VARCHAR(100) NOT NULL,
+                direccion VARCHAR(100) NOT NULL,
+                municipio BIGINT NOT NULL,
+                telefono VARCHAR(50) NOT NULL,
+                contacto VARCHAR(100) NOT NULL,
+                estado BOOLEAN DEFAULT true NOT NULL,
+                CONSTRAINT centro_medico_pk PRIMARY KEY (id)
+);
+
+
+ALTER SEQUENCE public.centro_medico_id_seq OWNED BY public.centro_medico.id;
 
 CREATE SEQUENCE public.lista_id_seq;
 
@@ -261,13 +261,6 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.empleado ADD CONSTRAINT centro_medico_empleado_fk
-FOREIGN KEY (centro_medico)
-REFERENCES public.centro_medico (id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
 ALTER TABLE public.municipio ADD CONSTRAINT departamento_municipio_fk
 FOREIGN KEY (departamento)
 REFERENCES public.departamento (id)
@@ -278,6 +271,20 @@ NOT DEFERRABLE;
 ALTER TABLE public.empleado ADD CONSTRAINT municipio_empleado_fk
 FOREIGN KEY (municipio)
 REFERENCES public.municipio (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.centro_medico ADD CONSTRAINT municipio_centro_medico_fk
+FOREIGN KEY (municipio)
+REFERENCES public.municipio (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.empleado ADD CONSTRAINT centro_medico_empleado_fk
+FOREIGN KEY (centro_medico)
+REFERENCES public.centro_medico (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
