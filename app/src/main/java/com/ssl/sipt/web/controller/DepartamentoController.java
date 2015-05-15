@@ -7,6 +7,7 @@ package com.ssl.sipt.web.controller;
 import com.ssl.sipt.api.model.Departamento;
 import com.ssl.sipt.api.service.DepartamentoServiceInterface;
 import com.ssl.sipt.api.service.exception.ServiceException;
+import com.ssl.sipt.web.util.NavEnum;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -27,198 +28,194 @@ import org.slf4j.LoggerFactory;
 @ViewScoped
 public class DepartamentoController extends AbstractController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DepartamentoController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(DepartamentoController.class);
 
-    private enum OptionNavEnum {
+  @EJB
+  private DepartamentoServiceInterface service;
+  private Departamento selected;
+  private List<Departamento> list;
+  private boolean editable;
+  private NavEnum optionNavEnum;
 
-        LIST, DETAILS
+  public DepartamentoController() {
+    LOG.trace("method: constructor()");
+  }
+
+  @PostConstruct
+  public void initialize() {
+    LOG.trace("method: initialize()");
+    optionNavEnum = NavEnum.LIST;
+    setSelected(null);
+    setEditable(false);
+    setSelected(null);
+    loadList();
+  }
+
+  /**
+   *
+   */
+  public void loadList() {
+    LOG.trace("method: loadList()");
+    try {
+      setList(service.findAll());
+    } catch (ServiceException ex) {
+      LOG.error("Error in method: loadList()", ex);
     }
-    @EJB
-    private DepartamentoServiceInterface service;
-    private Departamento selected;
-    private List<Departamento> list;
-    private boolean editable;
-    private OptionNavEnum optionNavEnum;
+  }
 
-    public DepartamentoController() {
-        LOG.trace("method: constructor()");
-    }
+  /**
+   *
+   */
+  private void initializeEdit() {
+    LOG.trace("method: initializeEdit()");
+    setEditable(true);
+  }
 
-    @PostConstruct
-    public void initialize() {
-        LOG.trace("method: initialize()");
-        optionNavEnum = OptionNavEnum.LIST;
-        setSelected(null);
-        setEditable(false);
-        setSelected(null);
-        loadList();
-    }
+  /**
+   *
+   */
+  public void onCreate() {
+    LOG.trace("method: onCreate()");
+    optionNavEnum = NavEnum.DETAILS;
+    setSelected(new Departamento());
+    initializeEdit();
+  }
 
-    /**
-     *
-     */
-    public void loadList() {
-        LOG.trace("method: loadList()");
-        try {
-            setList(service.findAll());
-        } catch (ServiceException ex) {
-            LOG.error("Error in method: loadList()", ex);
-        }
-    }
+  /**
+   *
+   * @param event
+   */
+  public void onRowSelect(SelectEvent event) {
+    LOG.trace("method: onRowSelect()");
+    setSelected((Departamento) event.getObject());
+    setEditable(false);
+    optionNavEnum = NavEnum.DETAILS;
+  }
 
-    /**
-     *
-     */
-    private void initializeEdit() {
-        LOG.trace("method: initializeEdit()");
-        setEditable(true);
-    }
+  /**
+   *
+   */
+  public void onEdit() {
+    LOG.trace("method: onEdit()");
+    initializeEdit();
+  }
 
-    /**
-     *
-     */
-    public void onCreate() {
-        LOG.trace("method: onCreate()");
-        optionNavEnum = OptionNavEnum.DETAILS;
-        setSelected(new Departamento());
-        initializeEdit();
+  /**
+   *
+   */
+  public void onDelete() {
+    LOG.trace("method: onDelete()");
+    try {
+      service.delete(getSelected());
+      initialize();
+    } catch (ServiceException ex) {
+      LOG.error("Error in method: onDelete()", ex);
     }
+  }
 
-    /**
-     *
-     * @param event
-     */
-    public void onRowSelect(SelectEvent event) {
-        LOG.trace("method: onRowSelect()");
-        setSelected((Departamento) event.getObject());
-        setEditable(false);
-        optionNavEnum = OptionNavEnum.DETAILS;
+  /**
+   *
+   */
+  public void onSave() {
+    LOG.trace("method: onSave()");
+    try {
+      if (getSelected().getId() == null) {
+        service.create(getSelected());
+      } else {
+        service.update(getSelected());
+      }
+      setEditable(false);
+    } catch (ServiceException ex) {
+      LOG.error("Error en <<onSave>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
     }
+  }
 
-    /**
-     *
-     */
-    public void onEdit() {
-        LOG.trace("method: onEdit()");
-        initializeEdit();
+  /**
+   *
+   */
+  public void onCancel() {
+    LOG.trace("method: onCancel()");
+    if (getSelected() != null && getSelected().getId() != null) {
+      setEditable(false);
+    } else {
+      optionNavEnum = NavEnum.LIST;
     }
+  }
 
-    /**
-     *
-     */
-    public void onDelete() {
-        LOG.trace("method: onDelete()");
-        try {
-            service.delete(getSelected());
-            initialize();
-        } catch (ServiceException ex) {
-            LOG.error("Error in method: onDelete()", ex);
-        }
-    }
+  /**
+   *
+   */
+  public void onBack() {
+    LOG.trace("method: onBack()");
+    initialize();
+  }
 
-    /**
-     *
-     */
-    public void onSave() {
-        LOG.trace("method: onSave()");
-        try {
-            if (getSelected().getId() == null) {
-                service.create(getSelected());
-            } else {
-                service.update(getSelected());
-            }
-            setEditable(false);
-        } catch (ServiceException ex) {
-            LOG.error("Error en <<onSave>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
-        }
-    }
+  /**
+   *
+   * @return
+   */
+  public boolean isShowList() {
+    boolean showList = (optionNavEnum == NavEnum.LIST);
+    return showList;
+  }
 
-    /**
-     *
-     */
-    public void onCancel() {
-        LOG.trace("method: onCancel()");
-        if (getSelected() != null && getSelected().getId() != null) {
-            setEditable(false);
-        } else {
-            optionNavEnum = OptionNavEnum.LIST;
-        }
-    }
+  /**
+   *
+   * @return
+   */
+  public boolean isShowDetails() {
+    boolean showDetails = (optionNavEnum == NavEnum.DETAILS);
+    return showDetails;
+  }
 
-    /**
-     *
-     */
-    public void onBack() {
-        LOG.trace("method: onBack()");
-        initialize();
-    }
+  /**
+   *
+   * @return
+   */
+  public boolean isNewRecord() {
+    boolean newRecord = (getSelected() != null && getSelected().getId() == null);
+    return newRecord;
+  }
 
-    /**
-     *
-     * @return
-     */
-    public boolean isShowList() {
-        boolean showList = (optionNavEnum == OptionNavEnum.LIST);
-        return showList;
-    }
+  /**
+   * @return the selected
+   */
+  public Departamento getSelected() {
+    return selected;
+  }
 
-    /**
-     *
-     * @return
-     */
-    public boolean isShowDetails() {
-        boolean showDetails = (optionNavEnum == OptionNavEnum.DETAILS);
-        return showDetails;
-    }
+  /**
+   * @param selected the selected to set
+   */
+  public void setSelected(Departamento selected) {
+    this.selected = selected;
+  }
 
-    /**
-     *
-     * @return
-     */
-    public boolean isNewRecord() {
-        boolean newRecord = (getSelected() != null && getSelected().getId() == null);
-        return newRecord;
-    }
+  /**
+   * @return the list
+   */
+  public List<Departamento> getList() {
+    return list;
+  }
 
-    /**
-     * @return the selected
-     */
-    public Departamento getSelected() {
-        return selected;
-    }
+  /**
+   * @param list the list to set
+   */
+  public void setList(List<Departamento> list) {
+    this.list = list;
+  }
 
-    /**
-     * @param selected the selected to set
-     */
-    public void setSelected(Departamento selected) {
-        this.selected = selected;
-    }
+  /**
+   * @return the editable
+   */
+  public boolean isEditable() {
+    return editable;
+  }
 
-    /**
-     * @return the list
-     */
-    public List<Departamento> getList() {
-        return list;
-    }
-
-    /**
-     * @param list the list to set
-     */
-    public void setList(List<Departamento> list) {
-        this.list = list;
-    }
-
-    /**
-     * @return the editable
-     */
-    public boolean isEditable() {
-        return editable;
-    }
-
-    /**
-     * @param editable the editable to set
-     */
-    public void setEditable(boolean editable) {
-        this.editable = editable;
-    }
+  /**
+   * @param editable the editable to set
+   */
+  public void setEditable(boolean editable) {
+    this.editable = editable;
+  }
 }

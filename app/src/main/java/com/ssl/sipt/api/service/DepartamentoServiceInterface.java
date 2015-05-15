@@ -17,15 +17,15 @@ import java.util.List;
  */
 public interface DepartamentoServiceInterface {
 
-    List<Departamento> findAll() throws ServiceException;
+  List<Departamento> findAll() throws ServiceException;
 
-    Departamento findById(Long id) throws ServiceException;
+  Departamento findById(Long id) throws ServiceException;
 
-    Departamento create(Departamento record) throws ServiceException;
+  Departamento create(Departamento record) throws ServiceException;
 
-    void update(Departamento record) throws ServiceException;
+  void update(Departamento record) throws ServiceException;
 
-    void delete(Departamento record) throws ServiceException;
+  void delete(Departamento record) throws ServiceException;
 
-    void delete(Long id) throws ServiceException;
+  void delete(Long id) throws ServiceException;
 }

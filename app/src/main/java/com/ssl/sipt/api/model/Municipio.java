@@ -28,93 +28,93 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(catalog = "sipt", schema = "public")
 @NamedQueries({
-    @NamedQuery(name = Municipio.FIND_ALL, query = "SELECT m FROM Municipio m"),
-    @NamedQuery(name = Municipio.FIND_BY_DEPARTAMENTO, query = "SELECT m FROM Municipio m WHERE m.departamento.id = :departamento")
+  @NamedQuery(name = Municipio.FIND_ALL, query = "SELECT m FROM Municipio m"),
+  @NamedQuery(name = Municipio.FIND_BY_DEPARTAMENTO, query = "SELECT m FROM Municipio m WHERE m.departamento.id = :departamento")
 })
 public class Municipio implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    public static final String FIND_ALL = "Municipio.findAll";
-    public static final String FIND_BY_DEPARTAMENTO = "Municipio.findByDepartamento";
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private Long id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(nullable = false, length = 100)
-    private String nombre;
-    @Size(max = 500)
-    @Column(length = 500)
-    private String descripcion;
-    @JoinColumn(name = "departamento", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Departamento departamento;
+  private static final long serialVersionUID = 1L;
+  public static final String FIND_ALL = "Municipio.findAll";
+  public static final String FIND_BY_DEPARTAMENTO = "Municipio.findByDepartamento";
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Basic(optional = false)
+  @Column(nullable = false)
+  private Long id;
+  @Basic(optional = false)
+  @NotNull
+  @Size(min = 1, max = 100)
+  @Column(nullable = false, length = 100)
+  private String nombre;
+  @Size(max = 500)
+  @Column(length = 500)
+  private String descripcion;
+  @JoinColumn(name = "departamento", referencedColumnName = "id", nullable = false)
+  @ManyToOne(optional = false, fetch = FetchType.EAGER)
+  private Departamento departamento;
 
-    public Municipio() {
-    }
+  public Municipio() {
+  }
 
-    public Municipio(Long id) {
-        this.id = id;
-    }
+  public Municipio(Long id) {
+    this.id = id;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getNombre() {
-        return nombre;
-    }
+  public String getNombre() {
+    return nombre;
+  }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+  public String getDescripcion() {
+    return descripcion;
+  }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+  public void setDescripcion(String descripcion) {
+    this.descripcion = descripcion;
+  }
 
-    public Departamento getDepartamento() {
-        return departamento;
-    }
+  public Departamento getDepartamento() {
+    return departamento;
+  }
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
-    }
+  public void setDepartamento(Departamento departamento) {
+    this.departamento = departamento;
+  }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+  @Override
+  public int hashCode() {
+    int hash = 0;
+    hash += (id != null ? id.hashCode() : 0);
+    return hash;
+  }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Municipio)) {
-            return false;
-        }
-        Municipio other = (Municipio) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+  @Override
+  public boolean equals(Object object) {
+    // TODO: Warning - this method won't work in the case the id fields are not set
+    if (!(object instanceof Municipio)) {
+      return false;
     }
+    Municipio other = (Municipio) object;
+    if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+      return false;
+    }
+    return true;
+  }
 
-    @Override
-    public String toString() {
-        return "com.ssl.sipt.api.model.Municipio[ id=" + id + " ]";
-    }
+  @Override
+  public String toString() {
+    return "com.ssl.sipt.api.model.Municipio[ id=" + id + " ]";
+  }
 
 }

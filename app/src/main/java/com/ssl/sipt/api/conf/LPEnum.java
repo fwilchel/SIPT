@@ -13,81 +13,64 @@ package com.ssl.sipt.api.conf;
  */
 public enum LPEnum {
 
-    ARL(1L, "ARL's", ""),
-    BANCO(1L, "Bancos", ""),
-    CAJA_COMPENSACION(1L, "Cajas de compensación", ""),
-    CARGO(1L, "Cargos", ""),
-    CENTRO_MEDICO(1L, "Centros médicos", ""),
-    CENTRO_TRABAJO(1L, "Centros de trabajo", ""),
-    DEPARTAMENTO(1L, "Departamentos", ""),
-    EPS(1L, "EPS's", ""),
-    ESTADO_CIVIL(1L, "Estados civiles", ""),
-    FONDO_CESANTIAS(1L, "Fondos de cesantias", ""),
-    FONDO_PENSIONES(1L, "Fondos de pensiones", ""),
-    GENERO(1L, "Géneros", ""),
-    MACROPROYECTO(1L, "Macroproyectos", ""),
-    MUNICIPIO(1L, "Municipios", ""),
-    PARENTESCO(1L, "Parentescos", ""),
-    RH(1L, "RH's", ""),
-    SI_NO(1L, "SI/NO", ""),
-    TIPO_CONTRATO(1L, "Tipos de contratos", ""),
-    TIPO_CUENTA(1L, "Tipos de cuentas", ""),
-    TIPO_DOTACION(1L, "Tipos de dotaciones", ""),
-    TIPO_EMPRESA(1L, "Tipos de empresas", ""),
-    TIPO_FORMACION(1L, "Tipos de formaciones", ""),
-    TIPO_IDENTIFICACION(1L, "Tipos de identificación", ""),
-    TIPO_SOPORTE(1L, "Tipos de soporte", "");
+  ARL(1L, "title.arl"),
+  BANCO(2L, "title.banco"),
+  CAJA_COMPENSACION(3L, "title.cajacompensacion"),
+  CARGO(4L, "title.cargo"),
+  CENTRO_MEDICO(5L, "title.centromedico"),
+  CENTRO_TRABAJO(6L, "title.centrotrabajo"),
+  DEPARTAMENTO(7L, "title.departamento"),
+  EPS(8L, "title.eps"),
+  ESTADO_CIVIL(9L, "title.estadovivil"),
+  FONDO_CESANTIAS(10L, "title.fondocesantias"),
+  FONDO_PENSIONES(11L, "title.fondopensiones"),
+  GENERO(12L, "title.genero"),
+  MACROPROYECTO(13L, "title.macroproyecto"),
+  MUNICIPIO(14L, "title.municipio"),
+  PARENTESCO(15L, "title.parentesco"),
+  RH(16L, "title.rh"),
+  SI_NO(17L, "title.sino"),
+  TIPO_CONTRATO(18L, "title.tipocontrato"),
+  TIPO_CUENTA(19L, "title.tipocuenta"),
+  TIPO_DOTACION(20L, "title.tipodotacion"),
+  TIPO_EMPRESA(21L, "title.tipoempresa"),
+  TIPO_FORMACION(22L, "title.tipoformacion"),
+  TIPO_IDENTIFICACION(23L, "title.tipoidentificacion"),
+  TIPO_SOPORTE(24L, "title.tiposoporte");
 
-    private Long id;
-    private String nombre;
-    private String descripcion;
+  private final Long id;
+  private final String key;
 
-    private LPEnum(Long id, String nombre, String descripcion) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
+  private LPEnum(Long id, String nombre) {
+    this.id = id;
+    this.key = nombre;
+  }
+
+  /**
+   * @return the id
+   */
+  public Long getId() {
+    return id;
+  }
+
+  /**
+   * @return the key
+   */
+  public String getKey() {
+    return key;
+  }
+
+  /**
+   * 
+   * @param id
+   * @return 
+   */
+  public static LPEnum findById(Long id) {
+    for (LPEnum c : LPEnum.values()) {
+      if (c.getId().equals(id)) {
+        return c;
+      }
     }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the nombre
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    /**
-     * @param nombre the nombre to set
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    /**
-     * @return the descripcion
-     */
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    /**
-     * @param descripcion the descripcion to set
-     */
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
+    return null;
+  }
 }

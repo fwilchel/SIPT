@@ -17,15 +17,15 @@ import java.util.List;
  */
 public interface CentroMedicoServiceInterface {
 
-    List<CentroMedico> findAll() throws ServiceException;
+  List<CentroMedico> findAll() throws ServiceException;
 
-    CentroMedico findById(Long id) throws ServiceException;
+  CentroMedico findById(Long id) throws ServiceException;
 
-    CentroMedico create(CentroMedico record) throws ServiceException;
+  CentroMedico create(CentroMedico record) throws ServiceException;
 
-    void update(CentroMedico record) throws ServiceException;
+  void update(CentroMedico record) throws ServiceException;
 
-    void delete(CentroMedico record) throws ServiceException;
+  void delete(CentroMedico record) throws ServiceException;
 
-    void delete(Long id) throws ServiceException;
+  void delete(Long id) throws ServiceException;
 }

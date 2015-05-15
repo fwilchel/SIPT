@@ -18,18 +18,18 @@ import java.util.List;
  */
 public interface LPServiceInterface {
 
-    List<Lista> findAll() throws ServiceException;
+  List<Lista> findAll() throws ServiceException;
 
-    List<Item> findByParent(Long parent) throws ServiceException;
+  List<Item> findByParent(Long parent) throws ServiceException;
 
-    Item findById(Long id) throws ServiceException;
+  Item findById(Long id) throws ServiceException;
 
-    Item create(Item record) throws ServiceException;
+  Item create(Item record) throws ServiceException;
 
-    void update(Item record) throws ServiceException;
+  void update(Item record) throws ServiceException;
 
-    void delete(Item record) throws ServiceException;
+  void delete(Item record) throws ServiceException;
 
-    void delete(Long id) throws ServiceException;
+  void delete(Long id) throws ServiceException;
 
 }

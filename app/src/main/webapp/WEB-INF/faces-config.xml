@@ -1,64 +1,64 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <faces-config 
-    version="2.1" 
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
-    <application>
-        <resource-bundle>
-            <base-name>bundle</base-name>
-            <var>bundle</var>
-        </resource-bundle>
-        <locale-config>
-            <default-locale>en</default-locale>
-        </locale-config>
-    </application>
-    <navigation-rule>
-        <from-view-id>*</from-view-id>
-        <!-- index -->
-        <navigation-case>
-            <from-outcome>index</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-        <!-- usuarios -->
-        <navigation-case>
-            <from-outcome>usuario</from-outcome>
-            <to-view-id>/pages/admon/usuario.xhtml</to-view-id>
-        </navigation-case>
-        <!-- perfiles -->
-        <navigation-case>
-            <from-outcome>perfil</from-outcome>
-            <to-view-id>/pages/admon/perfil.xhtml</to-view-id>
-        </navigation-case>
-        <!-- listas parametricas -->
-        <navigation-case>
-            <from-outcome>lp</from-outcome>
-            <to-view-id>/pages/admon/lp.xhtml</to-view-id>
-        </navigation-case>
-        <!-- centros medicos -->
-        <navigation-case>
-            <from-outcome>centromedico</from-outcome>
-            <to-view-id>/pages/admon/centroMedico.xhtml</to-view-id>
-        </navigation-case>
-        <!-- centros de trabajo -->
-        <navigation-case>
-            <from-outcome>centrotrabajo</from-outcome>
-            <to-view-id>/pages/admon/centroTrabajo.xhtml</to-view-id>
-        </navigation-case>
-        <!-- departamentos -->
-        <navigation-case>
-            <from-outcome>depto</from-outcome>
-            <to-view-id>/pages/admon/depto.xhtml</to-view-id>
-        </navigation-case>
-        <!-- municipios -->
-        <navigation-case>
-            <from-outcome>municipio</from-outcome>
-            <to-view-id>/pages/admon/municipio.xhtml</to-view-id>
-        </navigation-case>
-        <!-- talento humano -->
-        <navigation-case>
-            <from-outcome>th</from-outcome>
-            <to-view-id>/pages/th/th.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+  version="2.1" 
+  xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+  <application>
+    <resource-bundle>
+      <base-name>bundle</base-name>
+      <var>bundle</var>
+    </resource-bundle>
+    <locale-config>
+      <default-locale>es</default-locale>
+    </locale-config>
+  </application>
+  <navigation-rule>
+    <from-view-id>*</from-view-id>
+    <!-- index -->
+    <navigation-case>
+      <from-outcome>index</from-outcome>
+      <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+    <!-- usuarios -->
+    <navigation-case>
+      <from-outcome>usuario</from-outcome>
+      <to-view-id>/pages/admon/usuario.xhtml</to-view-id>
+    </navigation-case>
+    <!-- perfiles -->
+    <navigation-case>
+      <from-outcome>perfil</from-outcome>
+      <to-view-id>/pages/admon/perfil.xhtml</to-view-id>
+    </navigation-case>
+    <!-- listas parametricas -->
+    <navigation-case>
+      <from-outcome>lp</from-outcome>
+      <to-view-id>/pages/admon/lp.xhtml</to-view-id>
+    </navigation-case>
+    <!-- centros medicos -->
+    <navigation-case>
+      <from-outcome>centromedico</from-outcome>
+      <to-view-id>/pages/admon/centroMedico.xhtml</to-view-id>
+    </navigation-case>
+    <!-- centros de trabajo -->
+    <navigation-case>
+      <from-outcome>centrotrabajo</from-outcome>
+      <to-view-id>/pages/admon/centroTrabajo.xhtml</to-view-id>
+    </navigation-case>
+    <!-- departamentos -->
+    <navigation-case>
+      <from-outcome>depto</from-outcome>
+      <to-view-id>/pages/admon/depto.xhtml</to-view-id>
+    </navigation-case>
+    <!-- municipios -->
+    <navigation-case>
+      <from-outcome>municipio</from-outcome>
+      <to-view-id>/pages/admon/municipio.xhtml</to-view-id>
+    </navigation-case>
+    <!-- talento humano -->
+    <navigation-case>
+      <from-outcome>th</from-outcome>
+      <to-view-id>/pages/th/th.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
 </faces-config>

@@ -17,15 +17,15 @@ import java.util.List;
  */
 public interface CentroTrabajoServiceInterface {
 
-    List<CentroTrabajo> findAll() throws ServiceException;
+  List<CentroTrabajo> findAll() throws ServiceException;
 
-    CentroTrabajo findById(Long id) throws ServiceException;
+  CentroTrabajo findById(Long id) throws ServiceException;
 
-    CentroTrabajo create(CentroTrabajo record) throws ServiceException;
+  CentroTrabajo create(CentroTrabajo record) throws ServiceException;
 
-    void update(CentroTrabajo record) throws ServiceException;
+  void update(CentroTrabajo record) throws ServiceException;
 
-    void delete(CentroTrabajo record) throws ServiceException;
+  void delete(CentroTrabajo record) throws ServiceException;
 
-    void delete(Long id) throws ServiceException;
+  void delete(Long id) throws ServiceException;
 }

@@ -25,78 +25,78 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(catalog = "sipt", schema = "public")
 @NamedQueries({
-    @NamedQuery(name = "Departamento.findAll", query = "SELECT d FROM Departamento d")})
+  @NamedQuery(name = "Departamento.findAll", query = "SELECT d FROM Departamento d")})
 public class Departamento implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private Long id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(nullable = false, length = 100)
-    private String nombre;
-    @Size(max = 500)
-    @Column(length = 500)
-    private String descripcion;
+  private static final long serialVersionUID = 1L;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Basic(optional = false)
+  @Column(nullable = false)
+  private Long id;
+  @Basic(optional = false)
+  @NotNull
+  @Size(min = 1, max = 100)
+  @Column(nullable = false, length = 100)
+  private String nombre;
+  @Size(max = 500)
+  @Column(length = 500)
+  private String descripcion;
 
-    public Departamento() {
-    }
+  public Departamento() {
+  }
 
-    public Departamento(Long id) {
-        this.id = id;
-    }
+  public Departamento(Long id) {
+    this.id = id;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getNombre() {
-        return nombre;
-    }
+  public String getNombre() {
+    return nombre;
+  }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+  public String getDescripcion() {
+    return descripcion;
+  }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+  public void setDescripcion(String descripcion) {
+    this.descripcion = descripcion;
+  }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+  @Override
+  public int hashCode() {
+    int hash = 0;
+    hash += (id != null ? id.hashCode() : 0);
+    return hash;
+  }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Departamento)) {
-            return false;
-        }
-        Departamento other = (Departamento) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+  @Override
+  public boolean equals(Object object) {
+    // TODO: Warning - this method won't work in the case the id fields are not set
+    if (!(object instanceof Departamento)) {
+      return false;
     }
+    Departamento other = (Departamento) object;
+    if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+      return false;
+    }
+    return true;
+  }
 
-    @Override
-    public String toString() {
-        return "com.ssl.sipt.api.model.Departamento[ id=" + id + " ]";
-    }
+  @Override
+  public String toString() {
+    return "com.ssl.sipt.api.model.Departamento[ id=" + id + " ]";
+  }
 
 }

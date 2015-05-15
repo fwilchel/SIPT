@@ -13,6 +13,6 @@ package com.ssl.sipt.web.util;
  */
 public enum NavEnum {
 
-    LIST, DETAILS;
+  LIST, DETAILS;
 
 }
