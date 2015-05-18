@@ -3,7 +3,7 @@
 -- Copyrigth .MMXV.
 --
 -- Create database script
--- @author: Diego Poveda, <diego.poveda@softstudio.com>.
+-- @author: Diego Poveda, <diego.poveda@softstudio.co>.
 -- @version: 1.0
 --
 

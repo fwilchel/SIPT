@@ -35,7 +35,7 @@ public class LpController extends AbstractController {
   @EJB
   private LPServiceInterface service;
   private String title;
-  private final Long parent;
+  private Long parent;
   private Item selected;
   private List<Item> list;
   private boolean editable;
@@ -51,7 +51,7 @@ public class LpController extends AbstractController {
   @PostConstruct
   public void initialize() {
     LOG.trace("method: initialize()");
-    optionNavEnum = NavEnum.LIST;
+    optionNavEnum = (NavEnum.LIST);
     setSelected(null);
     setEditable(false);
     setSelected(null);
@@ -64,7 +64,7 @@ public class LpController extends AbstractController {
   public void loadList() {
     LOG.trace("method: loadList()");
     try {
-      setList(service.findByParent(parent));
+      setList(service.findByParent(getParent()));
     } catch (ServiceException ex) {
       LOG.error("Error in method: loadList()", ex);
     }
@@ -83,9 +83,9 @@ public class LpController extends AbstractController {
    */
   public void onCreate() {
     LOG.trace("method: onCreate()");
-    optionNavEnum = NavEnum.DETAILS;
+    optionNavEnum = (NavEnum.DETAILS);
     setSelected(new Item());
-    getSelected().setLista(new Lista(parent));
+    getSelected().setLista(new Lista(getParent()));
     initializeEdit();
   }
 
@@ -97,7 +97,7 @@ public class LpController extends AbstractController {
     LOG.trace("method: onRowSelect()");
     setSelected((Item) event.getObject());
     setEditable(false);
-    optionNavEnum = NavEnum.DETAILS;
+    optionNavEnum = (NavEnum.DETAILS);
   }
 
   /**
@@ -146,7 +146,7 @@ public class LpController extends AbstractController {
     if (getSelected() != null && getSelected().getId() != null) {
       setEditable(false);
     } else {
-      optionNavEnum = NavEnum.LIST;
+      optionNavEnum = (NavEnum.LIST);
     }
   }
 
@@ -197,6 +197,20 @@ public class LpController extends AbstractController {
    */
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  /**
+   * @return the parent
+   */
+  public Long getParent() {
+    return parent;
+  }
+
+  /**
+   * @param parent the parent to set
+   */
+  public void setParent(Long parent) {
+    this.parent = parent;
   }
 
   /**

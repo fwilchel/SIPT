@@ -3,7 +3,7 @@
 -- Copyrigth .MMXV.
 --
 -- Drop database script
--- @author: Javier Latorre, <javier.latorre@demiurgesoft.com>
+-- @author: Javier Latorre, <javier.latorre@demiurgesoft.co>
 -- @version: 1.0
 --
 
@@ -12,8 +12,8 @@
 -------------------------------------------------------------
 SELECT pg_terminate_backend(pg_stat_activity.pid)
 FROM pg_stat_activity
-WHERE pg_stat_activity.datname = 'showroom'
+WHERE pg_stat_activity.datname = 'sipt'
 AND pid <> pg_backend_pid();
 
-DROP DATABASE showroom;
-DROP ROLE showroom;
+DROP DATABASE sipt;
+DROP ROLE sipt;

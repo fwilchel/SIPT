@@ -1,7 +1,6 @@
 package com.ssl.sipt.api.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +14,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -33,13 +33,17 @@ public class Empleado implements Serializable {
   @Basic(optional = false)
   @Column(nullable = false)
   private Long id;
+  @JoinColumn(name = "identificacion_tipo", referencedColumnName = "id", nullable = false)
+  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  private Item identificacionTipo;
   @Basic(optional = false)
   @NotNull
   @Size(min = 1, max = 25)
   @Column(nullable = false, length = 25)
   private String identificacion;
-  @Column(name = "lugar_expedicion_identificacion")
-  private BigInteger lugarExpedicionIdentificacion;
+  @JoinColumn(name = "identificacion_lugar_expedicion", referencedColumnName = "id", nullable = false)
+  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  private Municipio identificacionLugarExpedicion;
   @Basic(optional = false)
   @NotNull
   @Size(min = 1, max = 50)
@@ -54,7 +58,7 @@ public class Empleado implements Serializable {
   @NotNull
   @Column(nullable = false)
   private boolean estado;
-  // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+  @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Invalid email")
   @Size(max = 100)
   @Column(length = 100)
   private String email;
@@ -87,9 +91,6 @@ public class Empleado implements Serializable {
   @JoinColumn(name = "tipo_contrato", referencedColumnName = "id", nullable = false)
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   private Item tipoContrato;
-  @JoinColumn(name = "tipo_identificacion", referencedColumnName = "id", nullable = false)
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
-  private Item tipoIdentificacion;
   @JoinColumn(name = "centro_trabajo", referencedColumnName = "id", nullable = false)
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   private CentroTrabajo centroTrabajo;
@@ -105,15 +106,6 @@ public class Empleado implements Serializable {
 
   public Empleado(Long id) {
     this.id = id;
-  }
-
-  public Empleado(Long id, String identificacion, String nombres, String apellidos, boolean estado, String direccion) {
-    this.id = id;
-    this.identificacion = identificacion;
-    this.nombres = nombres;
-    this.apellidos = apellidos;
-    this.estado = estado;
-    this.direccion = direccion;
   }
 
   public Long getId() {
@@ -132,12 +124,12 @@ public class Empleado implements Serializable {
     this.identificacion = identificacion;
   }
 
-  public BigInteger getLugarExpedicionIdentificacion() {
-    return lugarExpedicionIdentificacion;
+  public Municipio getIdentificacionLugarExpedicion() {
+    return identificacionLugarExpedicion;
   }
 
-  public void setLugarExpedicionIdentificacion(BigInteger lugarExpedicionIdentificacion) {
-    this.lugarExpedicionIdentificacion = lugarExpedicionIdentificacion;
+  public void setIdentificacionLugarExpedicion(Municipio identificacionLugarExpedicion) {
+    this.identificacionLugarExpedicion = identificacionLugarExpedicion;
   }
 
   public String getNombres() {
@@ -244,12 +236,12 @@ public class Empleado implements Serializable {
     this.tipoContrato = tipoContrato;
   }
 
-  public Item getTipoIdentificacion() {
-    return tipoIdentificacion;
+  public Item getIdentificacionTipo() {
+    return identificacionTipo;
   }
 
-  public void setTipoIdentificacion(Item tipoIdentificacion) {
-    this.tipoIdentificacion = tipoIdentificacion;
+  public void setIdentificacionTipo(Item identificacionTipo) {
+    this.identificacionTipo = identificacionTipo;
   }
 
   public CentroTrabajo getCentroTrabajo() {

@@ -103,8 +103,8 @@ CREATE SEQUENCE public.empleado_id_seq;
 CREATE TABLE public.empleado (
                 id BIGINT NOT NULL DEFAULT nextval('public.empleado_id_seq'),
                 identificacion VARCHAR(25) NOT NULL,
-                tipo_identificacion BIGINT NOT NULL,
-                lugar_expedicion_identificacion BIGINT,
+                identificacion_tipo BIGINT NOT NULL,
+                identificacion_lugar_expedicion BIGINT,
                 nombres VARCHAR(50) NOT NULL,
                 apellidos VARCHAR(50) NOT NULL,
                 estado BOOLEAN DEFAULT true NOT NULL,
@@ -282,6 +282,13 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
+ALTER TABLE public.empleado ADD CONSTRAINT id_lugar_exp_empleado_fk
+FOREIGN KEY (identificacion_lugar_expedicion)
+REFERENCES public.municipio (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
 ALTER TABLE public.empleado ADD CONSTRAINT centro_medico_empleado_fk
 FOREIGN KEY (centro_medico)
 REFERENCES public.centro_medico (id)
@@ -346,7 +353,7 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.empleado ADD CONSTRAINT tipo_identificacion_empleado_fk
-FOREIGN KEY (tipo_identificacion)
+FOREIGN KEY (identificacion_tipo)
 REFERENCES public.item (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
