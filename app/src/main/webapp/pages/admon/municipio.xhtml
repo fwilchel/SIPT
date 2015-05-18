@@ -6,7 +6,7 @@
   xmlns:f="http://xmlns.jcp.org/jsf/core"
   xmlns:ui="http://java.sun.com/jsf/facelets" 
   xmlns:p="http://primefaces.org/ui" 
-  template="/resources/templates/default/template.left-panel.xhtml">
+  template="/resources/default/template/default.xhtml">
   <ui:define
     name="content">
     <h:panelGroup 
@@ -71,7 +71,7 @@
               value="#{record.descripcion}"/>
           </p:column>
           <p:column 
-            headerText="#{bundle['municipio.departamento']}">
+            headerText="#{bundle['depto']}">
             <h:outputText 
               value="#{record.departamento.nombre}"/>
           </p:column>
@@ -85,7 +85,7 @@
           id="tbDetails">
           <f:facet name="left">
             <h:outputText 
-              value="#{bundle['title.municipio']}"
+              value="#{bundle['municipio']}"
               styleClass="toolbar-title"/>
           </f:facet>
           <f:facet 
@@ -116,72 +116,68 @@
             </p:commandButton>
           </f:facet>
         </p:toolbar>
-        <p:panel>
-          <div class="row">
-            <p:panel
-              id="pnlDetails">
-              <p:panelGrid
-                columns="2">
-                <!-- nombre -->
-                <p:outputLabel
-                  for="nombre"
-                  value="#{bundle['municipio.nombre']}"/>
-                <h:outputText
-                  value="#{municipioController.selected.nombre}"
-                  rendered="#{!municipioController.editable}"/>
-                <p:inputText
-                  id="nombre"
-                  value="#{municipioController.selected.nombre}"
-                  rendered="#{municipioController.editable}"/>
-                <!-- descripcion -->
-                <p:outputLabel
-                  for="descripcion"
-                  value="#{bundle['municipio.descripcion']}"/>
-                <h:outputText
-                  value="#{municipioController.selected.descripcion}"
-                  rendered="#{!municipioController.editable}"/>
-                <p:inputText
-                  id="descripcion"
-                  value="#{municipioController.selected.descripcion}"
-                  rendered="#{municipioController.editable}"/>
-                <p:outputLabel 
-                  for="depto" 
-                  value="#{bundle['municipio.departamento']}"  />
-                <h:outputText
-                  value="#{municipioController.selected.departamento.nombre}"
-                  rendered="#{!municipioController.editable}"/>
-                <p:selectOneMenu 
-                  id="depto" 
-                  value="#{municipioController.selected.departamento}" 
-                  converter="deptoConverter"
-                  rendered="#{municipioController.editable}">
-                  <f:selectItem 
-                    noSelectionOption="true"/>
-                  <f:selectItems 
-                    value="#{comunController.obtenerDepartamentos()}" 
-                    var="record" 
-                    itemLabel="#{record.nombre}" 
-                    itemValue="#{record}" />
-                </p:selectOneMenu>              
-              </p:panelGrid>
-              <f:facet name="footer">
-                <p:commandButton 
-                  title="#{bundle['commons.btn.save']}"
-                  icon="ui-icon-disk"
-                  actionListener="#{municipioController.onSave()}"
-                  rendered="#{municipioController.editable}"
-                  process="pnlDetails"
-                  update=":frmMessage frmDetail"/>
-                <p:commandButton 
-                  title="#{bundle['commons.btn.cancel']}"
-                  icon="ui-icon-circle-close"
-                  actionListener="#{municipioController.onCancel()}"
-                  immediate="true"
-                  rendered="#{municipioController.editable}"
-                  update=":main"/>
-              </f:facet>
-            </p:panel>
-          </div>
+        <p:panel
+          id="pnlDetails">
+          <p:panelGrid
+            columns="2">
+            <!-- nombre -->
+            <p:outputLabel
+              for="nombre"
+              value="#{bundle['municipio.nombre']}"/>
+            <h:outputText
+              value="#{municipioController.selected.nombre}"
+              rendered="#{!municipioController.editable}"/>
+            <p:inputText
+              id="nombre"
+              value="#{municipioController.selected.nombre}"
+              rendered="#{municipioController.editable}"/>
+            <!-- descripcion -->
+            <p:outputLabel
+              for="descripcion"
+              value="#{bundle['municipio.descripcion']}"/>
+            <h:outputText
+              value="#{municipioController.selected.descripcion}"
+              rendered="#{!municipioController.editable}"/>
+            <p:inputText
+              id="descripcion"
+              value="#{municipioController.selected.descripcion}"
+              rendered="#{municipioController.editable}"/>
+            <p:outputLabel 
+              for="depto" 
+              value="#{bundle['depto']}"  />
+            <h:outputText
+              value="#{municipioController.selected.departamento.nombre}"
+              rendered="#{!municipioController.editable}"/>
+            <p:selectOneMenu 
+              id="depto" 
+              value="#{municipioController.selected.departamento}" 
+              converter="deptoConverter"
+              rendered="#{municipioController.editable}">
+              <f:selectItem 
+                noSelectionOption="true"/>
+              <f:selectItems 
+                value="#{comunController.obtenerDepartamentos()}" 
+                var="record" 
+                itemLabel="#{record.nombre}" 
+                itemValue="#{record}" />
+            </p:selectOneMenu>              
+          </p:panelGrid>
+          <f:facet name="footer">
+            <p:commandButton 
+              title="#{bundle['commons.btn.save']}"
+              icon="ui-icon-disk"
+              actionListener="#{municipioController.onSave()}"
+              rendered="#{municipioController.editable}"
+              process="pnlDetails"
+              update=":frmMessage frmDetail"/>
+            <p:commandButton 
+              title="#{bundle['commons.btn.cancel']}"
+              icon="ui-icon-circle-close"
+              actionListener="#{municipioController.onCancel()}"
+              immediate="true"
+              rendered="#{municipioController.editable}"
+              update=":main"/>
+          </f:facet>
         </p:panel>
       </h:form>
     </h:panelGroup>

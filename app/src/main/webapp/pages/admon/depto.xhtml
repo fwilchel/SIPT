@@ -6,7 +6,7 @@
   xmlns:f="http://xmlns.jcp.org/jsf/core"
   xmlns:ui="http://java.sun.com/jsf/facelets" 
   xmlns:p="http://primefaces.org/ui" 
-  template="/resources/templates/default/template.left-panel.xhtml">
+  template="/resources/default/template/default.xhtml">
   <ui:define
     name="content">
     <h:panelGroup 
@@ -80,7 +80,7 @@
           id="tbDetails">
           <f:facet name="left">
             <h:outputText 
-              value="#{bundle['title.departamento']}"
+              value="#{bundle['depto']}"
               styleClass="toolbar-title"/>
           </f:facet>
           <f:facet 
@@ -111,53 +111,49 @@
             </p:commandButton>
           </f:facet>
         </p:toolbar>
-        <p:panel>
-          <div class="row">
-            <p:panel
-              id="pnlDetails">
-              <p:panelGrid
-                columns="2">
-                <!-- nombre -->
-                <p:outputLabel
-                  for="nombre"
-                  value="#{bundle['depto.nombre']}"/>
-                <h:outputText
-                  value="#{departamentoController.selected.nombre}"
-                  rendered="#{!departamentoController.editable}"/>
-                <p:inputText
-                  id="nombre"
-                  value="#{departamentoController.selected.nombre}"
-                  rendered="#{departamentoController.editable}"/>
-                <!-- descripcion -->
-                <p:outputLabel
-                  for="descripcion"
-                  value="#{bundle['depto.descripcion']}"/>
-                <h:outputText
-                  value="#{departamentoController.selected.descripcion}"
-                  rendered="#{!departamentoController.editable}"/>
-                <p:inputText
-                  id="descripcion"
-                  value="#{departamentoController.selected.descripcion}"
-                  rendered="#{departamentoController.editable}"/>
-              </p:panelGrid>
-              <f:facet name="footer">
-                <p:commandButton 
-                  title="#{bundle['commons.btn.save']}"
-                  icon="ui-icon-disk"
-                  actionListener="#{departamentoController.onSave()}"
-                  rendered="#{departamentoController.editable}"
-                  process="pnlDetails"
-                  update=":frmMessage frmDetail"/>
-                <p:commandButton 
-                  title="#{bundle['commons.btn.cancel']}"
-                  icon="ui-icon-circle-close"
-                  actionListener="#{departamentoController.onCancel()}"
-                  immediate="true"
-                  rendered="#{departamentoController.editable}"
-                  update=":main"/>
-              </f:facet>
-            </p:panel>
-          </div>
+        <p:panel
+          id="pnlDetails">
+          <p:panelGrid
+            columns="2">
+            <!-- nombre -->
+            <p:outputLabel
+              for="nombre"
+              value="#{bundle['depto.nombre']}"/>
+            <h:outputText
+              value="#{departamentoController.selected.nombre}"
+              rendered="#{!departamentoController.editable}"/>
+            <p:inputText
+              id="nombre"
+              value="#{departamentoController.selected.nombre}"
+              rendered="#{departamentoController.editable}"/>
+            <!-- descripcion -->
+            <p:outputLabel
+              for="descripcion"
+              value="#{bundle['depto.descripcion']}"/>
+            <h:outputText
+              value="#{departamentoController.selected.descripcion}"
+              rendered="#{!departamentoController.editable}"/>
+            <p:inputText
+              id="descripcion"
+              value="#{departamentoController.selected.descripcion}"
+              rendered="#{departamentoController.editable}"/>
+          </p:panelGrid>
+          <f:facet name="footer">
+            <p:commandButton 
+              title="#{bundle['commons.btn.save']}"
+              icon="ui-icon-disk"
+              actionListener="#{departamentoController.onSave()}"
+              rendered="#{departamentoController.editable}"
+              process="pnlDetails"
+              update=":frmMessage frmDetail"/>
+            <p:commandButton 
+              title="#{bundle['commons.btn.cancel']}"
+              icon="ui-icon-circle-close"
+              actionListener="#{departamentoController.onCancel()}"
+              immediate="true"
+              rendered="#{departamentoController.editable}"
+              update=":main"/>
+          </f:facet>
         </p:panel>
       </h:form>
     </h:panelGroup>

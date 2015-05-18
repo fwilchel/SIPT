@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ssl.sipt.api.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -74,8 +66,6 @@ public class Empleado implements Serializable {
   @Size(min = 1, max = 2147483647)
   @Column(nullable = false, length = 2147483647)
   private String direccion;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado", fetch = FetchType.LAZY)
-  private List<Formacion> formacionList;
   @JoinColumn(name = "municipio", referencedColumnName = "id", nullable = false)
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   private Municipio municipio;
@@ -109,18 +99,6 @@ public class Empleado implements Serializable {
   @JoinColumn(name = "curriculum", referencedColumnName = "id", nullable = false)
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   private Archivo curriculum;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado", fetch = FetchType.LAZY)
-  private List<Dotacion> dotacionList;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado", fetch = FetchType.LAZY)
-  private List<Cesantias> cesantiasList;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado", fetch = FetchType.LAZY)
-  private List<Beneficiario> beneficiarioList;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado", fetch = FetchType.LAZY)
-  private List<Contrato> contratoList;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado", fetch = FetchType.LAZY)
-  private List<Contacto> contactoList;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "empleado", fetch = FetchType.LAZY)
-  private List<Experiencia> experienciaList;
 
   public Empleado() {
   }
@@ -210,14 +188,6 @@ public class Empleado implements Serializable {
     this.direccion = direccion;
   }
 
-  public List<Formacion> getFormacionList() {
-    return formacionList;
-  }
-
-  public void setFormacionList(List<Formacion> formacionList) {
-    this.formacionList = formacionList;
-  }
-
   public Municipio getMunicipio() {
     return municipio;
   }
@@ -304,54 +274,6 @@ public class Empleado implements Serializable {
 
   public void setCurriculum(Archivo curriculum) {
     this.curriculum = curriculum;
-  }
-
-  public List<Dotacion> getDotacionList() {
-    return dotacionList;
-  }
-
-  public void setDotacionList(List<Dotacion> dotacionList) {
-    this.dotacionList = dotacionList;
-  }
-
-  public List<Cesantias> getCesantiasList() {
-    return cesantiasList;
-  }
-
-  public void setCesantiasList(List<Cesantias> cesantiasList) {
-    this.cesantiasList = cesantiasList;
-  }
-
-  public List<Beneficiario> getBeneficiarioList() {
-    return beneficiarioList;
-  }
-
-  public void setBeneficiarioList(List<Beneficiario> beneficiarioList) {
-    this.beneficiarioList = beneficiarioList;
-  }
-
-  public List<Contrato> getContratoList() {
-    return contratoList;
-  }
-
-  public void setContratoList(List<Contrato> contratoList) {
-    this.contratoList = contratoList;
-  }
-
-  public List<Contacto> getContactoList() {
-    return contactoList;
-  }
-
-  public void setContactoList(List<Contacto> contactoList) {
-    this.contactoList = contactoList;
-  }
-
-  public List<Experiencia> getExperienciaList() {
-    return experienciaList;
-  }
-
-  public void setExperienciaList(List<Experiencia> experienciaList) {
-    this.experienciaList = experienciaList;
   }
 
   @Override

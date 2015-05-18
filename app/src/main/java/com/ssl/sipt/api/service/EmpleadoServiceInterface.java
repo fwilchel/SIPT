@@ -23,7 +23,7 @@ public interface EmpleadoServiceInterface {
 
   Empleado findById(Long id) throws ServiceException;
 
-  void create(Empleado empleado) throws ServiceException;
+  Empleado create(Empleado empleado) throws ServiceException;
 
   void update(Empleado empleado) throws ServiceException;
 
