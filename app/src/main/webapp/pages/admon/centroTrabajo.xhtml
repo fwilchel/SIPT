@@ -129,46 +129,65 @@
             <p:outputLabel
               for="nombre"
               value="#{bundle['centrotrabajo.nombre']}"/>
-            <h:outputText
-              value="#{centroTrabajoController.selected.nombre}"
-              rendered="#{!centroTrabajoController.editable}"/>
-            <p:inputText
-              id="nombre"
-              value="#{centroTrabajoController.selected.nombre}"
-              rendered="#{centroTrabajoController.editable}"/>
+            <h:panelGroup>
+              <h:outputText
+                value="#{centroTrabajoController.selected.nombre}"
+                rendered="#{!centroTrabajoController.editable}"/>
+              <p:inputText
+                id="nombre"
+                value="#{centroTrabajoController.selected.nombre}"
+                rendered="#{centroTrabajoController.editable}"/>
+              <p:message
+                for="nombre"/>
+            </h:panelGroup>
             <!-- descripcion -->
             <p:outputLabel
               for="descripcion"
               value="#{bundle['centrotrabajo.descripcion']}"/>
-            <h:outputText
-              value="#{centroTrabajoController.selected.descripcion}"
-              rendered="#{!centroTrabajoController.editable}"/>
-            <p:inputText
-              id="descripcion"
-              value="#{centroTrabajoController.selected.descripcion}"
-              rendered="#{centroTrabajoController.editable}"/>
+            <h:panelGroup>
+              <h:outputText
+                value="#{centroTrabajoController.selected.descripcion}"
+                rendered="#{!centroTrabajoController.editable}"/>
+              <p:inputText
+                id="descripcion"
+                value="#{centroTrabajoController.selected.descripcion}"
+                rendered="#{centroTrabajoController.editable}"/>
+              <p:message
+                for="descripcion"/>
+            </h:panelGroup>
             <!-- direccion -->
             <p:outputLabel
               for="direccion"
               value="#{bundle['centrotrabajo.direccion']}"/>
-            <h:outputText
-              value="#{centroTrabajoController.selected.direccion}"
-              rendered="#{!centroTrabajoController.editable}"/>
-            <p:inputText
-              id="direccion"
-              value="#{centroTrabajoController.selected.direccion}"
-              rendered="#{centroTrabajoController.editable}"/>
+            <h:panelGroup>
+              <h:outputText
+                value="#{centroTrabajoController.selected.direccion}"
+                rendered="#{!centroTrabajoController.editable}"/>
+              <p:inputText
+                id="direccion"
+                value="#{centroTrabajoController.selected.direccion}"
+                rendered="#{centroTrabajoController.editable}"/>
+              <p:message
+                for="direccion"/>
+            </h:panelGroup>
             <!-- estado -->
             <p:outputLabel
               for="estado"
               value="#{bundle['centrotrabajo.estado']}"/>
-            <p:selectBooleanButton 
-              id="estado" 
-              value="#{centroTrabajoController.selected.estado}" 
-              onLabel="#{bundle['commons.lbl.active']}" 
-              offLabel="#{bundle['commons.lbl.inactive']}" 
-              style="width:80px" 
-              disabled="#{!centroTrabajoController.editable}"/>
+            <h:panelGroup>
+              <h:outputText 
+                value="#{centroTrabajoController.selected.estado ? bundle['commons.lbl.active'] : bundle['commons.lbl.inactive']}"
+                rendered="#{!centroTrabajoController.editable}"/>
+              <p:selectBooleanButton 
+                id="estado" 
+                value="#{centroTrabajoController.selected.estado}" 
+                onLabel="#{bundle['commons.lbl.active']}" 
+                offLabel="#{bundle['commons.lbl.inactive']}" 
+                style="width:80px" 
+                rendered="#{centroTrabajoController.editable}"/>
+              <p:message
+                for="estado"/>
+            </h:panelGroup>
           </p:panelGrid>
           <f:facet name="footer">
             <p:commandButton 
@@ -177,7 +196,7 @@
               actionListener="#{centroTrabajoController.onSave()}"
               rendered="#{centroTrabajoController.editable}"
               process="pnlDetails"
-              update=":frmMessage frmDetail"/>
+              update="frmDetail"/>
             <p:commandButton 
               title="#{bundle['commons.btn.cancel']}"
               icon="ui-icon-circle-close"

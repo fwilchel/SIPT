@@ -124,35 +124,50 @@
             <p:outputLabel
               for="nombre"
               value="#{bundle['centrotrabajo.nombre']}"/>
-            <h:outputText
-              value="#{lpController.selected.nombre}"
-              rendered="#{!lpController.editable}"/>
-            <p:inputText
-              id="nombre"
-              value="#{lpController.selected.nombre}"
-              rendered="#{lpController.editable}"/>
+            <h:panelGroup>
+              <h:outputText
+                value="#{lpController.selected.nombre}"
+                rendered="#{!lpController.editable}"/>
+              <p:inputText
+                id="nombre"
+                value="#{lpController.selected.nombre}"
+                rendered="#{lpController.editable}"/>
+              <p:message
+                for="nombre"/>
+            </h:panelGroup>
             <!-- descripcion -->
             <p:outputLabel
               for="descripcion"
               value="#{bundle['centrotrabajo.descripcion']}"/>
-            <h:outputText
-              value="#{lpController.selected.descripcion}"
-              rendered="#{!lpController.editable}"/>
-            <p:inputText
-              id="descripcion"
-              value="#{lpController.selected.descripcion}"
-              rendered="#{lpController.editable}"/>
+            <h:panelGroup>
+              <h:outputText
+                value="#{lpController.selected.descripcion}"
+                rendered="#{!lpController.editable}"/>
+              <p:inputText
+                id="descripcion"
+                value="#{lpController.selected.descripcion}"
+                rendered="#{lpController.editable}"/>
+              <p:message
+                for="descripcion"/>
+            </h:panelGroup>
             <!-- estado -->
             <p:outputLabel
               for="estado"
               value="#{bundle['centrotrabajo.estado']}"/>
-            <p:selectBooleanButton 
-              id="estado" 
-              value="#{lpController.selected.estado}" 
-              onLabel="#{bundle['commons.lbl.active']}" 
-              offLabel="#{bundle['commons.lbl.inactive']}" 
-              style="width:80px" 
-              disabled="#{!lpController.editable}"/>
+            <h:panelGroup>
+              <h:outputText 
+                value="#{lpController.selected.estado ? bundle['commons.lbl.active'] : bundle['commons.lbl.inactive']}"
+                rendered="#{!lpController.editable}"/>
+              <p:selectBooleanButton 
+                id="estado" 
+                value="#{lpController.selected.estado}" 
+                onLabel="#{bundle['commons.lbl.active']}" 
+                offLabel="#{bundle['commons.lbl.inactive']}" 
+                style="width:80px" 
+                rendered="#{lpController.editable}"/>
+              <p:message
+                for="estado"/>
+            </h:panelGroup>
           </p:panelGrid>
           <f:facet name="footer">
             <p:commandButton 
@@ -161,7 +176,7 @@
               actionListener="#{lpController.onSave()}"
               rendered="#{lpController.editable}"
               process="pnlDetails"
-              update=":frmMessage frmDetail"/>
+              update="frmDetail"/>
             <p:commandButton 
               title="#{bundle['commons.btn.cancel']}"
               icon="ui-icon-circle-close"

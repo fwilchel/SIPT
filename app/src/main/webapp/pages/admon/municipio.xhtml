@@ -124,43 +124,56 @@
             <p:outputLabel
               for="nombre"
               value="#{bundle['municipio.nombre']}"/>
-            <h:outputText
-              value="#{municipioController.selected.nombre}"
-              rendered="#{!municipioController.editable}"/>
-            <p:inputText
-              id="nombre"
-              value="#{municipioController.selected.nombre}"
-              rendered="#{municipioController.editable}"/>
+            <h:panelGroup>
+              <h:outputText
+                value="#{municipioController.selected.nombre}"
+                rendered="#{!municipioController.editable}"/>
+              <p:inputText
+                id="nombre"
+                value="#{municipioController.selected.nombre}"
+                rendered="#{municipioController.editable}"/>
+              <p:message
+                for="nombre"/>
+            </h:panelGroup>
             <!-- descripcion -->
             <p:outputLabel
               for="descripcion"
               value="#{bundle['municipio.descripcion']}"/>
-            <h:outputText
-              value="#{municipioController.selected.descripcion}"
-              rendered="#{!municipioController.editable}"/>
-            <p:inputText
-              id="descripcion"
-              value="#{municipioController.selected.descripcion}"
-              rendered="#{municipioController.editable}"/>
+            <h:panelGroup>
+              <h:outputText
+                value="#{municipioController.selected.descripcion}"
+                rendered="#{!municipioController.editable}"/>
+              <p:inputText
+                id="descripcion"
+                value="#{municipioController.selected.descripcion}"
+                rendered="#{municipioController.editable}"/>
+              <p:message
+                for="descripcion"/>
+            </h:panelGroup>
+            <!-- departamento -->
             <p:outputLabel 
               for="depto" 
               value="#{bundle['depto']}"  />
-            <h:outputText
-              value="#{municipioController.selected.departamento.nombre}"
-              rendered="#{!municipioController.editable}"/>
-            <p:selectOneMenu 
-              id="depto" 
-              value="#{municipioController.selected.departamento}" 
-              converter="deptoConverter"
-              rendered="#{municipioController.editable}">
-              <f:selectItem 
-                noSelectionOption="true"/>
-              <f:selectItems 
-                value="#{comunController.obtenerDepartamentos()}" 
-                var="record" 
-                itemLabel="#{record.nombre}" 
-                itemValue="#{record}" />
-            </p:selectOneMenu>              
+            <h:panelGroup>
+              <h:outputText
+                value="#{municipioController.selected.departamento.nombre}"
+                rendered="#{!municipioController.editable}"/>
+              <p:selectOneMenu 
+                id="depto" 
+                value="#{municipioController.selected.departamento}" 
+                converter="deptoConverter"
+                rendered="#{municipioController.editable}">
+                <f:selectItem 
+                  noSelectionOption="true"/>
+                <f:selectItems 
+                  value="#{comunController.obtenerDepartamentos()}" 
+                  var="record" 
+                  itemLabel="#{record.nombre}" 
+                  itemValue="#{record}" />
+              </p:selectOneMenu>              
+              <p:message
+                for="depto"/>
+            </h:panelGroup>
           </p:panelGrid>
           <f:facet name="footer">
             <p:commandButton 

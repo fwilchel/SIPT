@@ -119,24 +119,32 @@
             <p:outputLabel
               for="nombre"
               value="#{bundle['depto.nombre']}"/>
-            <h:outputText
-              value="#{departamentoController.selected.nombre}"
-              rendered="#{!departamentoController.editable}"/>
-            <p:inputText
-              id="nombre"
-              value="#{departamentoController.selected.nombre}"
-              rendered="#{departamentoController.editable}"/>
+            <h:panelGroup>
+              <h:outputText
+                value="#{departamentoController.selected.nombre}"
+                rendered="#{!departamentoController.editable}"/>
+              <p:inputText
+                id="nombre"
+                value="#{departamentoController.selected.nombre}"
+                rendered="#{departamentoController.editable}"/>
+              <p:message
+                for="nombre"/>
+            </h:panelGroup>
             <!-- descripcion -->
             <p:outputLabel
               for="descripcion"
               value="#{bundle['depto.descripcion']}"/>
-            <h:outputText
-              value="#{departamentoController.selected.descripcion}"
-              rendered="#{!departamentoController.editable}"/>
-            <p:inputText
-              id="descripcion"
-              value="#{departamentoController.selected.descripcion}"
-              rendered="#{departamentoController.editable}"/>
+            <h:panelGroup>
+              <h:outputText
+                value="#{departamentoController.selected.descripcion}"
+                rendered="#{!departamentoController.editable}"/>
+              <p:inputText
+                id="descripcion"
+                value="#{departamentoController.selected.descripcion}"
+                rendered="#{departamentoController.editable}"/>
+              <p:message
+                for="descripcion"/>
+            </h:panelGroup>
           </p:panelGrid>
           <f:facet name="footer">
             <p:commandButton 

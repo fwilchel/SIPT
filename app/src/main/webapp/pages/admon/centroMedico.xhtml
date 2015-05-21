@@ -144,108 +144,145 @@
             <p:outputLabel
               for="nit"
               value="#{bundle['centromedico.nit']}"/>
-            <h:outputText
-              value="#{centroMedicoController.selected.nit}"
-              rendered="#{!centroMedicoController.editable}"/>
-            <p:inputText
-              id="nit"
-              value="#{centroMedicoController.selected.nit}"
-              rendered="#{centroMedicoController.editable}"/>
+            <h:panelGroup>
+              <h:outputText
+                value="#{centroMedicoController.selected.nit}"
+                rendered="#{!centroMedicoController.editable}"/>
+              <p:inputText
+                id="nit"
+                value="#{centroMedicoController.selected.nit}"
+                rendered="#{centroMedicoController.editable}"/>
+              <p:message
+                for="nit"/>
+            </h:panelGroup>
             <!-- nombre -->
             <p:outputLabel
               for="nombre"
               value="#{bundle['centromedico.nombre']}"/>
-            <h:outputText
-              value="#{centroMedicoController.selected.nombre}"
-              rendered="#{!centroMedicoController.editable}"/>
-            <p:inputText
-              id="nombre"
-              value="#{centroMedicoController.selected.nombre}"
-              rendered="#{centroMedicoController.editable}"/>
+            <h:panelGroup>
+              <h:outputText
+                value="#{centroMedicoController.selected.nombre}"
+                rendered="#{!centroMedicoController.editable}"/>
+              <p:inputText
+                id="nombre"
+                value="#{centroMedicoController.selected.nombre}"
+                rendered="#{centroMedicoController.editable}"/>
+              <p:message
+                for="nombre"/>
+            </h:panelGroup>
             <!-- direccion -->
             <p:outputLabel
               for="direccion"
               value="#{bundle['centromedico.direccion']}"/>
-            <h:outputText
-              value="#{centroMedicoController.selected.direccion}"
-              rendered="#{!centroMedicoController.editable}"/>
-            <p:inputText
-              id="direccion"
-              value="#{centroMedicoController.selected.direccion}"
-              rendered="#{centroMedicoController.editable}"/>
+            <h:panelGroup>
+              <h:outputText
+                value="#{centroMedicoController.selected.direccion}"
+                rendered="#{!centroMedicoController.editable}"/>
+              <p:inputText
+                id="direccion"
+                value="#{centroMedicoController.selected.direccion}"
+                rendered="#{centroMedicoController.editable}"/>
+              <p:message
+                for="direccion"/>
+            </h:panelGroup>
             <!-- departamento -->
             <p:outputLabel
-              for="departamento"
-              value="#{bundle['depto']}"
-              rendered="#{centroMedicoController.editable}"/>
-            <p:selectOneMenu 
-              id="departamento" 
-              value="#{centroMedicoController.selected.municipio.departamento}" 
-              converter="deptoConverter"
-              rendered="#{centroMedicoController.editable}">
-              <p:ajax 
-                update="municipio" />
-              <f:selectItem 
-                noSelectionOption="true"/>
-              <f:selectItems 
-                value="#{comunController.obtenerDepartamentos()}" 
-                var="record" 
-                itemLabel="#{record.nombre}" 
-                itemValue="#{record}" />
-            </p:selectOneMenu>              
-            <!-- municipio -->
-            <p:outputLabel
-              for="municipio"
               value="#{bundle['municipio']}"/>
-            <h:outputText
-              value="#{centroMedicoController.selected.municipio.nombre}"
-              rendered="#{!centroMedicoController.editable}"/>
-            <p:selectOneMenu 
-              id="municipio" 
-              value="#{centroMedicoController.selected.municipio}" 
-              converter="municipioConverter"
-              rendered="#{centroMedicoController.editable}">
-              <f:selectItem 
-                noSelectionOption="true"/>
-              <f:selectItems 
-                value="#{comunController.obtenerMunicipios(centroMedicoController.selected.municipio.departamento.id)}" 
-                var="record" 
-                itemLabel="#{record.nombre}" 
-                itemValue="#{record}" />
-            </p:selectOneMenu>              
+            <h:panelGroup>
+              <h:outputText
+                value="#{centroMedicoController.selected.municipio.nombre}"
+                rendered="#{!centroMedicoController.editable}"/>
+              <p:panelGrid
+                columns="2"
+                rendered="#{centroMedicoController.editable}">
+                <h:panelGroup>
+                  <p:selectOneMenu 
+                    id="departamento" 
+                    value="#{centroMedicoController.selected.municipio.departamento}" 
+                    converter="deptoConverter"
+                    rendered="#{centroMedicoController.editable}">
+                    <p:ajax 
+                      update="municipio" />
+                    <f:selectItem 
+                      noSelectionOption="true"
+                      itemValue="#{bundle['depto']}"/>
+                    <f:selectItems 
+                      value="#{comunController.obtenerDepartamentos()}" 
+                      var="record" 
+                      itemLabel="#{record.nombre}" 
+                      itemValue="#{record}" />
+                  </p:selectOneMenu>              
+                  <p:message
+                    for="departamento"/>
+                </h:panelGroup>
+                <h:panelGroup>
+                  <p:selectOneMenu 
+                    id="municipio" 
+                    value="#{centroMedicoController.selected.municipio}" 
+                    converter="municipioConverter"
+                    rendered="#{centroMedicoController.editable}">
+                    <f:selectItem 
+                      noSelectionOption="true"
+                      itemValue="#{bundle['municipio']}"/>
+                    <f:selectItems 
+                      value="#{comunController.obtenerMunicipios(centroMedicoController.selected.municipio.departamento.id)}" 
+                      var="record" 
+                      itemLabel="#{record.nombre}" 
+                      itemValue="#{record}" />
+                  </p:selectOneMenu>              
+                  <p:message
+                    for="municipio"/>
+                </h:panelGroup>
+              </p:panelGrid>
+            </h:panelGroup>
             <!-- telefono -->
             <p:outputLabel
               for="telefono"
               value="#{bundle['centromedico.telefono']}"/>
-            <h:outputText
-              value="#{centroMedicoController.selected.telefono}"
-              rendered="#{!centroMedicoController.editable}"/>
-            <p:inputText
-              id="telefono"
-              value="#{centroMedicoController.selected.telefono}"
-              rendered="#{centroMedicoController.editable}"/>
+            <h:panelGroup>
+              <h:outputText
+                value="#{centroMedicoController.selected.telefono}"
+                rendered="#{!centroMedicoController.editable}"/>
+              <p:inputText
+                id="telefono"
+                value="#{centroMedicoController.selected.telefono}"
+                rendered="#{centroMedicoController.editable}"/>
+              <p:message
+                for="telefono"/>
+            </h:panelGroup>
             <!-- contacto -->
             <p:outputLabel
               for="contacto"
               value="#{bundle['centromedico.contacto']}"/>
-            <h:outputText
-              value="#{centroMedicoController.selected.contacto}"
-              rendered="#{!centroMedicoController.editable}"/>
-            <p:inputText
-              id="contacto"
-              value="#{centroMedicoController.selected.contacto}"
-              rendered="#{centroMedicoController.editable}"/>
+            <h:panelGroup>
+              <h:outputText
+                value="#{centroMedicoController.selected.contacto}"
+                rendered="#{!centroMedicoController.editable}"/>
+              <p:inputText
+                id="contacto"
+                value="#{centroMedicoController.selected.contacto}"
+                rendered="#{centroMedicoController.editable}"/>
+              <p:message
+                for="contacto"/>
+            </h:panelGroup>
             <!-- estado -->
             <p:outputLabel
               for="estado"
               value="#{bundle['centromedico.estado']}"/>
-            <p:selectBooleanButton 
-              id="estado" 
-              value="#{centroMedicoController.selected.estado}" 
-              onLabel="#{bundle['commons.lbl.active']}" 
-              offLabel="#{bundle['commons.lbl.inactive']}" 
-              style="width:80px" 
-              disabled="#{!centroMedicoController.editable}"/>
+            <h:panelGroup>
+              <h:outputText 
+                value="#{centroMedicoController.selected.estado ? bundle['commons.lbl.active'] : bundle['commons.lbl.inactive']}"
+                rendered="#{!centroMedicoController.editable}"/>
+              <p:selectBooleanButton 
+                id="estado" 
+                value="#{centroMedicoController.selected.estado}" 
+                onLabel="#{bundle['commons.lbl.active']}" 
+                offLabel="#{bundle['commons.lbl.inactive']}" 
+                style="width:80px" 
+                rendered="#{centroMedicoController.editable}"/>
+              <p:message
+                for="estado"/>
+            </h:panelGroup>
           </p:panelGrid>
           <f:facet name="footer">
             <p:commandButton 
@@ -254,7 +291,7 @@
               actionListener="#{centroMedicoController.onSave()}"
               rendered="#{centroMedicoController.editable}"
               process="pnlDetails"
-              update=":frmMessage frmDetail"/>
+              update="frmDetail"/>
             <p:commandButton 
               title="#{bundle['commons.btn.cancel']}"
               icon="ui-icon-circle-close"
