@@ -6,18 +6,14 @@
 package com.ssl.sipt.api.model;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -46,8 +42,6 @@ public class Lista implements Serializable {
   @Size(max = 500)
   @Column(length = 500)
   private String descripcion;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "lista", fetch = FetchType.LAZY)
-  private List<Item> itemList;
 
   public Lista() {
   }
@@ -83,14 +77,6 @@ public class Lista implements Serializable {
 
   public void setDescripcion(String descripcion) {
     this.descripcion = descripcion;
-  }
-
-  public List<Item> getItemList() {
-    return itemList;
-  }
-
-  public void setItemList(List<Item> itemList) {
-    this.itemList = itemList;
   }
 
   @Override

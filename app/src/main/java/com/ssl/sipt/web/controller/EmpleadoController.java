@@ -82,6 +82,8 @@ public class EmpleadoController extends AbstractController {
     setSelected(new Empleado());
     getSelected().setMunicipio(new Municipio());
     getSelected().getMunicipio().setDepartamento(new Departamento());
+    getSelected().setIdentificacionLugarExpedicion(new Municipio());
+    getSelected().getIdentificacionLugarExpedicion().setDepartamento(new Departamento());
     initializeEdit();
   }
 

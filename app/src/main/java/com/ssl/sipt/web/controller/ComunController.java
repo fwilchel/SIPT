@@ -5,9 +5,13 @@
 package com.ssl.sipt.web.controller;
 
 import com.ssl.sipt.api.conf.LPEnum;
+import com.ssl.sipt.api.model.CentroMedico;
+import com.ssl.sipt.api.model.CentroTrabajo;
 import com.ssl.sipt.api.model.Departamento;
 import com.ssl.sipt.api.model.Item;
 import com.ssl.sipt.api.model.Municipio;
+import com.ssl.sipt.api.service.CentroMedicoServiceInterface;
+import com.ssl.sipt.api.service.CentroTrabajoServiceInterface;
 import com.ssl.sipt.api.service.DepartamentoServiceInterface;
 import com.ssl.sipt.api.service.LPServiceInterface;
 import com.ssl.sipt.api.service.MunicipioServiceInterface;
@@ -37,6 +41,10 @@ public class ComunController {
   private MunicipioServiceInterface municipioService;
   @EJB
   private LPServiceInterface lpService;
+  @EJB
+  private CentroTrabajoServiceInterface centroTrabajoService;
+  @EJB
+  private CentroMedicoServiceInterface centroMedicoService;
 
   public List<Departamento> obtenerDepartamentos() {
     LOG.trace("method: obtenerDepartamentos()");
@@ -97,6 +105,26 @@ public class ComunController {
       return lpService.findByParent(LPEnum.CARGO.getId());
     } catch (ServiceException ex) {
       LOG.error("Error in method: obtenerCargos()", ex);
+      return null;
+    }
+  }
+
+  public List<CentroTrabajo> obtenerCentrosTrabajo() {
+    LOG.trace("method: obtenerCentrosTrabajo()");
+    try {
+      return centroTrabajoService.findAll();
+    } catch (ServiceException ex) {
+      LOG.error("Error in method: obtenerCentrosTrabajo()", ex);
+      return null;
+    }
+  }
+
+  public List<CentroMedico> obtenerCentrosMedicos() {
+    LOG.trace("method: obtenerCentrosMedicos()");
+    try {
+      return centroMedicoService.findAll();
+    } catch (ServiceException ex) {
+      LOG.error("Error in method: obtenerCentrosMedicos()", ex);
       return null;
     }
   }

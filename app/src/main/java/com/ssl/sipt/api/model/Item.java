@@ -49,7 +49,7 @@ public class Item implements Serializable {
   @Column(nullable = false)
   private boolean estado;
   @JoinColumn(name = "lista", referencedColumnName = "id", nullable = false)
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @ManyToOne(optional = false, fetch = FetchType.EAGER)
   private Lista lista;
 
   public Item() {
