@@ -4,18 +4,23 @@
  */
 package com.ssl.sipt.web.controller;
 
+import com.ssl.sipt.api.model.Archivo;
 import com.ssl.sipt.api.model.Departamento;
 import com.ssl.sipt.api.model.Empleado;
 import com.ssl.sipt.api.model.Municipio;
 import com.ssl.sipt.api.service.EmpleadoServiceInterface;
 import com.ssl.sipt.api.service.exception.ServiceException;
 import com.ssl.sipt.web.util.NavEnum;
+import de.svenjacobs.loremipsum.LoremIpsum;
+import java.io.IOException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +43,7 @@ public class EmpleadoController extends AbstractController {
   private List<Empleado> list;
   private boolean editable;
   private NavEnum optionNavEnum;
+  private UploadedFile uploadedFile;
 
   public EmpleadoController() {
     LOG.trace("method: constructor()");
@@ -136,6 +142,25 @@ public class EmpleadoController extends AbstractController {
     }
   }
 
+  public void handleFileUpload(FileUploadEvent event) {
+    LOG.trace("entered the method: handleFileUpload(FileUploadEvent)");
+    try {
+      setUploadedFile(event.getFile());
+      LoremIpsum loremIpsum = new LoremIpsum();
+      if (getSelected().getCurriculum() == null) {
+        getSelected().setCurriculum(new Archivo());
+      }
+      getSelected().getCurriculum().setContentType(getUploadedFile().getContentType());
+      getSelected().getCurriculum().setDocumentPath(getUploadedFile().getFileName());
+      // TODO: diseñar una funcionalidad para generar aleatoriamente los nombres de las imagenes.
+      getSelected().getCurriculum().setNombre(loremIpsum.getWords(1));
+      getSelected().getCurriculum().setInputStream(getUploadedFile().getInputstream());
+    } catch (IOException ex) {
+      LOG.error("Error in method: handleFileUpload()", ex);
+    }
+    LOG.trace("left the method: handleFileUpload(FileUploadEvent)");
+  }
+
   /**
    *
    */
@@ -223,5 +248,19 @@ public class EmpleadoController extends AbstractController {
    */
   public void setEditable(boolean editable) {
     this.editable = editable;
+  }
+
+  /**
+   * @return the uploadedFile
+   */
+  public UploadedFile getUploadedFile() {
+    return uploadedFile;
+  }
+
+  /**
+   * @param uploadedFile the uploadedFile to set
+   */
+  public void setUploadedFile(UploadedFile uploadedFile) {
+    this.uploadedFile = uploadedFile;
   }
 }

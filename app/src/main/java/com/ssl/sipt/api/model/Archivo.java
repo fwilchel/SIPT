@@ -1,26 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ssl.sipt.api.model;
 
+import com.ssl.sipt.api.util.FileUtil;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -33,6 +30,7 @@ import javax.validation.constraints.Size;
 public class Archivo implements Serializable {
 
   private static final long serialVersionUID = 1L;
+  private static final Logger LOG = LoggerFactory.getLogger(Archivo.class);
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Basic(optional = false)
@@ -67,26 +65,12 @@ public class Archivo implements Serializable {
   @Size(max = 500)
   @Column(length = 500)
   private String descripcion;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "curriculum", fetch = FetchType.LAZY)
-  private List<Empleado> empleadoList;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "experiencia", fetch = FetchType.LAZY)
-  private List<ArchivoXExperiencia> archivoXExperienciaList;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "soporte", fetch = FetchType.LAZY)
-  private List<Contrato> contratoList;
 
   public Archivo() {
   }
 
   public Archivo(Long id) {
     this.id = id;
-  }
-
-  public Archivo(Long id, String nombre, String ext, String archivoBase64, String contentType) {
-    this.id = id;
-    this.nombre = nombre;
-    this.ext = ext;
-    this.archivoBase64 = archivoBase64;
-    this.contentType = contentType;
   }
 
   public Long getId() {
@@ -153,28 +137,56 @@ public class Archivo implements Serializable {
     this.descripcion = descripcion;
   }
 
-  public List<Empleado> getEmpleadoList() {
-    return empleadoList;
+  /**
+   * @param documentPath the rutaDocumento to set
+   */
+  public void setDocumentPath(String documentPath) {
+    this.setNombre(FilenameUtils.getBaseName(documentPath));
+    this.setExt(FilenameUtils.getExtension(documentPath));
   }
 
-  public void setEmpleadoList(List<Empleado> empleadoList) {
-    this.empleadoList = empleadoList;
+  /**
+   * nombre concatenado con la extension
+   *
+   * @return
+   */
+  public String getNameWhitExtension() {
+    if (getNombre() != null && getExt() != null) {
+      return getNombre().concat(".").concat(getExt());
+    }
+    return null;
   }
 
-  public List<ArchivoXExperiencia> getArchivoXExperienciaList() {
-    return archivoXExperienciaList;
+  /**
+   *
+   * @return @throws IOException
+   */
+  public InputStream getImputStream() throws IOException {
+    if (getArchivoBase64() == null) {
+      return null;
+    } else {
+      try {
+        return FileUtil.base64ToInputStream(getArchivoBase64());
+      } catch (IOException ex) {
+        LOG.error("Error en <<getImputStream>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
+        throw ex;
+      }
+    }
   }
 
-  public void setArchivoXExperienciaList(List<ArchivoXExperiencia> archivoXExperienciaList) {
-    this.archivoXExperienciaList = archivoXExperienciaList;
-  }
-
-  public List<Contrato> getContratoList() {
-    return contratoList;
-  }
-
-  public void setContratoList(List<Contrato> contratoList) {
-    this.contratoList = contratoList;
+  /**
+   * @param inputStream the inputStream to set
+   * @throws java.io.IOException
+   */
+  public void setInputStream(InputStream inputStream) throws IOException {
+    if (inputStream != null) {
+      try {
+        setArchivoBase64(FileUtil.inputStreamToBase64(inputStream));
+      } catch (IOException ex) {
+        LOG.error("Error en <<setInputStream>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
+        throw ex;
+      }
+    }
   }
 
   @Override

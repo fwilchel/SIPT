@@ -2,6 +2,7 @@ package com.ssl.sipt.api.model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -98,7 +99,7 @@ public class Empleado implements Serializable {
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   private CentroMedico centroMedico;
   @JoinColumn(name = "curriculum", referencedColumnName = "id", nullable = false)
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Archivo curriculum;
 
   public Empleado() {
