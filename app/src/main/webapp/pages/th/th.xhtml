@@ -134,6 +134,7 @@
           </p:toolbar>
         </h:form>
         <p:tabView
+          id="tvEmpleado"
           orientation="top">
           <p:tab
             title="#{bundle['title.datosbasicos']}">
@@ -141,7 +142,9 @@
               src="datosBasicos.xhtml"/>
           </p:tab>
           <p:tab
-            title="#{bundle['title.contrato']}">          
+            title="#{bundle['title.contrato']}">       
+            <ui:include
+              src="formacion.xhtml"/>
           </p:tab>
           <p:tab
             title="#{bundle['title.formacion']}">          

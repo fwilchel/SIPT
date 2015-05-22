@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ssl.sipt.api.model;
 
 import java.io.Serializable;
@@ -77,15 +72,6 @@ public class Formacion implements Serializable {
 
   public Formacion(Long id) {
     this.id = id;
-  }
-
-  public Formacion(Long id, String titulo, String descripcion, String numero, String institucion, Date fecha) {
-    this.id = id;
-    this.titulo = titulo;
-    this.descripcion = descripcion;
-    this.numero = numero;
-    this.institucion = institucion;
-    this.fecha = fecha;
   }
 
   public Long getId() {
