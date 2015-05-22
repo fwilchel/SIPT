@@ -29,7 +29,6 @@
             disabled="#{formacionController.editable}"
             update="dtFormacionList"/>
           <p:commandButton 
-            id="btnCreate" 
             title="#{bundle['commons.btn.new']}"
             icon="ui-icon-document"
             actionListener="#{formacionController.onCreate()}"
@@ -127,14 +126,14 @@
           columns="2">
           <!-- tipoFormacion -->
           <p:outputLabel
-            for="tipoFormacion"
+            for="formaciontipoformacion"
             value="#{bundle['tipoformacion']}"/>
           <h:panelGroup>
             <h:outputText
               value="#{formacionController.selected.tipoFormacion.nombre}"
               rendered="#{!formacionController.editable}"/>
             <p:selectOneMenu 
-              id="tipoFormacion" 
+              id="formaciontipoformacion" 
               value="#{formacionController.selected.tipoFormacion}" 
               converter="itemConverter"
               required="true"
@@ -148,71 +147,71 @@
                 itemValue="#{record}" />
             </p:selectOneMenu>              
             <p:message
-              for="tipoFormacion"/>
+              for="formaciontipoformacion"/>
           </h:panelGroup>
           <!-- titulo -->
           <p:outputLabel
-            for="titulo"
+            for="formaciontitulo"
             value="#{bundle['formacion.titulo']}"/>
           <h:panelGroup>
             <h:outputText
               value="#{formacionController.selected.titulo}"
               rendered="#{!formacionController.editable}"/>
             <p:inputText
-              id="titulo"
+              id="formaciontitulo"
               value="#{formacionController.selected.titulo}"
               rendered="#{formacionController.editable}"/>
             <p:message
-              for="titulo"/>
+              for="formaciontitulo"/>
           </h:panelGroup>
           <!-- descripcion -->
           <p:outputLabel
-            for="descripcion"
+            for="formaciondescripcion"
             value="#{bundle['formacion.descripcion']}"/>
           <h:panelGroup>
             <h:outputText
               value="#{formacionController.selected.descripcion}"
               rendered="#{!formacionController.editable}"/>
             <p:inputText
-              id="descripcion"
+              id="formaciondescripcion"
               value="#{formacionController.selected.descripcion}"
               rendered="#{formacionController.editable}"/>
             <p:message
-              for="descripcion"/>
+              for="formaciondescripcion"/>
           </h:panelGroup>
           <!-- numero -->
           <p:outputLabel
-            for="numero"
+            for="formacionnumero"
             value="#{bundle['formacion.numero']}"/>
           <h:panelGroup>
             <h:outputText
               value="#{formacionController.selected.numero}"
               rendered="#{!formacionController.editable}"/>
             <p:inputText
-              id="numero"
+              id="formacionnumero"
               value="#{formacionController.selected.numero}"
               rendered="#{formacionController.editable}"/>
             <p:message
-              for="numero"/>
+              for="formacionnumero"/>
           </h:panelGroup>
           <!-- institucion -->
           <p:outputLabel
-            for="descripcion"
+            for="formacioninstitucion"
             value="#{bundle['formacion.institucion']}"/>
           <h:panelGroup>
             <h:outputText
               value="#{formacionController.selected.institucion}"
               rendered="#{!formacionController.editable}"/>
             <p:inputText
-              id="institucion"
+              id="formacioninstitucion"
               value="#{formacionController.selected.institucion}"
               rendered="#{formacionController.editable}"/>
             <p:message
-              for="institucion"/>
+              for="formacioninstitucion"/>
           </h:panelGroup>
           <!-- fecha -->
           <p:outputLabel
-            for="fecha"
+            for="formacionfecha"
             value="#{bundle['formacion.fecha']}"/>
           <h:panelGroup>
             <h:outputText
@@ -222,12 +221,12 @@
                 pattern="yyyy-MM-dd"/>
             </h:outputText>
             <p:calendar
-              id="fecha"
+              id="formacionfecha"
               value="#{formacionController.selected.fecha}"
               rendered="#{formacionController.editable}"
               pattern="yyyy-MM-dd"/>
             <p:message
-              for="fecha"/>
+              for="formacionfecha"/>
           </h:panelGroup>
         </p:panelGrid>
         <f:facet name="footer">
