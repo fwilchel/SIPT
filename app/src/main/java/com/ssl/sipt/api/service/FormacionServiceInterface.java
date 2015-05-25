@@ -19,6 +19,8 @@ public interface FormacionServiceInterface {
 
   List<Formacion> findAll() throws ServiceException;
 
+  List<Formacion> findByEmpleado(Long idEmpleado) throws ServiceException;
+
   Formacion findById(Long id) throws ServiceException;
 
   Formacion create(Formacion record) throws ServiceException;

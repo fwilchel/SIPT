@@ -4,7 +4,7 @@
  */
 package com.ssl.sipt.api.service;
 
-import com.ssl.sipt.api.model.Beneficiario;
+import com.ssl.sipt.api.model.Dotacion;
 import com.ssl.sipt.api.sdo.SDO;
 import com.ssl.sipt.api.sdo.exception.PersistenceException;
 import com.ssl.sipt.api.service.exception.ServiceException;
@@ -28,9 +28,9 @@ import org.slf4j.LoggerFactory;
  * @since: JDK_1.7
  */
 @Stateless
-public class BeneficiarioService implements BeneficiarioServiceInterface {
+public class DotacionService implements DotacionServiceInterface {
 
-  private static final Logger LOG = LoggerFactory.getLogger(BeneficiarioService.class);
+  private static final Logger LOG = LoggerFactory.getLogger(DotacionService.class);
   @PersistenceContext(unitName = "sipt-pu")
   private EntityManager em;
   @Inject
@@ -49,11 +49,11 @@ public class BeneficiarioService implements BeneficiarioServiceInterface {
   }
 
   @Override
-  public List<Beneficiario> findAll() throws ServiceException {
+  public List<Dotacion> findAll() throws ServiceException {
     LOG.trace("method: findAll()");
-    List<Beneficiario> list;
+    List<Dotacion> list;
     try {
-      list = sdo.getResultList(em, Beneficiario.class);
+      list = sdo.getResultList(em, Dotacion.class);
       em.clear();
     } catch (PersistenceException ex) {
       LOG.error("Error en <<findAll>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
@@ -63,16 +63,16 @@ public class BeneficiarioService implements BeneficiarioServiceInterface {
   }
 
   @Override
-  public List<Beneficiario> findByEmpleado(Long idEmpleado) throws ServiceException {
+  public List<Dotacion> findByEmpleado(Long idEmpleado) throws ServiceException {
     LOG.trace("method: findByEmpleado()");
     if (idEmpleado == null) {
       throw new IllegalArgumentException("El id del empleado es obligatorio");
     }
-    List<Beneficiario> list;
+    List<Dotacion> list;
     try {
       Map<String, Object> params = new HashMap<>();
       params.put("idEmpleado", idEmpleado);
-      list = sdo.getResultListByNamedQuery(em, Beneficiario.FIND_BY_EMPLEADO, params);
+      list = sdo.getResultListByNamedQuery(em, Dotacion.FIND_BY_EMPLEADO, params);
       em.clear();
     } catch (PersistenceException ex) {
       LOG.error("Error en <<findByEmpleado>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
@@ -82,10 +82,10 @@ public class BeneficiarioService implements BeneficiarioServiceInterface {
   }
 
   @Override
-  public Beneficiario findById(Long id) throws ServiceException {
+  public Dotacion findById(Long id) throws ServiceException {
     LOG.debug("method: findById(id)");
     try {
-      Beneficiario i = (Beneficiario) sdo.find(em, id, Beneficiario.class);
+      Dotacion i = (Dotacion) sdo.find(em, id, Dotacion.class);
       em.clear();
       return i;
     } catch (PersistenceException ex) {
@@ -95,7 +95,7 @@ public class BeneficiarioService implements BeneficiarioServiceInterface {
   }
 
   @Override
-  public Beneficiario create(Beneficiario record) throws ServiceException {
+  public Dotacion create(Dotacion record) throws ServiceException {
     LOG.debug("method: create(entity)");
     try {
       sdo.persist(em, record);
@@ -108,7 +108,7 @@ public class BeneficiarioService implements BeneficiarioServiceInterface {
   }
 
   @Override
-  public void update(Beneficiario record) throws ServiceException {
+  public void update(Dotacion record) throws ServiceException {
     LOG.debug("method: edit(record)");
     try {
       sdo.merge(em, record);
@@ -120,7 +120,7 @@ public class BeneficiarioService implements BeneficiarioServiceInterface {
   }
 
   @Override
-  public void delete(Beneficiario record) throws ServiceException {
+  public void delete(Dotacion record) throws ServiceException {
     LOG.debug("method: delete(record)");
     try {
       sdo.remove(em, record);
@@ -135,7 +135,7 @@ public class BeneficiarioService implements BeneficiarioServiceInterface {
   public void delete(Long id) throws ServiceException {
     LOG.debug("method: delete(id)");
     try {
-      sdo.remove(em, id, Beneficiario.class);
+      sdo.remove(em, id, Dotacion.class);
       em.flush();
     } catch (PersistenceException ex) {
       LOG.error("Error en <<delete>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());

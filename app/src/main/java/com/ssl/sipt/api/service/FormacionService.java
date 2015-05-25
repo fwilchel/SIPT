@@ -8,7 +8,9 @@ import com.ssl.sipt.api.model.Formacion;
 import com.ssl.sipt.api.sdo.SDO;
 import com.ssl.sipt.api.sdo.exception.PersistenceException;
 import com.ssl.sipt.api.service.exception.ServiceException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.naming.InitialContext;
@@ -55,6 +57,25 @@ public class FormacionService implements FormacionServiceInterface {
       em.clear();
     } catch (PersistenceException ex) {
       LOG.error("Error en <<findAll>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
+      throw new ServiceException(ex);
+    }
+    return list;
+  }
+
+  @Override
+  public List<Formacion> findByEmpleado(Long idEmpleado) throws ServiceException {
+    LOG.trace("method: findByEmpleado()");
+    if (idEmpleado == null) {
+      throw new IllegalArgumentException("El id del empleado es obligatorio");
+    }
+    List<Formacion> list;
+    try {
+      Map<String, Object> params = new HashMap<>();
+      params.put("idEmpleado", idEmpleado);
+      list = sdo.getResultListByNamedQuery(em, Formacion.FIND_BY_EMPLEADO, params);
+      em.clear();
+    } catch (PersistenceException ex) {
+      LOG.error("Error en <<findByEmpleado>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
       throw new ServiceException(ex);
     }
     return list;

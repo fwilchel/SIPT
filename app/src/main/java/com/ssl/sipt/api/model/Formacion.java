@@ -26,10 +26,14 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(catalog = "sipt", schema = "public")
 @NamedQueries({
-  @NamedQuery(name = "Formacion.findAll", query = "SELECT f FROM Formacion f")})
+  @NamedQuery(name = Formacion.FIND_ALL, query = "SELECT f FROM Formacion f"),
+  @NamedQuery(name = Formacion.FIND_BY_EMPLEADO, query = "SELECT f FROM Formacion f WHERE f.empleado.id = :idEmpleado")
+})
 public class Formacion implements Serializable {
 
   private static final long serialVersionUID = 1L;
+  public static final String FIND_ALL = "Formacion.findAll";
+  public static final String FIND_BY_EMPLEADO = "Formacion.findByEmpleado";
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Basic(optional = false)

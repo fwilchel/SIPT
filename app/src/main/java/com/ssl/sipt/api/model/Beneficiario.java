@@ -31,10 +31,14 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(catalog = "sipt", schema = "public")
 @NamedQueries({
-  @NamedQuery(name = "Beneficiario.findAll", query = "SELECT b FROM Beneficiario b")})
+  @NamedQuery(name = Beneficiario.FIND_ALL, query = "SELECT b FROM Beneficiario b"),
+  @NamedQuery(name = Beneficiario.FIND_BY_EMPLEADO, query = "SELECT b FROM Beneficiario b WHERE b.empleado.id = :idEmpleado")
+})
 public class Beneficiario implements Serializable {
 
   private static final long serialVersionUID = 1L;
+  public static final String FIND_ALL = "Beneficiario.findAll";
+  public static final String FIND_BY_EMPLEADO = "Beneficiario.findByEmpleado";
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Basic(optional = false)

@@ -19,6 +19,8 @@ public interface BeneficiarioServiceInterface {
 
   List<Beneficiario> findAll() throws ServiceException;
 
+  List<Beneficiario> findByEmpleado(Long idEmpleado) throws ServiceException;
+
   Beneficiario findById(Long id) throws ServiceException;
 
   Beneficiario create(Beneficiario record) throws ServiceException;
