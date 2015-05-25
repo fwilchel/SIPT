@@ -57,6 +57,7 @@ public class FormacionController extends AbstractController {
   public void loadList() {
     LOG.trace("method: loadList()");
     try {
+      // TODO: findByEmpleado
       setList(service.findAll());
     } catch (ServiceException ex) {
       LOG.error("Error in method: loadList()", ex);

@@ -4,8 +4,8 @@
  */
 package com.ssl.sipt.web.controller;
 
-import com.ssl.sipt.api.model.Beneficiario;
-import com.ssl.sipt.api.service.BeneficiarioServiceInterface;
+import com.ssl.sipt.api.model.Cesantias;
+import com.ssl.sipt.api.service.CesantiasServiceInterface;
 import com.ssl.sipt.api.service.exception.ServiceException;
 import com.ssl.sipt.web.util.NavEnum;
 import java.util.List;
@@ -26,18 +26,18 @@ import org.slf4j.LoggerFactory;
  */
 @Named
 @ViewScoped
-public class BeneficiarioController extends AbstractController {
+public class CesantiasController extends AbstractController {
 
-  private static final Logger LOG = LoggerFactory.getLogger(BeneficiarioController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CesantiasController.class);
 
   @EJB
-  private BeneficiarioServiceInterface service;
-  private Beneficiario selected;
-  private List<Beneficiario> list;
+  private CesantiasServiceInterface service;
+  private Cesantias selected;
+  private List<Cesantias> list;
   private boolean editable;
   private NavEnum optionNavEnum;
 
-  public BeneficiarioController() {
+  public CesantiasController() {
     LOG.trace("method: constructor()");
   }
 
@@ -78,7 +78,7 @@ public class BeneficiarioController extends AbstractController {
   public void onCreate() {
     LOG.trace("method: onCreate()");
     optionNavEnum = NavEnum.DETAILS;
-    setSelected(new Beneficiario());
+    setSelected(new Cesantias());
     initializeEdit();
   }
 
@@ -88,7 +88,7 @@ public class BeneficiarioController extends AbstractController {
    */
   public void onRowSelect(SelectEvent event) {
     LOG.trace("method: onRowSelect()");
-    setSelected((Beneficiario) event.getObject());
+    setSelected((Cesantias) event.getObject());
     setEditable(false);
     optionNavEnum = NavEnum.DETAILS;
   }
@@ -181,28 +181,28 @@ public class BeneficiarioController extends AbstractController {
   /**
    * @return the selected
    */
-  public Beneficiario getSelected() {
+  public Cesantias getSelected() {
     return selected;
   }
 
   /**
    * @param selected the selected to set
    */
-  public void setSelected(Beneficiario selected) {
+  public void setSelected(Cesantias selected) {
     this.selected = selected;
   }
 
   /**
    * @return the list
    */
-  public List<Beneficiario> getList() {
+  public List<Cesantias> getList() {
     return list;
   }
 
   /**
    * @param list the list to set
    */
-  public void setList(List<Beneficiario> list) {
+  public void setList(List<Cesantias> list) {
     this.list = list;
   }
 
