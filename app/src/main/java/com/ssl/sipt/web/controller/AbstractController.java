@@ -311,9 +311,9 @@ public abstract class AbstractController implements Serializable {
   }
 
   /**
-   * 
+   *
    * @param key
-   * @return 
+   * @return
    */
   public String getPropertyFromBundle(String key) {
     Locale es = new Locale("ES");
@@ -322,10 +322,10 @@ public abstract class AbstractController implements Serializable {
   }
 
   /**
-   * 
+   *
    * @param key
    * @param locale
-   * @return 
+   * @return
    */
   public String getPropertyFromBundle(String key, String locale) {
     Locale es = new Locale(locale);

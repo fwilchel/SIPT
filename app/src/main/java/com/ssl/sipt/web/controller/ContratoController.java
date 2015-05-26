@@ -4,10 +4,8 @@
  */
 package com.ssl.sipt.web.controller;
 
-import com.ssl.sipt.api.conf.LPEnum;
-import com.ssl.sipt.api.model.Item;
-import com.ssl.sipt.api.model.Lista;
-import com.ssl.sipt.api.service.LPServiceInterface;
+import com.ssl.sipt.api.model.Contrato;
+import com.ssl.sipt.api.service.ContratoServiceInterface;
 import com.ssl.sipt.api.service.exception.ServiceException;
 import com.ssl.sipt.web.util.NavEnum;
 import java.util.List;
@@ -28,30 +26,25 @@ import org.slf4j.LoggerFactory;
  */
 @Named
 @ViewScoped
-public class LpController extends AbstractController {
+public class ContratoController extends AbstractController {
 
-  private static final Logger LOG = LoggerFactory.getLogger(LpController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ContratoController.class);
 
   @EJB
-  private LPServiceInterface service;
-  private String title;
-  private Long parent;
-  private Item selected;
-  private List<Item> list;
+  private ContratoServiceInterface service;
+  private Contrato selected;
+  private List<Contrato> list;
   private boolean editable;
   private NavEnum optionNavEnum;
 
-  public LpController() {
+  public ContratoController() {
     LOG.trace("method: constructor()");
-    parent = new Long(getValueFromRequestParameterMap("parent").toString());
-    LPEnum lpEnum = LPEnum.findById(parent);
-    title = getPropertyFromBundle(lpEnum.getKey());
   }
 
   @PostConstruct
   public void initialize() {
     LOG.trace("method: initialize()");
-    optionNavEnum = (NavEnum.LIST);
+    optionNavEnum = NavEnum.LIST;
     setSelected(null);
     setEditable(false);
     setSelected(null);
@@ -64,7 +57,8 @@ public class LpController extends AbstractController {
   public void loadList() {
     LOG.trace("method: loadList()");
     try {
-      setList(service.findByParent(getParent()));
+      // TODO: findByEmpleado
+      setList(service.findAll());
     } catch (ServiceException ex) {
       LOG.error("Error in method: loadList()", ex);
     }
@@ -83,9 +77,8 @@ public class LpController extends AbstractController {
    */
   public void onCreate() {
     LOG.trace("method: onCreate()");
-    optionNavEnum = (NavEnum.DETAILS);
-    setSelected(new Item());
-    getSelected().setLista(new Lista(getParent()));
+    optionNavEnum = NavEnum.DETAILS;
+    setSelected(new Contrato());
     initializeEdit();
   }
 
@@ -95,9 +88,9 @@ public class LpController extends AbstractController {
    */
   public void onRowSelect(SelectEvent event) {
     LOG.trace("method: onRowSelect()");
-    setSelected((Item) event.getObject());
+    setSelected((Contrato) event.getObject());
     setEditable(false);
-    optionNavEnum = (NavEnum.DETAILS);
+    optionNavEnum = NavEnum.DETAILS;
   }
 
   /**
@@ -146,7 +139,7 @@ public class LpController extends AbstractController {
     if (getSelected() != null && getSelected().getId() != null) {
       setEditable(false);
     } else {
-      optionNavEnum = (NavEnum.LIST);
+      optionNavEnum = NavEnum.LIST;
     }
   }
 
@@ -186,58 +179,30 @@ public class LpController extends AbstractController {
   }
 
   /**
-   * @return the title
-   */
-  public String getTitle() {
-    return title;
-  }
-
-  /**
-   * @param title the title to set
-   */
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  /**
-   * @return the parent
-   */
-  public Long getParent() {
-    return parent;
-  }
-
-  /**
-   * @param parent the parent to set
-   */
-  public void setParent(Long parent) {
-    this.parent = parent;
-  }
-
-  /**
    * @return the selected
    */
-  public Item getSelected() {
+  public Contrato getSelected() {
     return selected;
   }
 
   /**
    * @param selected the selected to set
    */
-  public void setSelected(Item selected) {
+  public void setSelected(Contrato selected) {
     this.selected = selected;
   }
 
   /**
    * @return the list
    */
-  public List<Item> getList() {
+  public List<Contrato> getList() {
     return list;
   }
 
   /**
    * @param list the list to set
    */
-  public void setList(List<Item> list) {
+  public void setList(List<Contrato> list) {
     this.list = list;
   }
 

@@ -4,7 +4,7 @@
  */
 package com.ssl.sipt.api.service;
 
-import com.ssl.sipt.api.model.Experiencia;
+import com.ssl.sipt.api.model.Contrato;
 import com.ssl.sipt.api.sdo.SDO;
 import com.ssl.sipt.api.sdo.exception.PersistenceException;
 import com.ssl.sipt.api.service.exception.ServiceException;
@@ -28,9 +28,9 @@ import org.slf4j.LoggerFactory;
  * @since: JDK_1.7
  */
 @Stateless
-public class ExperienciaService implements ExperienciaServiceInterface {
+public class ContratoService implements ContratoServiceInterface {
 
-  private static final Logger LOG = LoggerFactory.getLogger(ExperienciaService.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ContratoService.class);
   @PersistenceContext(unitName = "sipt-pu")
   private EntityManager em;
   @Inject
@@ -49,11 +49,11 @@ public class ExperienciaService implements ExperienciaServiceInterface {
   }
 
   @Override
-  public List<Experiencia> findAll() throws ServiceException {
+  public List<Contrato> findAll() throws ServiceException {
     LOG.trace("method: findAll()");
-    List<Experiencia> list;
+    List<Contrato> list;
     try {
-      list = sdo.getResultList(em, Experiencia.class);
+      list = sdo.getResultList(em, Contrato.class);
       em.clear();
     } catch (PersistenceException ex) {
       LOG.error("Error en <<findAll>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
@@ -63,16 +63,16 @@ public class ExperienciaService implements ExperienciaServiceInterface {
   }
 
   @Override
-  public List<Experiencia> findByEmpleado(Long idEmpleado) throws ServiceException {
+  public List<Contrato> findByEmpleado(Long idEmpleado) throws ServiceException {
     LOG.trace("method: findByEmpleado()");
     if (idEmpleado == null) {
       throw new IllegalArgumentException("El id del empleado es obligatorio");
     }
-    List<Experiencia> list;
+    List<Contrato> list;
     try {
       Map<String, Object> params = new HashMap<>();
       params.put("idEmpleado", idEmpleado);
-      list = sdo.getResultListByNamedQuery(em, Experiencia.FIND_BY_EMPLEADO, params);
+      list = sdo.getResultListByNamedQuery(em, Contrato.FIND_BY_EMPLEADO, params);
       em.clear();
     } catch (PersistenceException ex) {
       LOG.error("Error en <<findByEmpleado>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
@@ -82,10 +82,10 @@ public class ExperienciaService implements ExperienciaServiceInterface {
   }
 
   @Override
-  public Experiencia findById(Long id) throws ServiceException {
+  public Contrato findById(Long id) throws ServiceException {
     LOG.debug("method: findById(id)");
     try {
-      Experiencia i = (Experiencia) sdo.find(em, id, Experiencia.class);
+      Contrato i = (Contrato) sdo.find(em, id, Contrato.class);
       em.clear();
       return i;
     } catch (PersistenceException ex) {
@@ -95,7 +95,7 @@ public class ExperienciaService implements ExperienciaServiceInterface {
   }
 
   @Override
-  public Experiencia create(Experiencia record) throws ServiceException {
+  public Contrato create(Contrato record) throws ServiceException {
     LOG.debug("method: create(entity)");
     try {
       sdo.persist(em, record);
@@ -108,7 +108,7 @@ public class ExperienciaService implements ExperienciaServiceInterface {
   }
 
   @Override
-  public void update(Experiencia record) throws ServiceException {
+  public void update(Contrato record) throws ServiceException {
     LOG.debug("method: edit(record)");
     try {
       sdo.merge(em, record);
@@ -120,7 +120,7 @@ public class ExperienciaService implements ExperienciaServiceInterface {
   }
 
   @Override
-  public void delete(Experiencia record) throws ServiceException {
+  public void delete(Contrato record) throws ServiceException {
     LOG.debug("method: delete(record)");
     try {
       sdo.remove(em, record);
@@ -135,7 +135,7 @@ public class ExperienciaService implements ExperienciaServiceInterface {
   public void delete(Long id) throws ServiceException {
     LOG.debug("method: delete(id)");
     try {
-      sdo.remove(em, id, Experiencia.class);
+      sdo.remove(em, id, Contrato.class);
       em.flush();
     } catch (PersistenceException ex) {
       LOG.error("Error en <<delete>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());

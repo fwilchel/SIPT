@@ -57,9 +57,9 @@ public enum LPEnum {
   }
 
   /**
-   * 
+   *
    * @param id
-   * @return 
+   * @return
    */
   public static LPEnum findById(Long id) {
     for (LPEnum c : LPEnum.values()) {

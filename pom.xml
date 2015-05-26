@@ -9,7 +9,7 @@
   <version>0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>sipt</name>
-    <modules>
-        <module>app</module>
-    </modules>
+  <modules>
+    <module>app</module>
+  </modules>
 </project>
