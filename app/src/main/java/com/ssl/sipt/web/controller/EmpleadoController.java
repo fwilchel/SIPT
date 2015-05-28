@@ -43,7 +43,6 @@ public class EmpleadoController extends AbstractController {
   private List<Empleado> list;
   private boolean editable;
   private NavEnum optionNavEnum;
-  private UploadedFile uploadedFile;
 
   public EmpleadoController() {
     LOG.trace("method: constructor()");
@@ -144,17 +143,17 @@ public class EmpleadoController extends AbstractController {
 
   public void handleFileUpload(FileUploadEvent event) {
     LOG.trace("entered the method: handleFileUpload(FileUploadEvent)");
+    UploadedFile uploadedFile;
     try {
-      setUploadedFile(event.getFile());
+      uploadedFile = event.getFile();
       LoremIpsum loremIpsum = new LoremIpsum();
       if (getSelected().getCurriculum() == null) {
         getSelected().setCurriculum(new Archivo());
       }
-      getSelected().getCurriculum().setContentType(getUploadedFile().getContentType());
-      getSelected().getCurriculum().setDocumentPath(getUploadedFile().getFileName());
-      // TODO: diseñar una funcionalidad para generar aleatoriamente los nombres de las imagenes.
+      getSelected().getCurriculum().setContentType(uploadedFile.getContentType());
+      getSelected().getCurriculum().setDocumentPath(uploadedFile.getFileName());
       getSelected().getCurriculum().setNombre(loremIpsum.getWords(1));
-      getSelected().getCurriculum().setInputStream(getUploadedFile().getInputstream());
+      getSelected().getCurriculum().setInputStream(uploadedFile.getInputstream());
     } catch (IOException ex) {
       LOG.error("Error in method: handleFileUpload()", ex);
     }
@@ -248,19 +247,5 @@ public class EmpleadoController extends AbstractController {
    */
   public void setEditable(boolean editable) {
     this.editable = editable;
-  }
-
-  /**
-   * @return the uploadedFile
-   */
-  public UploadedFile getUploadedFile() {
-    return uploadedFile;
-  }
-
-  /**
-   * @param uploadedFile the uploadedFile to set
-   */
-  public void setUploadedFile(UploadedFile uploadedFile) {
-    this.uploadedFile = uploadedFile;
   }
 }

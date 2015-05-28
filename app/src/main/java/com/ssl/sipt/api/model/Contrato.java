@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -67,12 +68,12 @@ public class Contrato implements Serializable {
   @JoinColumn(name = "tipo_soporte", referencedColumnName = "id", nullable = false)
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   private Item tipoSoporte;
+  @JoinColumn(name = "soporte", referencedColumnName = "id", nullable = false)
+  @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  private Archivo soporte;
   @JoinColumn(name = "empleado", referencedColumnName = "id", nullable = false)
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   private Empleado empleado;
-  @JoinColumn(name = "soporte", referencedColumnName = "id", nullable = false)
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
-  private Archivo soporte;
 
   public Contrato() {
   }

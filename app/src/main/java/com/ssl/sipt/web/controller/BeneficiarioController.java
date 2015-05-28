@@ -5,6 +5,7 @@
 package com.ssl.sipt.web.controller;
 
 import com.ssl.sipt.api.model.Beneficiario;
+import com.ssl.sipt.api.model.Empleado;
 import com.ssl.sipt.api.service.BeneficiarioServiceInterface;
 import com.ssl.sipt.api.service.exception.ServiceException;
 import com.ssl.sipt.web.util.NavEnum;
@@ -57,8 +58,13 @@ public class BeneficiarioController extends AbstractController {
   public void loadList() {
     LOG.trace("method: loadList()");
     try {
-      // TODO: findByEmpleado
-      setList(service.findAll());
+      EmpleadoController empleadoController = findManagedBean("empleadoController");
+      if (empleadoController != null) {
+        Empleado selectedEmpleado = empleadoController.getSelected();
+        if (selectedEmpleado != null) {
+          setList(service.findByEmpleado(selectedEmpleado.getId()));
+        }
+      }
     } catch (ServiceException ex) {
       LOG.error("Error in method: loadList()", ex);
     }

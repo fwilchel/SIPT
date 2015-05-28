@@ -4,16 +4,22 @@
  */
 package com.ssl.sipt.web.controller;
 
+import com.ssl.sipt.api.model.Archivo;
 import com.ssl.sipt.api.model.Contrato;
+import com.ssl.sipt.api.model.Empleado;
 import com.ssl.sipt.api.service.ContratoServiceInterface;
 import com.ssl.sipt.api.service.exception.ServiceException;
 import com.ssl.sipt.web.util.NavEnum;
+import de.svenjacobs.loremipsum.LoremIpsum;
+import java.io.IOException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +42,7 @@ public class ContratoController extends AbstractController {
   private List<Contrato> list;
   private boolean editable;
   private NavEnum optionNavEnum;
+  private Empleado selectedEmpleado;
 
   public ContratoController() {
     LOG.trace("method: constructor()");
@@ -57,8 +64,13 @@ public class ContratoController extends AbstractController {
   public void loadList() {
     LOG.trace("method: loadList()");
     try {
-      // TODO: findByEmpleado
-      setList(service.findAll());
+      EmpleadoController empleadoController = findManagedBean("empleadoController");
+      if (empleadoController != null) {
+        selectedEmpleado = empleadoController.getSelected();
+        if (selectedEmpleado != null) {
+          setList(service.findByEmpleado(selectedEmpleado.getId()));
+        }
+      }
     } catch (ServiceException ex) {
       LOG.error("Error in method: loadList()", ex);
     }
@@ -114,12 +126,32 @@ public class ContratoController extends AbstractController {
     }
   }
 
+  public void handleFileUpload(FileUploadEvent event) {
+    LOG.trace("entered the method: handleFileUpload(FileUploadEvent)");
+    UploadedFile uploadedFile;
+    try {
+      uploadedFile = (event.getFile());
+      LoremIpsum loremIpsum = new LoremIpsum();
+      if (getSelected().getSoporte() == null) {
+        getSelected().setSoporte(new Archivo());
+      }
+      getSelected().getSoporte().setContentType(uploadedFile.getContentType());
+      getSelected().getSoporte().setDocumentPath(uploadedFile.getFileName());
+      getSelected().getSoporte().setNombre(loremIpsum.getWords(1));
+      getSelected().getSoporte().setInputStream(uploadedFile.getInputstream());
+    } catch (IOException ex) {
+      LOG.error("Error in method: handleFileUpload()", ex);
+    }
+    LOG.trace("left the method: handleFileUpload(FileUploadEvent)");
+  }
+
   /**
    *
    */
   public void onSave() {
     LOG.trace("method: onSave()");
     try {
+      getSelected().setEmpleado(selectedEmpleado);
       if (getSelected().getId() == null) {
         service.create(getSelected());
       } else {
