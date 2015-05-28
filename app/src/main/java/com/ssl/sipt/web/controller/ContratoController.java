@@ -145,6 +145,9 @@ public class ContratoController extends AbstractController {
     LOG.trace("left the method: handleFileUpload(FileUploadEvent)");
   }
 
+  /**
+   * 
+   */
   public void onSave() {
     LOG.trace("method: onSave()");
     try {
