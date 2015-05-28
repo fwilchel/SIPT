@@ -145,21 +145,23 @@ public class ContratoController extends AbstractController {
     LOG.trace("left the method: handleFileUpload(FileUploadEvent)");
   }
 
-  /**
-   *
-   */
   public void onSave() {
     LOG.trace("method: onSave()");
     try {
-      getSelected().setEmpleado(selectedEmpleado);
-      if (getSelected().getId() == null) {
-        service.create(getSelected());
+      if (selectedEmpleado == null) {
+        addErrorMessage(getPropertyFromBundle("commons.msg.error.noselectedempleado.summary"), getPropertyFromBundle("commons.msg.error.noselectedempleado.detail"));
       } else {
-        service.update(getSelected());
+        getSelected().setEmpleado(selectedEmpleado);
+        if (getSelected().getId() == null) {
+          service.create(getSelected());
+        } else {
+          service.update(getSelected());
+        }
+        setEditable(false);
       }
-      setEditable(false);
-    } catch (ServiceException ex) {
+    } catch (Exception ex) {
       LOG.error("Error en <<onSave>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
+      addErrorMessage(getPropertyFromBundle("commons.msg.error.save.summary"), getPropertyFromBundle("commons.msg.error.save.detail"));
     }
   }
 

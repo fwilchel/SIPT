@@ -37,6 +37,7 @@ public class FormacionController extends AbstractController {
   private List<Formacion> list;
   private boolean editable;
   private NavEnum optionNavEnum;
+  private Empleado selectedEmpleado;
 
   public FormacionController() {
     LOG.trace("method: constructor()");
@@ -60,7 +61,7 @@ public class FormacionController extends AbstractController {
     try {
       EmpleadoController empleadoController = findManagedBean("empleadoController");
       if (empleadoController != null) {
-        Empleado selectedEmpleado = empleadoController.getSelected();
+        selectedEmpleado = empleadoController.getSelected();
         if (selectedEmpleado != null) {
           setList(service.findByEmpleado(selectedEmpleado.getId()));
         }
@@ -121,19 +122,25 @@ public class FormacionController extends AbstractController {
   }
 
   /**
-   *
+   * 
    */
   public void onSave() {
     LOG.trace("method: onSave()");
     try {
-      if (getSelected().getId() == null) {
-        service.create(getSelected());
+      if (selectedEmpleado == null) {
+        addErrorMessage(getPropertyFromBundle("commons.msg.error.noselectedempleado.summary"), getPropertyFromBundle("commons.msg.error.noselectedempleado.detail"));
       } else {
-        service.update(getSelected());
+        getSelected().setEmpleado(selectedEmpleado);
+        if (getSelected().getId() == null) {
+          service.create(getSelected());
+        } else {
+          service.update(getSelected());
+        }
+        setEditable(false);
       }
-      setEditable(false);
-    } catch (ServiceException ex) {
+    } catch (Exception ex) {
       LOG.error("Error en <<onSave>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
+      addErrorMessage(getPropertyFromBundle("commons.msg.error.save.summary"), getPropertyFromBundle("commons.msg.error.save.detail"));
     }
   }
 

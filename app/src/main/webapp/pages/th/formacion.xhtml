@@ -236,7 +236,7 @@
             actionListener="#{formacionController.onSave()}"
             rendered="#{formacionController.editable}"
             process="pnlFormacionDetails"
-            update="@form"/>
+            update="@form :frmMessage"/>
           <p:commandButton 
             title="#{bundle['commons.btn.cancel']}"
             icon="ui-icon-circle-close"
