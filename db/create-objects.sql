@@ -216,8 +216,8 @@ CREATE TABLE public.experiencia (
                 observaciones VARCHAR(500) NOT NULL,
                 fecha_inicio DATE NOT NULL,
                 fecha_fin DATE NOT NULL,
-                confirmado BOOLEAN NOT NULL,
-                fecha_confirmacion DATE NOT NULL,
+                confirmado BOOLEAN DEFAULT false NOT NULL,
+                fecha_confirmacion DATE,
                 CONSTRAINT experiencia_pk PRIMARY KEY (id)
 );
 

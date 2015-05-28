@@ -127,6 +127,7 @@ public class DepartamentoController extends AbstractController {
       setEditable(false);
     } catch (ServiceException ex) {
       LOG.error("Error en <<onSave>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
+      addErrorMessage(getPropertyFromBundle("commons.msg.error.save.summary"), getPropertyFromBundle("commons.msg.error.save.detail"));
     }
   }
 

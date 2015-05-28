@@ -291,7 +291,7 @@
               actionListener="#{centroMedicoController.onSave()}"
               rendered="#{centroMedicoController.editable}"
               process="pnlDetails"
-              update="frmDetail"/>
+              update="@form :frmMessage"/>
             <p:commandButton 
               title="#{bundle['commons.btn.cancel']}"
               icon="ui-icon-circle-close"

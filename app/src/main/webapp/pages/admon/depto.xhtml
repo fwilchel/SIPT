@@ -153,7 +153,7 @@
               actionListener="#{departamentoController.onSave()}"
               rendered="#{departamentoController.editable}"
               process="pnlDetails"
-              update=":frmMessage frmDetail"/>
+              update="@form :frmMessage"/>
             <p:commandButton 
               title="#{bundle['commons.btn.cancel']}"
               icon="ui-icon-circle-close"
