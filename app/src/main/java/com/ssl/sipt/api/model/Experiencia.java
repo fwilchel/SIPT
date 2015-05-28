@@ -71,9 +71,8 @@ public class Experiencia implements Serializable {
   @NotNull
   @Column(nullable = false)
   private boolean confirmado;
-  @Basic(optional = false)
-  @NotNull
-  @Column(name = "fecha_confirmacion", nullable = false)
+  @Basic(optional = true)
+  @Column(name = "fecha_confirmacion", nullable = true)
   @Temporal(TemporalType.DATE)
   private Date fechaConfirmacion;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "archivo", fetch = FetchType.LAZY)

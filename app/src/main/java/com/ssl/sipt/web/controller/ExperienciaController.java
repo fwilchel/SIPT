@@ -14,7 +14,9 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,6 +39,7 @@ public class ExperienciaController extends AbstractController {
   private List<Experiencia> list;
   private boolean editable;
   private NavEnum optionNavEnum;
+  private Empleado selectedEmpleado;
 
   public ExperienciaController() {
     LOG.trace("method: constructor()");
@@ -60,7 +63,7 @@ public class ExperienciaController extends AbstractController {
     try {
       EmpleadoController empleadoController = findManagedBean("empleadoController");
       if (empleadoController != null) {
-        Empleado selectedEmpleado = empleadoController.getSelected();
+        selectedEmpleado = empleadoController.getSelected();
         if (selectedEmpleado != null) {
           setList(service.findByEmpleado(selectedEmpleado.getId()));
         }
@@ -122,18 +125,34 @@ public class ExperienciaController extends AbstractController {
 
   /**
    *
+   * @param event
+   */
+  public void handleFileUpload(FileUploadEvent event) {
+    LOG.trace("entered the method: handleFileUpload(FileUploadEvent)");
+    UploadedFile uploadedFile;
+    LOG.trace("left the method: handleFileUpload(FileUploadEvent)");
+  }
+
+  /**
+   *
    */
   public void onSave() {
     LOG.trace("method: onSave()");
     try {
-      if (getSelected().getId() == null) {
-        service.create(getSelected());
+      if (selectedEmpleado == null) {
+        addErrorMessage(getPropertyFromBundle("commons.msg.error.noselectedempleado.summary"), getPropertyFromBundle("commons.msg.error.noselectedempleado.detail"));
       } else {
-        service.update(getSelected());
+        getSelected().setEmpleado(selectedEmpleado);
+        if (getSelected().getId() == null) {
+          service.create(getSelected());
+        } else {
+          service.update(getSelected());
+        }
+        setEditable(false);
       }
-      setEditable(false);
-    } catch (ServiceException ex) {
+    } catch (Exception ex) {
       LOG.error("Error en <<onSave>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
+      addErrorMessage(getPropertyFromBundle("commons.msg.error.save.summary"), getPropertyFromBundle("commons.msg.error.save.detail"));
     }
   }
 

@@ -126,6 +126,10 @@ public class ContratoController extends AbstractController {
     }
   }
 
+  /**
+   * 
+   * @param event 
+   */
   public void handleFileUpload(FileUploadEvent event) {
     LOG.trace("entered the method: handleFileUpload(FileUploadEvent)");
     UploadedFile uploadedFile;
