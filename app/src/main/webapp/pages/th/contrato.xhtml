@@ -148,9 +148,11 @@
             <h:outputText
               value="#{contratoController.selected.descripcion}"
               rendered="#{!contratoController.editable}"/>
-            <p:inputText
+            <p:inputTextarea
               id="descripcion"
               value="#{contratoController.selected.descripcion}"
+              cols="50"
+              rows="6"
               rendered="#{contratoController.editable}"/>
             <p:message
               for="descripcion"/>

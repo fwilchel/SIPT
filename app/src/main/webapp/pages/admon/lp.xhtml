@@ -143,9 +143,11 @@
               <h:outputText
                 value="#{lpController.selected.descripcion}"
                 rendered="#{!lpController.editable}"/>
-              <p:inputText
+              <p:inputTextarea
                 id="descripcion"
                 value="#{lpController.selected.descripcion}"
+                cols="50"
+                rows="6"
                 rendered="#{lpController.editable}"/>
               <p:message
                 for="descripcion"/>

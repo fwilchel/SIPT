@@ -148,9 +148,11 @@
               <h:outputText
                 value="#{centroTrabajoController.selected.descripcion}"
                 rendered="#{!centroTrabajoController.editable}"/>
-              <p:inputText
+              <p:inputTextarea
                 id="descripcion"
                 value="#{centroTrabajoController.selected.descripcion}"
+                cols="50"
+                rows="6"
                 rendered="#{centroTrabajoController.editable}"/>
               <p:message
                 for="descripcion"/>
