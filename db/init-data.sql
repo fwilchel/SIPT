@@ -62,22 +62,6 @@ INSERT INTO item (id, lista, nombre, descripcion, estado) VALUES (19, 19, 'CC', 
 INSERT INTO item (id, lista, nombre, descripcion, estado) VALUES (20, 20, 'Fisico', 'Fisico', true);
 
 --
--- TOC entry 2145 (class 0 OID 16431)
--- Dependencies: 179
--- Data for Name: centro_medico; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-INSERT INTO centro_medico (id, nit, nombre, direccion, municipio, telefono, contacto, estado) VALUES (1, '1234567890', 'MedicCenter', 'MedicCenter', 1, '1234567', 'Pepe Grillo', true);
-
---
--- TOC entry 2139 (class 0 OID 16397)
--- Dependencies: 173
--- Data for Name: centro_trabajo; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-INSERT INTO centro_trabajo (id, nombre, descripcion, direccion, estado) VALUES (1, 'Contabilidad', 'Contabilidad', 'calle falsa 123', true);
-
---
 -- TOC entry 2141 (class 0 OID 16409)
 -- Dependencies: 175
 -- Data for Name: departamento; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -92,3 +76,19 @@ INSERT INTO departamento (id, nombre, descripcion) VALUES (1, 'Cundinamarca', 'C
 --
 
 INSERT INTO municipio (id, departamento, nombre, descripcion) VALUES (1, 1, 'Bogotá', 'Bogotá');
+
+--
+-- TOC entry 2145 (class 0 OID 16431)
+-- Dependencies: 179
+-- Data for Name: centro_medico; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO centro_medico (id, nit, nombre, direccion, municipio, telefono, contacto, estado) VALUES (1, '1234567890', 'MedicCenter', 'MedicCenter', 1, '1234567', 'Pepe Grillo', true);
+
+--
+-- TOC entry 2139 (class 0 OID 16397)
+-- Dependencies: 173
+-- Data for Name: centro_trabajo; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO centro_trabajo (id, nombre, descripcion, direccion, estado) VALUES (1, 'Contabilidad', 'Contabilidad', 'calle falsa 123', true);

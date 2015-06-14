@@ -224,17 +224,17 @@ CREATE TABLE public.experiencia (
 
 ALTER SEQUENCE public.experiencia_id_seq OWNED BY public.experiencia.id;
 
-CREATE SEQUENCE public.archivo_x_experiencia_id_seq;
-
 CREATE TABLE public.archivo_x_experiencia (
-                id BIGINT NOT NULL DEFAULT nextval('public.archivo_x_experiencia_id_seq'),
-                archivo BIGINT NOT NULL,
+                id BIGINT NOT NULL,
                 experiencia BIGINT NOT NULL,
+                archivo BIGINT NOT NULL,
                 CONSTRAINT archivo_x_experiencia_pk PRIMARY KEY (id)
 );
 
 
-ALTER SEQUENCE public.archivo_x_experiencia_id_seq OWNED BY public.archivo_x_experiencia.id;
+CREATE UNIQUE INDEX archivo_x_experiencia_unique
+ ON public.archivo_x_experiencia
+ ( experiencia, archivo );
 
 CREATE SEQUENCE public.beneficiario_id_seq;
 
@@ -415,15 +415,15 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.archivo_x_experiencia ADD CONSTRAINT archivo_archivo_x_experiencia_fk
-FOREIGN KEY (experiencia)
+ALTER TABLE public.empleado ADD CONSTRAINT archivo_empleado_fk
+FOREIGN KEY (curriculum)
 REFERENCES public.archivo (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.empleado ADD CONSTRAINT archivo_empleado_fk
-FOREIGN KEY (curriculum)
+ALTER TABLE public.archivo_x_experiencia ADD CONSTRAINT archivo_archivo_x_experiencia_fk
+FOREIGN KEY (archivo)
 REFERENCES public.archivo (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
@@ -479,7 +479,7 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.archivo_x_experiencia ADD CONSTRAINT experiencia_archivo_x_experiencia_fk
-FOREIGN KEY (archivo)
+FOREIGN KEY (experiencia)
 REFERENCES public.experiencia (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
