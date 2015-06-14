@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Softstudio LTDA
+ * Copyrigth .2015.
  */
 package com.ssl.sipt.api.model;
 
@@ -28,8 +27,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- *
- * @author d5a9p6s7
+ * @author: Diego Poveda.
+ * @name:
+ * @descripcion:
+ * @version: 1.0
+ * @since: JDK_1.7
  */
 @Entity
 @Table(catalog = "sipt", schema = "public")
@@ -75,14 +77,14 @@ public class Experiencia implements Serializable {
   @Column(name = "fecha_confirmacion", nullable = true)
   @Temporal(TemporalType.DATE)
   private Date fechaConfirmacion;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "archivo", fetch = FetchType.LAZY)
-  private List<ArchivoXExperiencia> archivoXExperienciaList;
   @JoinColumn(name = "tipo_empresa", referencedColumnName = "id", nullable = false)
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   private Item tipoEmpresa;
   @JoinColumn(name = "empleado", referencedColumnName = "id", nullable = false)
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   private Empleado empleado;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "experiencia", fetch = FetchType.LAZY)
+  private List<ArchivoXExperiencia> archivoXExperienciaList;
 
   public Experiencia() {
   }

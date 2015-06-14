@@ -1,3 +1,7 @@
+/*
+ * Softstudio LTDA
+ * Copyrigth .2015.
+ */
 package com.ssl.sipt.api.model;
 
 import java.io.Serializable;
@@ -20,8 +24,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- *
- * @author d5a9p6s7
+ * @author: Diego Poveda.
+ * @name:
+ * @descripcion:
+ * @version: 1.0
+ * @since: JDK_1.7
  */
 @Entity
 @Table(catalog = "sipt", schema = "public")

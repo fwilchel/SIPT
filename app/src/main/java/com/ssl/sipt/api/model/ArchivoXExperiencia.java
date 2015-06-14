@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Softstudio LTDA
+ * Copyrigth .2015.
  */
 package com.ssl.sipt.api.model;
 
@@ -20,8 +19,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- *
- * @author d5a9p6s7
+ * @author: Diego Poveda.
+ * @name:
+ * @descripcion:
+ * @version: 1.0
+ * @since: JDK_1.7
  */
 @Entity
 @Table(name = "archivo_x_experiencia", catalog = "sipt", schema = "public")
