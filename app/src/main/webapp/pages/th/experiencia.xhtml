@@ -164,9 +164,11 @@
             <h:outputText
               value="#{experienciaController.selected.observaciones}"
               rendered="#{!experienciaController.editable}"/>
-            <p:inputText
+            <p:inputTextarea
               id="experienciaobservaciones"
               value="#{experienciaController.selected.observaciones}"
+              cols="50"
+              rows="6"
               rendered="#{experienciaController.editable}"/>
             <p:message
               for="experienciaobservaciones"/>
@@ -213,20 +215,20 @@
           <p:outputLabel
             for="experienciaconfirmado"
             value="#{bundle['experiencia.confirmado']}"/>
-            <h:panelGroup>
-              <h:outputText 
-                value="#{experienciaController.selected.confirmado? bundle['commons.lbl.yes'] : bundle['commons.lbl.no']}"
-                rendered="#{!experienciaController.editable}"/>
-              <p:selectBooleanButton 
-                id="experienciaconfirmado" 
-                value="#{experienciaController.selected.confirmado}" 
-                onLabel="#{bundle['commons.lbl.yes']}" 
-                offLabel="#{bundle['commons.lbl.no']}" 
-                style="width:80px" 
-                rendered="#{experienciaController.editable}"/>
-              <p:message
-                for="experienciaconfirmado"/>
-            </h:panelGroup>
+          <h:panelGroup>
+            <h:outputText 
+              value="#{experienciaController.selected.confirmado? bundle['commons.lbl.yes'] : bundle['commons.lbl.no']}"
+              rendered="#{!experienciaController.editable}"/>
+            <p:selectBooleanButton 
+              id="experienciaconfirmado" 
+              value="#{experienciaController.selected.confirmado}" 
+              onLabel="#{bundle['commons.lbl.yes']}" 
+              offLabel="#{bundle['commons.lbl.no']}" 
+              style="width:80px" 
+              rendered="#{experienciaController.editable}"/>
+            <p:message
+              for="experienciaconfirmado"/>
+          </h:panelGroup>
           <!-- fechaConfirmacion -->
           <p:outputLabel
             for="experienciafechaConfirmacion"

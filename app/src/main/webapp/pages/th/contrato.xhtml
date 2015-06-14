@@ -81,19 +81,20 @@
           headerText="#{bundle['contrato.sueldo']}">
           <h:outputText 
             value="#{record.sueldo}">
+            <f:convertNumber 
+              currencySymbol="$" 
+              type="currency"/>
           </h:outputText>
         </p:column>
         <p:column 
           headerText="#{bundle['tiposoporte']}">
           <h:outputText 
-            value="#{record.tipoSoporte.nombre}">
-          </h:outputText>
+            value="#{record.tipoSoporte.nombre}"/>
         </p:column>
         <p:column 
           headerText="#{bundle['contrato.soporte']}">
           <h:outputText 
-            value="#{record.soporte.nombre}">
-          </h:outputText>
+            value="#{record.soporte.nombre}"/>
         </p:column>
       </p:dataTable>
     </h:form>
@@ -202,7 +203,11 @@
           <h:panelGroup>
             <h:outputText
               value="#{contratoController.selected.sueldo}"
-              rendered="#{!contratoController.editable}"/>
+              rendered="#{!contratoController.editable}">
+              <f:convertNumber 
+                currencySymbol="$" 
+                type="currency"/>
+            </h:outputText>
             <p:inputText
               id="sueldo"
               value="#{contratoController.selected.sueldo}"

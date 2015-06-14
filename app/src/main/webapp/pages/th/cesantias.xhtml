@@ -72,7 +72,11 @@
         <p:column 
           headerText="#{bundle['cesantias.monto']}">
           <h:outputText 
-            value="#{record.monto}"/>
+            value="#{record.monto}">
+            <f:convertNumber 
+              currencySymbol="$" 
+              type="currency"/>
+          </h:outputText>
         </p:column>
         <p:column 
           headerText="#{bundle['cesantias.fechaaprobacion']}">
