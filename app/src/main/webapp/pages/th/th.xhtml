@@ -20,7 +20,7 @@
           <f:facet 
             name="left">
             <h:outputText 
-              value="#{bundle['title.centrotrabajo']}"
+              value="#{bundle['title.empleado']}"
               styleClass="toolbar-title"/>
           </f:facet>
           <f:facet 
@@ -93,6 +93,7 @@
         </p:dataTable>
       </h:form>
       <p:panel
+        id="pnlEmpleadoDetails"
         rendered="#{empleadoController.showDetails}">
         <h:form
           id="frmToolBar"
@@ -142,32 +143,38 @@
               src="datosBasicos.xhtml"/>
           </p:tab>
           <p:tab
-            title="#{bundle['title.contrato']}">       
+            title="#{bundle['title.contrato']}"
+            rendered="#{!empleadoController.newRecord}">
             <ui:include
               src="contrato.xhtml"/>
           </p:tab>
           <p:tab
-            title="#{bundle['title.formacion']}">          
+            title="#{bundle['title.formacion']}"
+            rendered="#{!empleadoController.newRecord}">          
             <ui:include
               src="formacion.xhtml"/>
           </p:tab>
           <p:tab
-            title="#{bundle['title.beneficiario']}">          
+            title="#{bundle['title.beneficiario']}"
+            rendered="#{!empleadoController.newRecord}">          
             <ui:include
               src="beneficiario.xhtml"/>
           </p:tab>
           <p:tab
-            title="#{bundle['title.experiencia']}">          
+            title="#{bundle['title.experiencia']}"
+            rendered="#{!empleadoController.newRecord}">          
             <ui:include
               src="experiencia.xhtml"/>
           </p:tab>
           <p:tab
-            title="#{bundle['title.dotacion']}">          
+            title="#{bundle['title.dotacion']}"
+            rendered="#{!empleadoController.newRecord}">          
             <ui:include
               src="dotacion.xhtml"/>
           </p:tab>
           <p:tab
-            title="#{bundle['title.cesantias']}">          
+            title="#{bundle['title.cesantias']}"
+            rendered="#{!empleadoController.newRecord}">          
             <ui:include
               src="cesantias.xhtml"/>
           </p:tab>

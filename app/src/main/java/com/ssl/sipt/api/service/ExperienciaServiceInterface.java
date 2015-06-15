@@ -4,6 +4,7 @@
  */
 package com.ssl.sipt.api.service;
 
+import com.ssl.sipt.api.model.ArchivoXExperiencia;
 import com.ssl.sipt.api.model.Experiencia;
 import com.ssl.sipt.api.service.exception.ServiceException;
 import java.util.List;
@@ -30,4 +31,10 @@ public interface ExperienciaServiceInterface {
   void delete(Experiencia record) throws ServiceException;
 
   void delete(Long id) throws ServiceException;
+
+  ArchivoXExperiencia create(ArchivoXExperiencia record) throws ServiceException;
+
+  void deleteSoporte(ArchivoXExperiencia record) throws ServiceException;
+
+  void deleteSoporte(Long id) throws ServiceException;
 }

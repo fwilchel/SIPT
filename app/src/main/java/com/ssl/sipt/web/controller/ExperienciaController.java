@@ -4,11 +4,15 @@
  */
 package com.ssl.sipt.web.controller;
 
+import com.ssl.sipt.api.model.Archivo;
+import com.ssl.sipt.api.model.ArchivoXExperiencia;
 import com.ssl.sipt.api.model.Empleado;
 import com.ssl.sipt.api.model.Experiencia;
 import com.ssl.sipt.api.service.ExperienciaServiceInterface;
 import com.ssl.sipt.api.service.exception.ServiceException;
 import com.ssl.sipt.web.util.NavEnum;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -130,7 +134,45 @@ public class ExperienciaController extends AbstractController {
   public void handleFileUpload(FileUploadEvent event) {
     LOG.trace("entered the method: handleFileUpload(FileUploadEvent)");
     UploadedFile uploadedFile;
+    try {
+      uploadedFile = (event.getFile());
+      if (getSelected().getArchivoXExperienciaList() == null) {
+        getSelected().setArchivoXExperienciaList(new ArrayList<ArchivoXExperiencia>());
+      }
+      ArchivoXExperiencia ae = new ArchivoXExperiencia();
+      Archivo soporte = new Archivo();
+      soporte.setContentType(uploadedFile.getContentType());
+      soporte.setDocumentPath(uploadedFile.getFileName());
+//      LoremIpsum loremIpsum = new LoremIpsum();
+//      soporte.setNombre(loremIpsum.getWords(1));
+      soporte.setNombre(uploadedFile.getFileName());
+      soporte.setInputStream(uploadedFile.getInputstream());
+      ae.setArchivo(soporte);
+      ae.setExperiencia(getSelected());
+      getSelected().getArchivoXExperienciaList().add(ae);
+    } catch (IOException ex) {
+      LOG.error("Error in method: handleFileUpload()", ex);
+    }
     LOG.trace("left the method: handleFileUpload(FileUploadEvent)");
+  }
+
+  /**
+   *
+   * @param record
+   */
+  public void removeSoporte(ArchivoXExperiencia record) {
+    LOG.trace("method: removeSoporte()");
+    if (isNewRecord()) {
+      getSelected().getArchivoXExperienciaList().remove(record);
+    } else {
+      try {
+        record.setExperiencia(getSelected());
+        service.create(record);
+      } catch (Exception ex) {
+        LOG.error("Error en <<onSave>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
+        addErrorMessage(getPropertyFromBundle("commons.msg.error.save.summary"), getPropertyFromBundle("commons.msg.error.save.detail"));
+      }
+    }
   }
 
   /**

@@ -6,17 +6,17 @@ package com.ssl.sipt.api.model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author: Diego Poveda.
@@ -33,16 +33,16 @@ public class ArchivoXExperiencia implements Serializable {
 
   private static final long serialVersionUID = 1L;
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Basic(optional = false)
+  @NotNull
   @Column(nullable = false)
   private Long id;
   @JoinColumn(name = "archivo", referencedColumnName = "id", nullable = false)
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
-  private Experiencia archivo;
+  @ManyToOne(cascade = {CascadeType.ALL}, optional = false, fetch = FetchType.EAGER)
+  private Archivo archivo;
   @JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
-  private Archivo experiencia;
+  @ManyToOne(cascade = {CascadeType.ALL}, optional = false, fetch = FetchType.EAGER)
+  private Experiencia experiencia;
 
   public ArchivoXExperiencia() {
   }
@@ -59,19 +59,19 @@ public class ArchivoXExperiencia implements Serializable {
     this.id = id;
   }
 
-  public Experiencia getArchivo() {
+  public Archivo getArchivo() {
     return archivo;
   }
 
-  public void setArchivo(Experiencia archivo) {
+  public void setArchivo(Archivo archivo) {
     this.archivo = archivo;
   }
 
-  public Archivo getExperiencia() {
+  public Experiencia getExperiencia() {
     return experiencia;
   }
 
-  public void setExperiencia(Archivo experiencia) {
+  public void setExperiencia(Experiencia experiencia) {
     this.experiencia = experiencia;
   }
 
@@ -97,7 +97,6 @@ public class ArchivoXExperiencia implements Serializable {
 
   @Override
   public String toString() {
-    return "com.ssl.sipt.api.model.ArchivoXExperiencia[ id=" + id + " ]";
-  }
-
+    return "com.mycompany.test.ArchivoXExperiencia[ id=" + id + " ]";
+  }  
 }

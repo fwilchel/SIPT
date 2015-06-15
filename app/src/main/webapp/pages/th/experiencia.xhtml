@@ -273,6 +273,40 @@
             <p:message
               for="experienciatipoEmpresa"/>
           </h:panelGroup>
+          <!-- soportes -->
+          <p:outputLabel
+            for="dlSoportes"
+            value="#{bundle['experiencia.soportes']}"/>
+          <p:dataList 
+            id="dlSoportes"
+            value="#{experienciaController.selected.archivoXExperienciaList}" 
+            var="archivo" 
+            type="unordered" >
+            <f:facet 
+              name="header">
+              <p:commandButton 
+                title="#{bundle['commons.btn.add']}"
+                icon="ui-icon-document"
+                actionListener="#{experienciaController.onCreate()}"
+                type="button" 
+                onclick="PF('dlgSoportes').show();"/>
+            </f:facet>
+            <h:outputText 
+              value="#{archivo.archivo.nameWhitExtension}"/>
+            <p:spacer 
+              width="16"/>
+            <p:commandButton 
+              title="#{bundle['commons.btn.remove']}"
+              icon="ui-icon-trash"
+              actionListener="#{experienciaController.removeSoporte(archivo)}"
+              immediate="true"
+              update=":tvEmpleado:dlSoportes">
+              <p:confirm 
+                header="#{bundle['commons.cfmdlg.header']}" 
+                message="#{bundle['commons.cfmdlg.remove.message']}" 
+                icon="ui-icon-alert" />
+            </p:commandButton>
+          </p:dataList>
         </p:panelGrid>
         <f:facet name="footer">
           <p:commandButton 
@@ -291,6 +325,22 @@
             update=":tvEmpleado:pnlExperiencia"/>
         </f:facet>
       </p:panel>
-    </h:form>  
+    </h:form>
+    <p:dialog
+      id="dlgSoportes"
+      widgetVar="dlgSoportes"
+      closeOnEscape="true"
+      modal="true">
+      <h:form>
+        <p:fileUpload 
+          fileUploadListener="#{experienciaController.handleFileUpload}" 
+          mode="advanced"
+          update=":tvEmpleado:dlSoportes" 
+          auto="true" 
+          multiple="true" 
+          sizeLimit="100000" 
+          oncomplete="PF('dlgSoportes').hide();"/>
+      </h:form>
+    </p:dialog>
   </h:panelGroup>
 </ui:composition>

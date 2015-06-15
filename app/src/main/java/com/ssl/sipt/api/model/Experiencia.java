@@ -83,7 +83,7 @@ public class Experiencia implements Serializable {
   @JoinColumn(name = "empleado", referencedColumnName = "id", nullable = false)
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   private Empleado empleado;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "experiencia", fetch = FetchType.LAZY)
+  @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "experiencia", fetch = FetchType.EAGER)
   private List<ArchivoXExperiencia> archivoXExperienciaList;
 
   public Experiencia() {

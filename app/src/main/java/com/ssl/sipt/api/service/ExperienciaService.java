@@ -4,6 +4,7 @@
  */
 package com.ssl.sipt.api.service;
 
+import com.ssl.sipt.api.model.ArchivoXExperiencia;
 import com.ssl.sipt.api.model.Experiencia;
 import com.ssl.sipt.api.sdo.SDO;
 import com.ssl.sipt.api.sdo.exception.PersistenceException;
@@ -136,6 +137,43 @@ public class ExperienciaService implements ExperienciaServiceInterface {
     LOG.debug("method: delete(id)");
     try {
       sdo.remove(em, id, Experiencia.class);
+      em.flush();
+    } catch (PersistenceException ex) {
+      LOG.error("Error en <<delete>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
+      throw new ServiceException(ex);
+    }
+  }
+
+  @Override
+  public ArchivoXExperiencia create(ArchivoXExperiencia record) throws ServiceException {
+    LOG.debug("method: create(entity)");
+    try {
+      sdo.persist(em, record);
+      em.flush();
+      return record;
+    } catch (PersistenceException ex) {
+      LOG.error("Error en <<create>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
+      throw new ServiceException(ex);
+    }
+  }
+
+  @Override
+  public void deleteSoporte(ArchivoXExperiencia record) throws ServiceException {
+    LOG.debug("method: delete(record)");
+    try {
+      sdo.remove(em, record);
+      em.flush();
+    } catch (PersistenceException ex) {
+      LOG.error("Error en <<delete>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
+      throw new ServiceException(ex);
+    }
+  }
+
+  @Override
+  public void deleteSoporte(Long id) throws ServiceException {
+    LOG.debug("method: delete(id)");
+    try {
+      sdo.remove(em, id, ArchivoXExperiencia.class);
       em.flush();
     } catch (PersistenceException ex) {
       LOG.error("Error en <<delete>> ->> mensaje ->> {} / causa ->> {} ", ex.getMessage(), ex.getCause());
