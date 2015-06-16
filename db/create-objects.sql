@@ -102,25 +102,48 @@ CREATE SEQUENCE public.empleado_id_seq;
 
 CREATE TABLE public.empleado (
                 id BIGINT NOT NULL DEFAULT nextval('public.empleado_id_seq'),
+                imagen BIGINT,
+                curriculum BIGINT,
                 identificacion VARCHAR(25) NOT NULL,
                 identificacion_tipo BIGINT NOT NULL,
                 identificacion_lugar_expedicion BIGINT,
                 nombres VARCHAR(50) NOT NULL,
                 apellidos VARCHAR(50) NOT NULL,
+                estado_civil BIGINT,
+                rh BIGINT,
                 estado BOOLEAN DEFAULT true NOT NULL,
                 email VARCHAR(100),
-                estado_civil BIGINT NOT NULL,
-                rh BIGINT NOT NULL,
-                genero BIGINT NOT NULL,
-                municipio BIGINT NOT NULL,
-                lugar VARCHAR(100),
-                direccion VARCHAR NOT NULL,
                 tipo_contrato BIGINT NOT NULL,
-                cargo BIGINT NOT NULL,
-                centro_trabajo BIGINT NOT NULL,
-                macro_proyecto BIGINT NOT NULL,
-                curriculum BIGINT NOT NULL,
+                sueldo NUMERIC,
+                fecha_inicio DATE,
+                fecha_fin DATE,
+                genero BIGINT,
+                cargo BIGINT,
+                centro_trabajo BIGINT,
+                macro_proyecto BIGINT,
+                municipio BIGINT,
+                lugar VARCHAR(100),
+                direccion VARCHAR,
+                arl BIGINT,
+                arl_fecha_afiliacion DATE,
+                caja_compensacion BIGINT,
+                caja_compensacion_fecha_afiliacion DATE,
+                eps BIGINT,
+                eps_fecha_afiliacion DATE,
+                pension BIGINT,
+                pension_fecha_afiliacion DATE,
+                cesantias BIGINT,
+                cesantias_fecha_afiliacion DATE,
+                banco BIGINT,
+                tipo_cuenta BIGINT,
+                numero_cuenta VARCHAR(20),
                 centro_medico BIGINT NOT NULL,
+                centro_medico_fecha_examen_ingreso DATE,
+                centro_medico_fecha_examen_egreso DATE,
+                fecha_etapa_electiva_inicio VARCHAR,
+                fecha_etapa_electiva_fin DATE,
+                fecha_etapa_productiva_inicio DATE,
+                fecha_etapa_productiva_fin DATE,
                 CONSTRAINT empleado_pk PRIMARY KEY (id)
 );
 
@@ -196,9 +219,9 @@ CREATE TABLE public.contrato (
                 empleado BIGINT NOT NULL,
                 tipo_soporte BIGINT NOT NULL,
                 descripcion VARCHAR(500) NOT NULL,
-                fecha_inicio DATE NOT NULL,
-                fecha_fin DATE NOT NULL,
-                sueldo NUMERIC NOT NULL,
+                fecha_inicio DATE,
+                fecha_fin DATE,
+                sueldo NUMERIC,
                 soporte BIGINT NOT NULL,
                 CONSTRAINT contrato_pk PRIMARY KEY (id)
 );
@@ -408,6 +431,55 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
+ALTER TABLE public.empleado ADD CONSTRAINT arl_empleado_fk
+FOREIGN KEY (arl)
+REFERENCES public.item (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.empleado ADD CONSTRAINT caja_compensacion_empleado_fk
+FOREIGN KEY (caja_compensacion)
+REFERENCES public.item (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.empleado ADD CONSTRAINT eps_empleado_fk
+FOREIGN KEY (eps)
+REFERENCES public.item (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.empleado ADD CONSTRAINT pension_empleado_fk
+FOREIGN KEY (pension)
+REFERENCES public.item (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.empleado ADD CONSTRAINT cesantias_empleado_fk
+FOREIGN KEY (cesantias)
+REFERENCES public.item (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.empleado ADD CONSTRAINT banco_empleado_fk
+FOREIGN KEY (banco)
+REFERENCES public.item (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.empleado ADD CONSTRAINT tipo_cuenta_empleado_fk
+FOREIGN KEY (tipo_cuenta)
+REFERENCES public.item (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
 ALTER TABLE public.contrato ADD CONSTRAINT archivo_contrato_fk
 FOREIGN KEY (soporte)
 REFERENCES public.archivo (id)
@@ -415,7 +487,7 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.empleado ADD CONSTRAINT archivo_empleado_fk
+ALTER TABLE public.empleado ADD CONSTRAINT curriculum_empleado_fk
 FOREIGN KEY (curriculum)
 REFERENCES public.archivo (id)
 ON DELETE NO ACTION
@@ -424,6 +496,13 @@ NOT DEFERRABLE;
 
 ALTER TABLE public.archivo_x_experiencia ADD CONSTRAINT archivo_archivo_x_experiencia_fk
 FOREIGN KEY (archivo)
+REFERENCES public.archivo (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.empleado ADD CONSTRAINT imagen_empleado_fk
+FOREIGN KEY (imagen)
 REFERENCES public.archivo (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
